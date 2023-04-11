@@ -1,26 +1,111 @@
-<!doctype html><html lang=zh class=no-js><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=generator content="Hugo 0.85.0"><meta name=ROBOTS content="INDEX, FOLLOW"><link rel="shortcut icon" href=/favicons/favicon.ico><link rel=apple-touch-icon href=/favicons/apple-touch-icon-180x180.png sizes=180x180><link rel=icon type=image/png href=/favicons/favicon-16x16.png sizes=16x16><link rel=icon type=image/png href=/favicons/favicon-32x32.png sizes=32x32><link rel=icon type=image/png href=/favicons/android-36x36.png sizes=36x36><link rel=icon type=image/png href=/favicons/android-48x48.png sizes=48x48><link rel=icon type=image/png href=/favicons/android-72x72.png sizes=72x72><link rel=icon type=image/png href=/favicons/android-96x96.png sizes=96x96><link rel=icon type=image/png href=/favicons/android-144x144.png sizes=144x144><link rel=icon type=image/png href=/favicons/android-192x192.png sizes=192x192><title>hz 自定义模板使用 | CloudWeGo</title><meta name=description content="A leading practice for building enterprise cloud native middleware!"><meta property="og:title" content="hz 自定义模板使用"><meta property="og:description" content="Hertz 提供的命令行工具(以下称为&#34;hz&#34;)支持自定义模板功能，包括：
+<!doctype html><html lang=zh class=no-js><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=generator content="Hugo 0.85.0"><meta name=ROBOTS content="INDEX, FOLLOW"><link rel="shortcut icon" href=/favicons/favicon.ico><link rel=apple-touch-icon href=/favicons/apple-touch-icon-180x180.png sizes=180x180><link rel=icon type=image/png href=/favicons/favicon-16x16.png sizes=16x16><link rel=icon type=image/png href=/favicons/favicon-32x32.png sizes=32x32><link rel=icon type=image/png href=/favicons/android-36x36.png sizes=36x36><link rel=icon type=image/png href=/favicons/android-48x48.png sizes=48x48><link rel=icon type=image/png href=/favicons/android-72x72.png sizes=72x72><link rel=icon type=image/png href=/favicons/android-96x96.png sizes=96x96><link rel=icon type=image/png href=/favicons/android-144x144.png sizes=144x144><link rel=icon type=image/png href=/favicons/android-192x192.png sizes=192x192><title>hz 自定义模板使用 | CloudWeGo</title><meta name=description content="A leading practice for building enterprise cloud native middleware!"><meta property="og:title" content="hz 自定义模板使用"><meta property="og:description" content="Hertz 提供的命令行工具(以下称为&#34;hz&#34;)支持自定义模板功能，包括:
  自定义 layout 模板(即生成代码的目录结构) 自定义 package 模板(即与 service 相关的代码结构，包括 handler、router 等)  用户可自己提供模板以及渲染参数，并结合 hz 的能力，来完成自定义的代码生成结构。
 自定义 layout 模板  用户可根据默认模板来修改或重写，从而满足自身需求
  hz 利用了 go template 支持以 &ldquo;yaml&rdquo; 的格式定义模板，并使用 &ldquo;json&rdquo; 定义模板渲染数据。
-所谓的 layout 模板是指整个项目的结构，这些结构与具体的 idl 定义无关，不需要 idl 也可以直接生成，默认的结构如下：
-. ├── biz │ ├── handler │ │ └── ping.go │ │ └── ****.go // 按照服务划分的 handler 集合，位置可根据 handler_dir 改变 │ ├── model │ │ └── model.go // idl 生成的 struct，位置可根据 model_dir 改变 │ └── router // 未开发自定义 dir │ └── register."><meta property="og:type" content="article"><meta property="og:url" content="/zh/docs/hertz/tutorials/toolkit/template/"><meta property="article:section" content="docs"><meta property="article:published_time" content="2022-06-18T00:00:00+00:00"><meta property="article:modified_time" content="2022-07-15T17:40:23+08:00"><meta property="og:site_name" content="CloudWeGo"><meta itemprop=name content="hz 自定义模板使用"><meta itemprop=description content="Hertz 提供的命令行工具(以下称为&#34;hz&#34;)支持自定义模板功能，包括：
+所谓的 layout 模板是指整个项目的结构，这些结构与具体的 idl 定义无关，不需要 idl 也可以直接生成，默认的结构如下:
+. ├── biz │ ├── handler │ │ └── ping.go │ │ └── ****.go // 按照服务划分的 handler 集合，位置可根据 handler_dir 改变 │ ├── model │ │ └── model.go // idl 生成的 struct，位置可根据 model_dir 改变 │ └── router // 未开发自定义 dir │ └── register."><meta property="og:type" content="article"><meta property="og:url" content="https://www.cloudwego.io/zh/docs/hertz/tutorials/toolkit/template/"><meta property="article:section" content="docs"><meta property="article:published_time" content="2023-02-20T00:00:00+00:00"><meta property="article:modified_time" content="2023-04-11T13:43:08+08:00"><meta property="og:site_name" content="CloudWeGo"><meta itemprop=name content="hz 自定义模板使用"><meta itemprop=description content="Hertz 提供的命令行工具(以下称为&#34;hz&#34;)支持自定义模板功能，包括:
  自定义 layout 模板(即生成代码的目录结构) 自定义 package 模板(即与 service 相关的代码结构，包括 handler、router 等)  用户可自己提供模板以及渲染参数，并结合 hz 的能力，来完成自定义的代码生成结构。
 自定义 layout 模板  用户可根据默认模板来修改或重写，从而满足自身需求
  hz 利用了 go template 支持以 &ldquo;yaml&rdquo; 的格式定义模板，并使用 &ldquo;json&rdquo; 定义模板渲染数据。
-所谓的 layout 模板是指整个项目的结构，这些结构与具体的 idl 定义无关，不需要 idl 也可以直接生成，默认的结构如下：
-. ├── biz │ ├── handler │ │ └── ping.go │ │ └── ****.go // 按照服务划分的 handler 集合，位置可根据 handler_dir 改变 │ ├── model │ │ └── model.go // idl 生成的 struct，位置可根据 model_dir 改变 │ └── router // 未开发自定义 dir │ └── register."><meta itemprop=datePublished content="2022-06-18T00:00:00+00:00"><meta itemprop=dateModified content="2022-07-15T17:40:23+08:00"><meta itemprop=wordCount content="1468"><meta itemprop=keywords content><meta name=twitter:card content="summary"><meta name=twitter:title content="hz 自定义模板使用"><meta name=twitter:description content="Hertz 提供的命令行工具(以下称为&#34;hz&#34;)支持自定义模板功能，包括：
+所谓的 layout 模板是指整个项目的结构，这些结构与具体的 idl 定义无关，不需要 idl 也可以直接生成，默认的结构如下:
+. ├── biz │ ├── handler │ │ └── ping.go │ │ └── ****.go // 按照服务划分的 handler 集合，位置可根据 handler_dir 改变 │ ├── model │ │ └── model.go // idl 生成的 struct，位置可根据 model_dir 改变 │ └── router // 未开发自定义 dir │ └── register."><meta itemprop=datePublished content="2023-02-20T00:00:00+00:00"><meta itemprop=dateModified content="2023-04-11T13:43:08+08:00"><meta itemprop=wordCount content="1640"><meta itemprop=keywords content><meta name=twitter:card content="summary"><meta name=twitter:title content="hz 自定义模板使用"><meta name=twitter:description content="Hertz 提供的命令行工具(以下称为&#34;hz&#34;)支持自定义模板功能，包括:
  自定义 layout 模板(即生成代码的目录结构) 自定义 package 模板(即与 service 相关的代码结构，包括 handler、router 等)  用户可自己提供模板以及渲染参数，并结合 hz 的能力，来完成自定义的代码生成结构。
 自定义 layout 模板  用户可根据默认模板来修改或重写，从而满足自身需求
  hz 利用了 go template 支持以 &ldquo;yaml&rdquo; 的格式定义模板，并使用 &ldquo;json&rdquo; 定义模板渲染数据。
-所谓的 layout 模板是指整个项目的结构，这些结构与具体的 idl 定义无关，不需要 idl 也可以直接生成，默认的结构如下：
-. ├── biz │ ├── handler │ │ └── ping.go │ │ └── ****.go // 按照服务划分的 handler 集合，位置可根据 handler_dir 改变 │ ├── model │ │ └── model.go // idl 生成的 struct，位置可根据 model_dir 改变 │ └── router // 未开发自定义 dir │ └── register."><script async src="https://www.googletagmanager.com/gtag/js?id=G-QYWRQRLPRM"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-QYWRQRLPRM')</script><link rel=preload href=/scss/main.min.74596076870d8ffa5db36c241dd9869dba338426a102ea7b739db8693ea21df8.css as=style><link href=/scss/main.min.74596076870d8ffa5db36c241dd9869dba338426a102ea7b739db8693ea21df8.css rel=stylesheet integrity><script src=https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin=anonymous></script><script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','G-QYWRQRLPRM','auto'),ga('send','pageview'))</script><script async src=https://www.google-analytics.com/analytics.js></script></head><body class=td-page><header><nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar"><a class=navbar-brand href=/zh/><span class=navbar-logo><img src=/img/logo.png></span></a><div class="td-navbar-nav-scroll ml-md-auto" id=main_navbar><ul class="navbar-nav mt-2 mt-lg-0"><li class="dropdown sub-menu"><a class="nav-link dropdown-toggle" href=# id=navbarDropdown role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false><span>文档</span></a><div class=dropdown-menu aria-labelledby=navbarDropdownMenuLink><a class=dropdown-item href=/zh/docs/kitex/>Kitex</a>
+所谓的 layout 模板是指整个项目的结构，这些结构与具体的 idl 定义无关，不需要 idl 也可以直接生成，默认的结构如下:
+. ├── biz │ ├── handler │ │ └── ping.go │ │ └── ****.go // 按照服务划分的 handler 集合，位置可根据 handler_dir 改变 │ ├── model │ │ └── model.go // idl 生成的 struct，位置可根据 model_dir 改变 │ └── router // 未开发自定义 dir │ └── register."><script async src="https://www.googletagmanager.com/gtag/js?id=G-QYWRQRLPRM"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-QYWRQRLPRM')</script><script>var _hmt=_hmt||[];(function(){var a=document.createElement("script"),b;a.src="https://hm.baidu.com/hm.js?f1808c42af827f368aa7eca3baae6d55",b=document.getElementsByTagName("script")[0],b.parentNode.insertBefore(a,b)})()</script><link rel=preload href=/scss/main.min.8090891c264e3fa6623cbdac7ce42c1259703e8068886edd79eb5ec5f88cd0c9.css as=style><link href=/scss/main.min.8090891c264e3fa6623cbdac7ce42c1259703e8068886edd79eb5ec5f88cd0c9.css rel=stylesheet integrity><script src=https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin=anonymous></script><script src=https://unpkg.com/lunr@2.3.8/lunr.min.js integrity=sha384-vRQ9bDyE0Wnu+lMfm57BlYLO0/XauFuKpVsZPs7KEDwYKktWi5+Kz3MP8++DFlRY crossorigin=anonymous></script><link rel=stylesheet href=/css/prism.css><script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','G-QYWRQRLPRM','auto'),ga('send','pageview'))</script><script async src=https://www.google-analytics.com/analytics.js></script></head><body class=td-page><header><nav class="js-navbar-scroll navbar navbar-expand-xl navbar-dark td-navbar"><a class=navbar-brand href=/zh/><span class=navbar-logo><img src=/img/logo.png></span></a>
+<button class=navbar-toggler type=button data-toggle=collapse data-target=#main_navbar aria-controls=main_navbar aria-expanded=false aria-label="Toggle navigation">
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse td-navbar-nav-scroll ml-md-auto" id=main_navbar><ul class="navbar-nav mt-2 mt-lg-0 ml-auto"><li class="dropdown sub-menu"><a class="nav-link dropdown-toggle" href=# id=navbarDropdown role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false><span>文档</span></a><div class=dropdown-menu aria-labelledby=navbarDropdownMenuLink><a class=dropdown-item href=/zh/docs/kitex/>Kitex</a>
 <a class=dropdown-item href=/zh/docs/hertz/>Hertz</a>
-<a class=dropdown-item href=/zh/docs/netpoll/>Netpoll</a></div></li><li class="nav-item mr-4 mb-2 mb-lg-0"><a class=nav-link href=/zh/about/><span>关于</span></a></li><li class="nav-item mr-4 mb-2 mb-lg-0"><a class=nav-link href=/zh/blog/><span>博客</span></a></li><li class="dropdown sub-menu"><a class="nav-link dropdown-toggle" href=# id=navbarDropdown role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false><span>社区</span></a><div class=dropdown-menu aria-labelledby=navbarDropdownMenuLink><a class=dropdown-item href=/zh/community/>概述</a>
+<a class=dropdown-item href=/zh/docs/volo/>Volo</a>
+<a class=dropdown-item href=/zh/docs/netpoll/>Netpoll</a>
+<a class=dropdown-item href=/zh/docs/cwgo/>Cwgo</a>
+<a class=dropdown-item href=/zh/docs/motore/>Motore</a>
+<a class=dropdown-item href=/zh/docs/pilota/>Pilota</a></div></li><li class="nav-item mr-4 mb-2 mb-lg-0"><a class=nav-link href=/zh/about/><span>关于</span></a></li><li class="nav-item mr-4 mb-2 mb-lg-0"><a class=nav-link href=/zh/blog/><span>博客</span></a></li><li class="dropdown sub-menu"><a class="nav-link dropdown-toggle" href=# id=navbarDropdown role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false><span>社区</span></a><div class=dropdown-menu aria-labelledby=navbarDropdownMenuLink><a class=dropdown-item href=/zh/community/overview/>概述</a>
 <a class=dropdown-item href=/zh/community/meeting_notes/>会议记录</a>
-<a class=dropdown-item href=/zh/community/weekly_report/>周报</a></div></li><li class="nav-item dropdown mr-4 d-none d-lg-block"><a class="nav-link dropdown-toggle" href=# id=navbarDropdown role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false>中文</a><div class=dropdown-menu aria-labelledby=navbarDropdownMenuLink><a class=dropdown-item href=/docs/hertz/tutorials/toolkit/template/>English</a></div></li></ul></div><div class="navbar-nav d-none d-lg-block"></div></nav></header><div class="container-fluid td-outer"><div class=td-main><div class="row flex-xl-nowrap"><aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none"><div id=td-sidebar-menu class=td-sidebar__inner><div id=content-mobile><form class="td-sidebar__search d-flex align-items-center"><button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation"></button></form></div><div id=content-desktop></div><nav class="collapse td-sidebar-nav" id=td-section-nav><div class="nav-item dropdown d-block d-lg-none"><a class="nav-link dropdown-toggle" href=# id=navbarDropdown role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false>中文</a><div class=dropdown-menu aria-labelledby=navbarDropdownMenuLink><a class=dropdown-item href=/docs/hertz/tutorials/toolkit/template/>English</a></div></div><ul class="td-sidebar-nav__section pr-md-3 ul-0"><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-zhdocs-li><a href=/zh/docs/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section tree-root" id=m-zhdocs><span>文档</span></a><ul class=ul-1><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-zhdocshertz-li><a href=/zh/docs/hertz/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zhdocshertz><span>Hertz</span></a><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertzoverview-li><a href=/zh/docs/hertz/overview/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zhdocshertzoverview><span>概览</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertzgetting-started-li><a href=/zh/docs/hertz/getting-started/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zhdocshertzgetting-started><span>快速开始</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-zhdocshertztutorials-li><a href=/zh/docs/hertz/tutorials/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zhdocshertztutorials><span>指南</span></a><ul class="ul-3 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialsexample-li><a href=/zh/docs/hertz/tutorials/example/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zhdocshertztutorialsexample><span>代码示例</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-zhdocshertztutorialsbasic-feature-li><a href=/zh/docs/hertz/tutorials/basic-feature/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zhdocshertztutorialsbasic-feature><span>基本特性</span></a><ul class="ul-4 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialsbasic-featurenetwork-lib-li><a href=/zh/docs/hertz/tutorials/basic-feature/network-lib/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialsbasic-featurenetwork-lib><span>网络库</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-zhdocshertztutorialsbasic-featuremiddleware-li><a href=/zh/docs/hertz/tutorials/basic-feature/middleware/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zhdocshertztutorialsbasic-featuremiddleware><span>中间件概览</span></a><ul class="ul-5 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialsbasic-featuremiddlewarecors-li><a href=/zh/docs/hertz/tutorials/basic-feature/middleware/cors/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialsbasic-featuremiddlewarecors><span>跨源资源共享</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialsbasic-featuremiddlewarebasic-auth-li><a href=/zh/docs/hertz/tutorials/basic-feature/middleware/basic-auth/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialsbasic-featuremiddlewarebasic-auth><span>基本认证</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialsbasic-featuremiddlewarejwt-li><a href=/zh/docs/hertz/tutorials/basic-feature/middleware/jwt/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialsbasic-featuremiddlewarejwt><span>JWT认证</span></a></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialsbasic-featureprotocol-li><a href=/zh/docs/hertz/tutorials/basic-feature/protocol/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialsbasic-featureprotocol><span>协议</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialsbasic-featurebinding-and-validate-li><a href=/zh/docs/hertz/tutorials/basic-feature/binding-and-validate/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialsbasic-featurebinding-and-validate><span>绑定与校验</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialsbasic-featurestream-li><a href=/zh/docs/hertz/tutorials/basic-feature/stream/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialsbasic-featurestream><span>流式处理</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialsbasic-featureerror-handle-li><a href=/zh/docs/hertz/tutorials/basic-feature/error-handle/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialsbasic-featureerror-handle><span>错误处理</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialsbasic-featurelog-li><a href=/zh/docs/hertz/tutorials/basic-feature/log/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialsbasic-featurelog><span>日志</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialsbasic-featuregraceful-shutdown-li><a href=/zh/docs/hertz/tutorials/basic-feature/graceful-shutdown/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialsbasic-featuregraceful-shutdown><span>优雅退出</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialsbasic-featureforward-proxy-li><a href=/zh/docs/hertz/tutorials/basic-feature/forward-proxy/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialsbasic-featureforward-proxy><span>正向代理</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialsbasic-featureunit-test-li><a href=/zh/docs/hertz/tutorials/basic-feature/unit-test/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialsbasic-featureunit-test><span>单测</span></a></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-zhdocshertztutorialsservice-governance-li><a href=/zh/docs/hertz/tutorials/service-governance/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zhdocshertztutorialsservice-governance><span>治理特性</span></a><ul class="ul-4 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialsservice-governancemonitoring-li><a href=/zh/docs/hertz/tutorials/service-governance/monitoring/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialsservice-governancemonitoring><span>监控</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialsservice-governancetracing-li><a href=/zh/docs/hertz/tutorials/service-governance/tracing/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialsservice-governancetracing><span>链路追踪</span></a></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-zhdocshertztutorialsframework-exten-li><a href=/zh/docs/hertz/tutorials/framework-exten/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zhdocshertztutorialsframework-exten><span>框架扩展</span></a><ul class="ul-4 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialsframework-extenmonitor-li><a href=/zh/docs/hertz/tutorials/framework-exten/monitor/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialsframework-extenmonitor><span>监控扩展</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialsframework-extenlog-li><a href=/zh/docs/hertz/tutorials/framework-exten/log/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialsframework-extenlog><span>日志扩展</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-zhdocshertztutorialsframework-extenadvanced-exten-li><a href=/zh/docs/hertz/tutorials/framework-exten/advanced-exten/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zhdocshertztutorialsframework-extenadvanced-exten><span>高级扩展</span></a><ul class="ul-5 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialsframework-extenadvanced-extennetwork-lib-li><a href=/zh/docs/hertz/tutorials/framework-exten/advanced-exten/network-lib/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialsframework-extenadvanced-extennetwork-lib><span>网络库扩展</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialsframework-extenadvanced-extenprotocol-li><a href=/zh/docs/hertz/tutorials/framework-exten/advanced-exten/protocol/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialsframework-extenadvanced-extenprotocol><span>协议扩展</span></a></li></ul></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-zhdocshertztutorialstoolkit-li><a href=/zh/docs/hertz/tutorials/toolkit/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zhdocshertztutorialstoolkit><span>hz 命令行工具</span></a><ul class="ul-4 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialstoolkittoolkit-li><a href=/zh/docs/hertz/tutorials/toolkit/toolkit/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialstoolkittoolkit><span>hz 命令行工具使用</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id=m-zhdocshertztutorialstoolkittemplate-li><a href=/zh/docs/hertz/tutorials/toolkit/template/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialstoolkittemplate><span class=td-sidebar-nav-active-item>hz 自定义模板使用</span></a></li></ul></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertzfaq-li><a href=/zh/docs/hertz/faq/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zhdocshertzfaq><span>常见问题</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-zhdocshertzreference-li><a href=/zh/docs/hertz/reference/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zhdocshertzreference><span>参考</span></a><ul class="ul-3 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertzreferenceconfig-li><a href=/zh/docs/hertz/reference/config/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertzreferenceconfig><span>配置说明</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertzreferenceversion-li><a href=/zh/docs/hertz/reference/version/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertzreferenceversion><span>版本说明</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertzreferencejson-li><a href=/zh/docs/hertz/reference/json/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertzreferencejson><span>JSON Marshal 库</span></a></li></ul></li></ul></li></ul></li></ul></nav></div></aside><aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none"><div class="td-page-meta ml-2 pb-1 pt-2 mb-0"><a href=https://github.com/cloudwego/cloudwego.github.io/edit/main/content/zh/docs/hertz/tutorials/toolkit/template.md target=_blank><i class="fa fa-edit fa-fw"></i> 编辑此页</a>
+<a class=dropdown-item href=/zh/community/weekly_report/>周报</a>
+<a class=dropdown-item href=/zh/community/past_activities/>往期活动</a></div></li><li class="nav-item mr-4 mb-2 mb-lg-0"><a class=nav-link href=/zh/cooperation/><span>用户案例</span></a></li><li class="dropdown sub-menu"><a class="nav-link dropdown-toggle" href=# id=navbarDropdown role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false><span>安全</span></a><div class=dropdown-menu aria-labelledby=navbarDropdownMenuLink><a class=dropdown-item href=/zh/security/safety-bulletin/>安全公告</a>
+<a class=dropdown-item href=/zh/security/vulnerability-reporting/>漏洞管理</a></div></li><li class="nav-item dropdown mr-4"><a class="nav-link dropdown-toggle" href=# id=navbarDropdown role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false>中文</a><div class=dropdown-menu aria-labelledby=navbarDropdownMenuLink><a class=dropdown-item href=/docs/hertz/tutorials/toolkit/template/>English</a></div></li></ul></div><div class="navbar-nav d-none d-lg-block"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.ffbc4e552f7e4427acd2c28307a2610a.json data-offline-search-base-href=/ data-offline-search-max-results=10></div></nav></header><div class="container-fluid td-outer"><div class=td-main><div class="row flex-xl-nowrap"><aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none"><div id=td-sidebar-menu class=td-sidebar__inner><div id=content-mobile><form class="td-sidebar__search d-flex align-items-center"><input type=search class="form-control td-search-input" placeholder="&#xf002; 站内搜索…" aria-label=站内搜索… autocomplete=off data-offline-search-index-json-src=/offline-search-index.ffbc4e552f7e4427acd2c28307a2610a.json data-offline-search-base-href=/ data-offline-search-max-results=10>
+<button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-docs-nav aria-expanded=false aria-label="Toggle section navigation"></button></form></div><div id=content-desktop></div><nav class="collapse td-sidebar-nav foldable-nav" id=td-section-nav><div class="nav-item dropdown d-block d-lg-none"><a class="nav-link dropdown-toggle" href=# id=navbarDropdown role=button data-toggle=dropdown aria-haspopup=true aria-expanded=false>中文</a><div class=dropdown-menu aria-labelledby=navbarDropdownMenuLink><a class=dropdown-item href=/docs/hertz/tutorials/toolkit/template/>English</a></div></div><ul class="td-sidebar-nav__section pr-md-3 ul-0"><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-zhdocs-li><a href=/zh/docs/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section tree-root" id=m-zhdocs><span>文档</span></a><ul class=ul-1><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-zhdocshertz-li><input type=checkbox id=m-zhdocshertz-check checked>
+<label for=m-zhdocshertz-check><a href=/zh/docs/hertz/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zhdocshertz><span>Hertz</span></a></label><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertzoverview-li><input type=checkbox id=m-zhdocshertzoverview-check checked>
+<label for=m-zhdocshertzoverview-check><a href=/zh/docs/hertz/overview/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zhdocshertzoverview><span>概览</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertzgetting-started-li><input type=checkbox id=m-zhdocshertzgetting-started-check checked>
+<label for=m-zhdocshertzgetting-started-check><a href=/zh/docs/hertz/getting-started/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zhdocshertzgetting-started><span>快速开始</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-zhdocshertztutorials-li><input type=checkbox id=m-zhdocshertztutorials-check checked>
+<label for=m-zhdocshertztutorials-check><a href=/zh/docs/hertz/tutorials/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zhdocshertztutorials><span>开发指南</span></a></label><ul class="ul-3 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialsexample-li><input type=checkbox id=m-zhdocshertztutorialsexample-check>
+<label for=m-zhdocshertztutorialsexample-check><a href=/zh/docs/hertz/tutorials/example/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zhdocshertztutorialsexample><span>代码示例</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-zhdocshertztutorialsbasic-feature-li><input type=checkbox id=m-zhdocshertztutorialsbasic-feature-check>
+<label for=m-zhdocshertztutorialsbasic-feature-check><a href=/zh/docs/hertz/tutorials/basic-feature/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zhdocshertztutorialsbasic-feature><span>基本特性</span></a></label><ul class="ul-4 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialsbasic-featurenetwork-lib-li><input type=checkbox id=m-zhdocshertztutorialsbasic-featurenetwork-lib-check>
+<label for=m-zhdocshertztutorialsbasic-featurenetwork-lib-check><a href=/zh/docs/hertz/tutorials/basic-feature/network-lib/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialsbasic-featurenetwork-lib><span>网络库</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialsbasic-featureroute-li><input type=checkbox id=m-zhdocshertztutorialsbasic-featureroute-check>
+<label for=m-zhdocshertztutorialsbasic-featureroute-check><a href=/zh/docs/hertz/tutorials/basic-feature/route/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialsbasic-featureroute><span>路由</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-zhdocshertztutorialsbasic-featuremiddleware-li><input type=checkbox id=m-zhdocshertztutorialsbasic-featuremiddleware-check>
+<label for=m-zhdocshertztutorialsbasic-featuremiddleware-check><a href=/zh/docs/hertz/tutorials/basic-feature/middleware/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zhdocshertztutorialsbasic-featuremiddleware><span>中间件概览</span></a></label><ul class="ul-5 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialsbasic-featuremiddlewarecors-li><input type=checkbox id=m-zhdocshertztutorialsbasic-featuremiddlewarecors-check>
+<label for=m-zhdocshertztutorialsbasic-featuremiddlewarecors-check><a href=/zh/docs/hertz/tutorials/basic-feature/middleware/cors/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialsbasic-featuremiddlewarecors><span>跨源资源共享</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialsbasic-featuremiddlewarerecovery-li><input type=checkbox id=m-zhdocshertztutorialsbasic-featuremiddlewarerecovery-check>
+<label for=m-zhdocshertztutorialsbasic-featuremiddlewarerecovery-check><a href=/zh/docs/hertz/tutorials/basic-feature/middleware/recovery/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialsbasic-featuremiddlewarerecovery><span>Recovery</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialsbasic-featuremiddlewarebasic-auth-li><input type=checkbox id=m-zhdocshertztutorialsbasic-featuremiddlewarebasic-auth-check>
+<label for=m-zhdocshertztutorialsbasic-featuremiddlewarebasic-auth-check><a href=/zh/docs/hertz/tutorials/basic-feature/middleware/basic-auth/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialsbasic-featuremiddlewarebasic-auth><span>基本认证</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialsbasic-featuremiddlewarejwt-li><input type=checkbox id=m-zhdocshertztutorialsbasic-featuremiddlewarejwt-check>
+<label for=m-zhdocshertztutorialsbasic-featuremiddlewarejwt-check><a href=/zh/docs/hertz/tutorials/basic-feature/middleware/jwt/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialsbasic-featuremiddlewarejwt><span>JWT认证</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialsbasic-featuremiddlewaregzip-li><input type=checkbox id=m-zhdocshertztutorialsbasic-featuremiddlewaregzip-check>
+<label for=m-zhdocshertztutorialsbasic-featuremiddlewaregzip-check><a href=/zh/docs/hertz/tutorials/basic-feature/middleware/gzip/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialsbasic-featuremiddlewaregzip><span>Gzip 压缩</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialsbasic-featuremiddlewarei18n-li><input type=checkbox id=m-zhdocshertztutorialsbasic-featuremiddlewarei18n-check>
+<label for=m-zhdocshertztutorialsbasic-featuremiddlewarei18n-check><a href=/zh/docs/hertz/tutorials/basic-feature/middleware/i18n/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialsbasic-featuremiddlewarei18n><span>国际化</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialsbasic-featuremiddlewaresession-li><input type=checkbox id=m-zhdocshertztutorialsbasic-featuremiddlewaresession-check>
+<label for=m-zhdocshertztutorialsbasic-featuremiddlewaresession-check><a href=/zh/docs/hertz/tutorials/basic-feature/middleware/session/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialsbasic-featuremiddlewaresession><span>Session扩展</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialsbasic-featuremiddlewarepprof-li><input type=checkbox id=m-zhdocshertztutorialsbasic-featuremiddlewarepprof-check>
+<label for=m-zhdocshertztutorialsbasic-featuremiddlewarepprof-check><a href=/zh/docs/hertz/tutorials/basic-feature/middleware/pprof/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialsbasic-featuremiddlewarepprof><span>Pprof</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialsbasic-featuremiddlewarekeyauth-li><input type=checkbox id=m-zhdocshertztutorialsbasic-featuremiddlewarekeyauth-check>
+<label for=m-zhdocshertztutorialsbasic-featuremiddlewarekeyauth-check><a href=/zh/docs/hertz/tutorials/basic-feature/middleware/keyauth/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialsbasic-featuremiddlewarekeyauth><span>KeyAuth</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialsbasic-featuremiddlewareswagger-li><input type=checkbox id=m-zhdocshertztutorialsbasic-featuremiddlewareswagger-check>
+<label for=m-zhdocshertztutorialsbasic-featuremiddlewareswagger-check><a href=/zh/docs/hertz/tutorials/basic-feature/middleware/swagger/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialsbasic-featuremiddlewareswagger><span>Swagger</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialsbasic-featuremiddlewarerequestid-li><input type=checkbox id=m-zhdocshertztutorialsbasic-featuremiddlewarerequestid-check>
+<label for=m-zhdocshertztutorialsbasic-featuremiddlewarerequestid-check><a href=/zh/docs/hertz/tutorials/basic-feature/middleware/requestid/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialsbasic-featuremiddlewarerequestid><span>Request ID</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialsbasic-featuremiddlewareaccess-log-li><input type=checkbox id=m-zhdocshertztutorialsbasic-featuremiddlewareaccess-log-check>
+<label for=m-zhdocshertztutorialsbasic-featuremiddlewareaccess-log-check><a href=/zh/docs/hertz/tutorials/basic-feature/middleware/access-log/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialsbasic-featuremiddlewareaccess-log><span>访问日志</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialsbasic-featuremiddlewaresecure-li><input type=checkbox id=m-zhdocshertztutorialsbasic-featuremiddlewaresecure-check>
+<label for=m-zhdocshertztutorialsbasic-featuremiddlewaresecure-check><a href=/zh/docs/hertz/tutorials/basic-feature/middleware/secure/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialsbasic-featuremiddlewaresecure><span>Secure</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialsbasic-featuremiddlewaresentry-li><input type=checkbox id=m-zhdocshertztutorialsbasic-featuremiddlewaresentry-check>
+<label for=m-zhdocshertztutorialsbasic-featuremiddlewaresentry-check><a href=/zh/docs/hertz/tutorials/basic-feature/middleware/sentry/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialsbasic-featuremiddlewaresentry><span>Sentry</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialsbasic-featuremiddlewarecsrf-li><input type=checkbox id=m-zhdocshertztutorialsbasic-featuremiddlewarecsrf-check>
+<label for=m-zhdocshertztutorialsbasic-featuremiddlewarecsrf-check><a href=/zh/docs/hertz/tutorials/basic-feature/middleware/csrf/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialsbasic-featuremiddlewarecsrf><span>CSRF</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialsbasic-featuremiddlewarecasbin-li><input type=checkbox id=m-zhdocshertztutorialsbasic-featuremiddlewarecasbin-check>
+<label for=m-zhdocshertztutorialsbasic-featuremiddlewarecasbin-check><a href=/zh/docs/hertz/tutorials/basic-feature/middleware/casbin/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialsbasic-featuremiddlewarecasbin><span>Casbin</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialsbasic-featuremiddlewareetag-li><input type=checkbox id=m-zhdocshertztutorialsbasic-featuremiddlewareetag-check>
+<label for=m-zhdocshertztutorialsbasic-featuremiddlewareetag-check><a href=/zh/docs/hertz/tutorials/basic-feature/middleware/etag/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialsbasic-featuremiddlewareetag><span>ETag</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialsbasic-featuremiddlewarecache-li><input type=checkbox id=m-zhdocshertztutorialsbasic-featuremiddlewarecache-check>
+<label for=m-zhdocshertztutorialsbasic-featuremiddlewarecache-check><a href=/zh/docs/hertz/tutorials/basic-feature/middleware/cache/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialsbasic-featuremiddlewarecache><span>Cache</span></a></label></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-zhdocshertztutorialsbasic-featureprotocol-li><input type=checkbox id=m-zhdocshertztutorialsbasic-featureprotocol-check>
+<label for=m-zhdocshertztutorialsbasic-featureprotocol-check><a href=/zh/docs/hertz/tutorials/basic-feature/protocol/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zhdocshertztutorialsbasic-featureprotocol><span>协议</span></a></label><ul class="ul-5 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialsbasic-featureprotocolhttp2-li><input type=checkbox id=m-zhdocshertztutorialsbasic-featureprotocolhttp2-check>
+<label for=m-zhdocshertztutorialsbasic-featureprotocolhttp2-check><a href=/zh/docs/hertz/tutorials/basic-feature/protocol/http2/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialsbasic-featureprotocolhttp2><span>HTTP2</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialsbasic-featureprotocolwebsocket-li><input type=checkbox id=m-zhdocshertztutorialsbasic-featureprotocolwebsocket-check>
+<label for=m-zhdocshertztutorialsbasic-featureprotocolwebsocket-check><a href=/zh/docs/hertz/tutorials/basic-feature/protocol/websocket/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialsbasic-featureprotocolwebsocket><span>Websocket</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialsbasic-featureprotocoltls-li><input type=checkbox id=m-zhdocshertztutorialsbasic-featureprotocoltls-check>
+<label for=m-zhdocshertztutorialsbasic-featureprotocoltls-check><a href=/zh/docs/hertz/tutorials/basic-feature/protocol/tls/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialsbasic-featureprotocoltls><span>TLS</span></a></label></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialsbasic-featurebinding-and-validate-li><input type=checkbox id=m-zhdocshertztutorialsbasic-featurebinding-and-validate-check>
+<label for=m-zhdocshertztutorialsbasic-featurebinding-and-validate-check><a href=/zh/docs/hertz/tutorials/basic-feature/binding-and-validate/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialsbasic-featurebinding-and-validate><span>绑定与校验</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialsbasic-featurestream-li><input type=checkbox id=m-zhdocshertztutorialsbasic-featurestream-check>
+<label for=m-zhdocshertztutorialsbasic-featurestream-check><a href=/zh/docs/hertz/tutorials/basic-feature/stream/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialsbasic-featurestream><span>流式处理</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialsbasic-featureerror-handle-li><input type=checkbox id=m-zhdocshertztutorialsbasic-featureerror-handle-check>
+<label for=m-zhdocshertztutorialsbasic-featureerror-handle-check><a href=/zh/docs/hertz/tutorials/basic-feature/error-handle/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialsbasic-featureerror-handle><span>错误处理</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialsbasic-featuregraceful-shutdown-li><input type=checkbox id=m-zhdocshertztutorialsbasic-featuregraceful-shutdown-check>
+<label for=m-zhdocshertztutorialsbasic-featuregraceful-shutdown-check><a href=/zh/docs/hertz/tutorials/basic-feature/graceful-shutdown/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialsbasic-featuregraceful-shutdown><span>优雅退出</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialsbasic-featureproxy-li><input type=checkbox id=m-zhdocshertztutorialsbasic-featureproxy-check>
+<label for=m-zhdocshertztutorialsbasic-featureproxy-check><a href=/zh/docs/hertz/tutorials/basic-feature/proxy/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialsbasic-featureproxy><span>正向代理和反向代理</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialsbasic-featureretry-li><input type=checkbox id=m-zhdocshertztutorialsbasic-featureretry-check>
+<label for=m-zhdocshertztutorialsbasic-featureretry-check><a href=/zh/docs/hertz/tutorials/basic-feature/retry/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialsbasic-featureretry><span>重试</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialsbasic-featurehooks-li><input type=checkbox id=m-zhdocshertztutorialsbasic-featurehooks-check>
+<label for=m-zhdocshertztutorialsbasic-featurehooks-check><a href=/zh/docs/hertz/tutorials/basic-feature/hooks/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialsbasic-featurehooks><span>Hooks</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialsbasic-featureunit-test-li><input type=checkbox id=m-zhdocshertztutorialsbasic-featureunit-test-check>
+<label for=m-zhdocshertztutorialsbasic-featureunit-test-check><a href=/zh/docs/hertz/tutorials/basic-feature/unit-test/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialsbasic-featureunit-test><span>单测</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialsbasic-featureadaptor-li><input type=checkbox id=m-zhdocshertztutorialsbasic-featureadaptor-check>
+<label for=m-zhdocshertztutorialsbasic-featureadaptor-check><a href=/zh/docs/hertz/tutorials/basic-feature/adaptor/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialsbasic-featureadaptor><span>适配器</span></a></label></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-zhdocshertztutorialsobservability-li><input type=checkbox id=m-zhdocshertztutorialsobservability-check>
+<label for=m-zhdocshertztutorialsobservability-check><a href=/zh/docs/hertz/tutorials/observability/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zhdocshertztutorialsobservability><span>可观测性</span></a></label><ul class="ul-4 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialsobservabilitylog-li><input type=checkbox id=m-zhdocshertztutorialsobservabilitylog-check>
+<label for=m-zhdocshertztutorialsobservabilitylog-check><a href=/zh/docs/hertz/tutorials/observability/log/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialsobservabilitylog><span>日志</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialsobservabilitytracing-li><input type=checkbox id=m-zhdocshertztutorialsobservabilitytracing-check>
+<label for=m-zhdocshertztutorialsobservabilitytracing-check><a href=/zh/docs/hertz/tutorials/observability/tracing/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialsobservabilitytracing><span>链路追踪</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialsobservabilitymonitoring-li><input type=checkbox id=m-zhdocshertztutorialsobservabilitymonitoring-check>
+<label for=m-zhdocshertztutorialsobservabilitymonitoring-check><a href=/zh/docs/hertz/tutorials/observability/monitoring/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialsobservabilitymonitoring><span>监控</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialsobservabilityopen-telemetry-li><input type=checkbox id=m-zhdocshertztutorialsobservabilityopen-telemetry-check>
+<label for=m-zhdocshertztutorialsobservabilityopen-telemetry-check><a href=/zh/docs/hertz/tutorials/observability/open-telemetry/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialsobservabilityopen-telemetry><span>OpenTelemetry</span></a></label></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-zhdocshertztutorialsservice-governance-li><input type=checkbox id=m-zhdocshertztutorialsservice-governance-check>
+<label for=m-zhdocshertztutorialsservice-governance-check><a href=/zh/docs/hertz/tutorials/service-governance/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zhdocshertztutorialsservice-governance><span>治理特性</span></a></label><ul class="ul-4 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialsservice-governanceservice_discovery-li><input type=checkbox id=m-zhdocshertztutorialsservice-governanceservice_discovery-check>
+<label for=m-zhdocshertztutorialsservice-governanceservice_discovery-check><a href=/zh/docs/hertz/tutorials/service-governance/service_discovery/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialsservice-governanceservice_discovery><span>服务注册与发现</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialsservice-governancesentinel-li><input type=checkbox id=m-zhdocshertztutorialsservice-governancesentinel-check>
+<label for=m-zhdocshertztutorialsservice-governancesentinel-check><a href=/zh/docs/hertz/tutorials/service-governance/sentinel/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialsservice-governancesentinel><span>Sentinel</span></a></label></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-zhdocshertztutorialsframework-exten-li><input type=checkbox id=m-zhdocshertztutorialsframework-exten-check>
+<label for=m-zhdocshertztutorialsframework-exten-check><a href=/zh/docs/hertz/tutorials/framework-exten/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zhdocshertztutorialsframework-exten><span>框架扩展</span></a></label><ul class="ul-4 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialsframework-extenmonitor-li><input type=checkbox id=m-zhdocshertztutorialsframework-extenmonitor-check>
+<label for=m-zhdocshertztutorialsframework-extenmonitor-check><a href=/zh/docs/hertz/tutorials/framework-exten/monitor/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialsframework-extenmonitor><span>监控扩展</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialsframework-extenlog-li><input type=checkbox id=m-zhdocshertztutorialsframework-extenlog-check>
+<label for=m-zhdocshertztutorialsframework-extenlog-check><a href=/zh/docs/hertz/tutorials/framework-exten/log/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialsframework-extenlog><span>日志扩展</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialsframework-extenservice_discovery-li><input type=checkbox id=m-zhdocshertztutorialsframework-extenservice_discovery-check>
+<label for=m-zhdocshertztutorialsframework-extenservice_discovery-check><a href=/zh/docs/hertz/tutorials/framework-exten/service_discovery/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialsframework-extenservice_discovery><span>服务注册与发现扩展</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-zhdocshertztutorialsframework-extenadvanced-exten-li><input type=checkbox id=m-zhdocshertztutorialsframework-extenadvanced-exten-check>
+<label for=m-zhdocshertztutorialsframework-extenadvanced-exten-check><a href=/zh/docs/hertz/tutorials/framework-exten/advanced-exten/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zhdocshertztutorialsframework-extenadvanced-exten><span>高级扩展</span></a></label><ul class="ul-5 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialsframework-extenadvanced-extennetwork-lib-li><input type=checkbox id=m-zhdocshertztutorialsframework-extenadvanced-extennetwork-lib-check>
+<label for=m-zhdocshertztutorialsframework-extenadvanced-extennetwork-lib-check><a href=/zh/docs/hertz/tutorials/framework-exten/advanced-exten/network-lib/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialsframework-extenadvanced-extennetwork-lib><span>网络库扩展</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialsframework-extenadvanced-extenprotocol-li><input type=checkbox id=m-zhdocshertztutorialsframework-extenadvanced-extenprotocol-check>
+<label for=m-zhdocshertztutorialsframework-extenadvanced-extenprotocol-check><a href=/zh/docs/hertz/tutorials/framework-exten/advanced-exten/protocol/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialsframework-extenadvanced-extenprotocol><span>协议扩展</span></a></label></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialsframework-extenresponse_writer-li><input type=checkbox id=m-zhdocshertztutorialsframework-extenresponse_writer-check>
+<label for=m-zhdocshertztutorialsframework-extenresponse_writer-check><a href=/zh/docs/hertz/tutorials/framework-exten/response_writer/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialsframework-extenresponse_writer><span>Response 的 Writer 扩展</span></a></label></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-zhdocshertztutorialstoolkit-li><input type=checkbox id=m-zhdocshertztutorialstoolkit-check checked>
+<label for=m-zhdocshertztutorialstoolkit-check><a href=/zh/docs/hertz/tutorials/toolkit/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zhdocshertztutorialstoolkit><span>代码生成</span></a></label><ul class="ul-4 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-zhdocshertztutorialstoolkitusage-li><input type=checkbox id=m-zhdocshertztutorialstoolkitusage-check>
+<label for=m-zhdocshertztutorialstoolkitusage-check><a href=/zh/docs/hertz/tutorials/toolkit/usage/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zhdocshertztutorialstoolkitusage><span>hz 使用方法</span></a></label><ul class="ul-5 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialstoolkitusageinstall-li><input type=checkbox id=m-zhdocshertztutorialstoolkitusageinstall-check>
+<label for=m-zhdocshertztutorialstoolkitusageinstall-check><a href=/zh/docs/hertz/tutorials/toolkit/usage/install/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialstoolkitusageinstall><span>hz 安装</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialstoolkitusageusage-li><input type=checkbox id=m-zhdocshertztutorialstoolkitusageusage-check>
+<label for=m-zhdocshertztutorialstoolkitusageusage-check><a href=/zh/docs/hertz/tutorials/toolkit/usage/usage/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialstoolkitusageusage><span>hz 的基本使用</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialstoolkitusageusage-thrift-li><input type=checkbox id=m-zhdocshertztutorialstoolkitusageusage-thrift-check>
+<label for=m-zhdocshertztutorialstoolkitusageusage-thrift-check><a href=/zh/docs/hertz/tutorials/toolkit/usage/usage-thrift/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialstoolkitusageusage-thrift><span>hz 使用 (thrift)</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialstoolkitusageusage-protobuf-li><input type=checkbox id=m-zhdocshertztutorialstoolkitusageusage-protobuf-check>
+<label for=m-zhdocshertztutorialstoolkitusageusage-protobuf-check><a href=/zh/docs/hertz/tutorials/toolkit/usage/usage-protobuf/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialstoolkitusageusage-protobuf><span>hz 使用 (protobuf)</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialstoolkitusagelayout-li><input type=checkbox id=m-zhdocshertztutorialstoolkitusagelayout-check>
+<label for=m-zhdocshertztutorialstoolkitusagelayout-check><a href=/zh/docs/hertz/tutorials/toolkit/usage/layout/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialstoolkitusagelayout><span>hz 生成代码的结构</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialstoolkitusageannotation-li><input type=checkbox id=m-zhdocshertztutorialstoolkitusageannotation-check>
+<label for=m-zhdocshertztutorialstoolkitusageannotation-check><a href=/zh/docs/hertz/tutorials/toolkit/usage/annotation/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialstoolkitusageannotation><span>IDL 注解说明</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialstoolkitusagecommand-li><input type=checkbox id=m-zhdocshertztutorialstoolkitusagecommand-check>
+<label for=m-zhdocshertztutorialstoolkitusagecommand-check><a href=/zh/docs/hertz/tutorials/toolkit/usage/command/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialstoolkitusagecommand><span>hz 命令梳理</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialstoolkitusagecautions-li><input type=checkbox id=m-zhdocshertztutorialstoolkitusagecautions-check>
+<label for=m-zhdocshertztutorialstoolkitusagecautions-check><a href=/zh/docs/hertz/tutorials/toolkit/usage/cautions/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialstoolkitusagecautions><span>注意事项</span></a></label></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id=m-zhdocshertztutorialstoolkittemplate-li><input type=checkbox id=m-zhdocshertztutorialstoolkittemplate-check checked>
+<label for=m-zhdocshertztutorialstoolkittemplate-check><a href=/zh/docs/hertz/tutorials/toolkit/template/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialstoolkittemplate><span class=td-sidebar-nav-active-item>hz 自定义模板使用</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialstoolkitplugin-li><input type=checkbox id=m-zhdocshertztutorialstoolkitplugin-check>
+<label for=m-zhdocshertztutorialstoolkitplugin-check><a href=/zh/docs/hertz/tutorials/toolkit/plugin/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialstoolkitplugin><span>hz 接入第三方生成代码插件</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertztutorialstoolkitclient-li><input type=checkbox id=m-zhdocshertztutorialstoolkitclient-check>
+<label for=m-zhdocshertztutorialstoolkitclient-check><a href=/zh/docs/hertz/tutorials/toolkit/client/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertztutorialstoolkitclient><span>hz client 代码生成</span></a></label></li></ul></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertzfaq-li><input type=checkbox id=m-zhdocshertzfaq-check checked>
+<label for=m-zhdocshertzfaq-check><a href=/zh/docs/hertz/faq/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zhdocshertzfaq><span>常见问题</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-zhdocshertzreference-li><input type=checkbox id=m-zhdocshertzreference-check checked>
+<label for=m-zhdocshertzreference-check><a href=/zh/docs/hertz/reference/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-zhdocshertzreference><span>参考</span></a></label><ul class="ul-3 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertzreferenceconfig-li><input type=checkbox id=m-zhdocshertzreferenceconfig-check>
+<label for=m-zhdocshertzreferenceconfig-check><a href=/zh/docs/hertz/reference/config/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertzreferenceconfig><span>配置说明</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertzreferenceversion-li><input type=checkbox id=m-zhdocshertzreferenceversion-check>
+<label for=m-zhdocshertzreferenceversion-check><a href=/zh/docs/hertz/reference/version/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertzreferenceversion><span>版本说明</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertzreferencejson-li><input type=checkbox id=m-zhdocshertzreferencejson-check>
+<label for=m-zhdocshertzreferencejson-check><a href=/zh/docs/hertz/reference/json/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertzreferencejson><span>JSON Marshal 库</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertzreferencemigration-li><input type=checkbox id=m-zhdocshertzreferencemigration-check>
+<label for=m-zhdocshertzreferencemigration-check><a href=/zh/docs/hertz/reference/migration/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertzreferencemigration><span>迁移文档</span></a></label></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-zhdocshertzreferencestream_based_design-li><input type=checkbox id=m-zhdocshertzreferencestream_based_design-check>
+<label for=m-zhdocshertzreferencestream_based_design-check><a href=/zh/docs/hertz/reference/stream_based_design/ title="Hertz 支持 QUIC & HTTP/3" class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-zhdocshertzreferencestream_based_design><span>Hertz 支持 QUIC & HTTP/3</span></a></label></li></ul></li></ul></li></ul></li></ul></nav></div></aside><aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none"><div class="td-page-meta ml-2 pb-1 pt-2 mb-0"><a href=https://github.com/cloudwego/cloudwego.github.io/edit/main/content/zh/docs/hertz/tutorials/toolkit/template.md target=_blank><i class="fa fa-edit fa-fw"></i> 编辑此页</a>
 <a href="https://github.com/cloudwego/cloudwego.github.io/new/main/content/zh/docs/hertz/tutorials/toolkit/template.md?filename=change-me.md&value=---%0Atitle%3A+%22Long+Page+Title%22%0AlinkTitle%3A+%22Short+Nav+Title%22%0Aweight%3A+100%0Adescription%3A+%3E-%0A+++++Page+description+for+heading+and+indexes.%0A---%0A%0A%23%23+Heading%0A%0AEdit+this+template+to+create+your+new+page.%0A%0A%2A+Give+it+a+good+name%2C+ending+in+%60.md%60+-+e.g.+%60getting-started.md%60%0A%2A+Edit+the+%22front+matter%22+section+at+the+top+of+the+page+%28weight+controls+how+its+ordered+amongst+other+pages+in+the+same+directory%3B+lowest+number+first%29.%0A%2A+Add+a+good+commit+message+at+the+bottom+of+the+page+%28%3C80+characters%3B+use+the+extended+description+field+for+more+detail%29.%0A%2A+Create+a+new+branch+so+you+can+preview+your+new+file+and+request+a+review+via+Pull+Request.%0A" target=_blank><i class="fa fa-edit fa-fw"></i> 添加子页面</a>
 <a href="https://github.com/cloudwego/cloudwego.github.io/issues/new?title=hz%20%e8%87%aa%e5%ae%9a%e4%b9%89%e6%a8%a1%e6%9d%bf%e4%bd%bf%e7%94%a8" target=_blank><i class="fab fa-github fa-fw"></i> 提交文档问题</a>
-<a href=https://github.com/cloudwego/kitex/issues/new target=_blank><i class="fas fa-tasks fa-fw"></i> 提交项目问题</a></div><div class=td-toc><nav id=TableOfContents><ul><li><a href=#idl>IDL</a></li><li><a href=#命令>命令</a></li><li><a href=#默认-layout-模板的含义>默认 layout 模板的含义</a></li><li><a href=#模板渲染参数文件的含义>模板渲染参数文件的含义</a></li><li><a href=#自定义一个-layout-模板>自定义一个 layout 模板</a><ul><li><a href=#template>template:</a></li><li><a href=#render-data>render data:</a></li></ul></li></ul><ul><li><a href=#命令-1>命令</a></li><li><a href=#默认-package-模板>默认 package 模板</a></li><li><a href=#自定义一个-package-模板>自定义一个 package 模板</a><ul><li><a href=#template-1>template:</a></li></ul></li></ul><ul><li><a href=#使用-layout-模板的注意事项>使用 layout 模板的注意事项</a></li><li><a href=#使用-package-模板的注意事项>使用 package 模板的注意事项</a></li></ul></nav></div></aside><main class="col-12 col-md-9 col-xl-8 pl-md-5" role=main><nav aria-label=breadcrumb class="d-none d-md-block d-print-none"><ol class="breadcrumb spb-1"><li class=breadcrumb-item><a href=/zh/docs/>文档</a></li><li class=breadcrumb-item><a href=/zh/docs/hertz/>Hertz</a></li><li class=breadcrumb-item><a href=/zh/docs/hertz/tutorials/>指南</a></li><li class=breadcrumb-item><a href=/zh/docs/hertz/tutorials/toolkit/>hz 命令行工具</a></li><li class="breadcrumb-item active" aria-current=page><a href=/zh/docs/hertz/tutorials/toolkit/template/>hz 自定义模板使用</a></li></ol></nav><div class=td-content><h1>hz 自定义模板使用</h1><header class=article-meta></header><p>Hertz 提供的命令行工具(以下称为"hz")支持自定义模板功能，包括：</p><ul><li>自定义 layout 模板(即生成代码的目录结构)</li><li>自定义 package 模板(即与 service 相关的代码结构，包括 handler、router 等)</li></ul><p>用户可自己提供模板以及渲染参数，并结合 hz 的能力，来完成自定义的代码生成结构。</p><h1 id=自定义-layout-模板>自定义 layout 模板</h1><blockquote><p>用户可根据默认模板来修改或重写，从而满足自身需求</p></blockquote><p>hz 利用了 go template 支持以 &ldquo;yaml&rdquo; 的格式定义模板，并使用 &ldquo;json&rdquo; 定义模板渲染数据。</p><p>所谓的 layout 模板是指整个项目的结构，这些结构与具体的 idl 定义无关，不需要 idl 也可以直接生成，默认的结构如下：</p><pre><code>.
+<a href=https://github.com/cloudwego/kitex/issues/new target=_blank><i class="fas fa-tasks fa-fw"></i> 提交项目问题</a></div><div class=td-toc><nav id=TableOfContents><ul><li><a href=#自定义-layout-模板>自定义 layout 模板</a><ul><li><a href=#idl>IDL</a></li><li><a href=#命令>命令</a></li><li><a href=#默认-layout-模板的含义>默认 layout 模板的含义</a></li><li><a href=#模板渲染参数文件的含义>模板渲染参数文件的含义</a></li><li><a href=#自定义一个-layout-模板>自定义一个 layout 模板</a></li></ul></li><li><a href=#自定义-package-模板>自定义 package 模板</a><ul><li><a href=#命令-1>命令</a></li><li><a href=#默认-package-模板>默认 package 模板</a></li><li><a href=#自定义一个-package-模板>自定义一个 package 模板</a></li></ul></li><li><a href=#mvc-模板实践>MVC 模板实践</a></li><li><a href=#注意事项>注意事项</a><ul><li><a href=#使用-layout-模板的注意事项>使用 layout 模板的注意事项</a></li><li><a href=#使用-package-模板的注意事项>使用 package 模板的注意事项</a></li></ul></li></ul></nav></div></aside><main class="col-12 col-md-9 col-xl-8 pl-md-5" role=main><nav aria-label=breadcrumb class="d-none d-md-block d-print-none"><ol class="breadcrumb spb-1"><li class=breadcrumb-item><a href=https://www.cloudwego.io/zh/docs/>文档</a></li><li class=breadcrumb-item><a href=https://www.cloudwego.io/zh/docs/hertz/>Hertz</a></li><li class=breadcrumb-item><a href=https://www.cloudwego.io/zh/docs/hertz/tutorials/>开发指南</a></li><li class=breadcrumb-item><a href=https://www.cloudwego.io/zh/docs/hertz/tutorials/toolkit/>代码生成</a></li><li class="breadcrumb-item active" aria-current=page><a href=https://www.cloudwego.io/zh/docs/hertz/tutorials/toolkit/template/>hz 自定义模板使用</a></li></ol></nav><div class=td-content><h1>hz 自定义模板使用</h1><header class=article-meta></header><p>Hertz 提供的命令行工具(以下称为"hz")支持自定义模板功能，包括:</p><ul><li>自定义 layout 模板(即生成代码的目录结构)</li><li>自定义 package 模板(即与 service 相关的代码结构，包括 handler、router 等)</li></ul><p>用户可自己提供模板以及渲染参数，并结合 hz 的能力，来完成自定义的代码生成结构。</p><h2 id=自定义-layout-模板>自定义 layout 模板</h2><blockquote><p>用户可根据默认模板来修改或重写，从而满足自身需求</p></blockquote><p>hz 利用了 go template 支持以 &ldquo;yaml&rdquo; 的格式定义模板，并使用 &ldquo;json&rdquo; 定义模板渲染数据。</p><p>所谓的 layout 模板是指整个项目的结构，这些结构与具体的 idl 定义无关，不需要 idl 也可以直接生成，默认的结构如下:</p><pre><code>.
 ├── biz
 │   ├── handler
 │   │   └── ping.go
@@ -36,99 +121,167 @@
 ├── main.go                       // 启动入口
 ├── router.go                     // 用户自定义路由写入位置
 └── router_gen.go                 // hz 生成的路由注册调用
-</code></pre><h2 id=idl>IDL</h2><pre><code>// hello.thrift
-namespace go hello.example
-
-struct HelloReq {
-    1: string Name (api.query=&quot;name&quot;);
-}
-
-struct HelloResp {
-    1: string RespBody;
-}
-
-
-service HelloService {
-    HelloResp HelloMethod(1: HelloReq request) (api.get=&quot;/hello&quot;);
-}
-</code></pre><h2 id=命令>命令</h2><pre><code>hz new --mod=github.com/hertz/hello --idl=./hertzDemo/hello.thrift --customize_layout=template/layout.yaml:template/data.json
-</code></pre><h2 id=默认-layout-模板的含义>默认 layout 模板的含义</h2><blockquote><p>注：以下的 body 均为 go template</p></blockquote><pre><code>layouts:
-  # 生成的 handler 的目录，只有目录下有文件才会生成
-  - path: biz/handler/
-    delims:
-      - &quot;&quot;
-      - &quot;&quot;
-    body: &quot;&quot;
-  # 生成的 model 的目录，只有目录下有文件才会生成
-  - path: biz/model/
-    delims:
-      - &quot;&quot;
-      - &quot;&quot;
-    body: &quot;&quot;
-  # 项目 main 文件，
-  - path: main.go
-    delims:
-      - &quot;&quot;
-      - &quot;&quot;
-    body: &quot;// Code generated by hertz generator.\n\npackage main\n\nimport (\n\t\&quot;github.com/cloudwego/hertz/pkg/app/server\&quot;\n)\n\nfunc
-    main() {\n\th := server.Default()\n\n\tregister(h)\n\th.Spin()\n}\n&quot;
-  # go.mod 文件，需要模板渲染数据{{.GoModule}}才能生成
-  - path: go.mod
-    delims:
-      - '{{'
-      - '}}'
-    body: &quot;module {{.GoModule}}\n{{- if .UseApacheThrift}}\nreplace github.com/apache/thrift
-    =&gt; github.com/apache/thrift v0.13.0\n{{- end}}\n&quot;
-  # .gitignore 文件
-  - path: .gitignore
-    delims:
-      - &quot;&quot;
-      - &quot;&quot;
-    body: &quot;*.o\n*.a\n*.so\n_obj\n_test\n*.[568vq]\n[568vq].out\n*.cgo1.go\n*.cgo2.c\n_cgo_defun.c\n_cgo_gotypes.go\n_cgo_export.*\n_testmain.go\n*.exe\n*.exe~\n*.test\n*.prof\n*.rar\n*.zip\n*.gz\n*.psd\n*.bmd\n*.cfg\n*.pptx\n*.log\n*nohup.out\n*settings.pyc\n*.sublime-project\n*.sublime-workspace\n!.gitkeep\n.DS_Store\n/.idea\n/.vscode\n/output\n*.local.yml\ndumped_hertz_remote_config.json\n\t\t
-    \ &quot;
-  # .hz 文件，包含 hz 版本，是 hz 创建的项目的标志，不需要传渲染数据
-  - path: .hz
-    delims:
-      - '{{'
-      - '}}'
-    body: &quot;
-      // Code generated by hz. DO NOT EDIT.
-
-      hz version: v{{.hzVersion}}&quot;
-  # ping 自带 ping 的 handler
-  - path: biz/handler/ping.go
-    delims:
-      - &quot;&quot;
-      - &quot;&quot;
-    body: &quot;// Code generated by hertz generator.\n\npackage handler\n\nimport (\n\t\&quot;context\&quot;\n\n\t\&quot;github.com/cloudwego/hertz/pkg/app\&quot;\n\t\&quot;github.com/cloudwego/hertz/pkg/common/utils\&quot;\n)\n\n//
-    Ping .\nfunc Ping(ctx context.Context, c *app.RequestContext) {\n\tc.JSON(200,
-    utils.H{\n\t\t\&quot;message\&quot;: \&quot;pong\&quot;,\n\t})\n}\n&quot;
-  # 定义路由注册的文件，需要模板渲染数据{{.RouterPkgPath}}才能生成
-  - path: router_gen.go
-    delims:
-      - &quot;&quot;
-      - &quot;&quot;
-    body: &quot;// Code generated by hertz generator. DO NOT EDIT.\n\npackage main\n\nimport (\n\t\&quot;github.com/cloudwego/hertz/pkg/app/server\&quot;\n\trouter
-    \&quot;{{.RouterPkgPath}}\&quot;\n)\n\n// register registers all routers.\nfunc register(r
-    *server.Hertz) {\n\n\trouter.GeneratedRegister(r)\n\n\tcustomizedRegister(r)\n\n}\n&quot;
-  # 自定义路由注册的文件
-  - path: router.go
-    delims:
-      - &quot;&quot;
-      - &quot;&quot;
-    body: &quot;// Code generated by hertz generator.\n\npackage main\n\nimport (\n\t\&quot;github.com/cloudwego/hertz/pkg/app/server\&quot;\n\thandler
-    \&quot;{{.GoModule}}/biz/handler\&quot;\n)\n\n// customizeRegister registers customize routers.\nfunc
-    customizedRegister(r *server.Hertz){\n\tr.GET(\&quot;/ping\&quot;, handler.Ping)\n\n\t//
-    your code ...\n}\n&quot;
-  # 默认路由注册文件，不要修改
-  - path: biz/router/register.go
-    delims:
-      - &quot;&quot;
-      - &quot;&quot;
-    body: &quot;// Code generated by hertz generator. DO NOT EDIT.\n\npackage router\n\nimport (\n\t\&quot;github.com/cloudwego/hertz/pkg/app/server\&quot;\n)
-    \n\n// GeneratedRegister registers routers generated by IDL.\n
-    func GeneratedRegister(r *server.Hertz) {\n\t//INSERT_POINT: DO NOT DELETE THIS LINE!\n}\n&quot;
-</code></pre><h2 id=模板渲染参数文件的含义>模板渲染参数文件的含义</h2><p>当指定了自定义模板以及渲染数据后，此时命令行指定的选项将不会被作为渲染数据，因此，模板中的渲染数据需要用户自己定义。</p><p>hz 使用了"json"来指定渲染数据，下面进行介绍</p><pre><code>{
+</code></pre><h3 id=idl>IDL</h3><div class=highlight><pre style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-thrift data-lang=thrift><span style=color:#8f5902;font-style:italic>// hello.thrift
+</span><span style=color:#8f5902;font-style:italic></span><span style=color:#204a87;font-weight:700>namespace</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>go</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>hello.example</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>struct</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>HelloReq</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000;font-weight:700>{</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#0000cf;font-weight:700>1</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#204a87;font-weight:700>string</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>Name</span> <span style=color:#ce5c00;font-weight:700>(</span><span style=color:#000>api.query</span><span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;name&#34;</span><span style=color:#000;font-weight:700>);</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#000;font-weight:700>}</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>struct</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>HelloResp</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000;font-weight:700>{</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#0000cf;font-weight:700>1</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#204a87;font-weight:700>string</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>RespBody</span><span style=color:#000;font-weight:700>;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#000;font-weight:700>}</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>service</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>HelloService</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000;font-weight:700>{</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#000>HelloResp</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>HelloMethod</span><span style=color:#ce5c00;font-weight:700>(</span><span style=color:#0000cf;font-weight:700>1</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>HelloReq</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>request</span><span style=color:#000;font-weight:700>)</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000;font-weight:700>(</span><span style=color:#000>api.get</span><span style=color:#ce5c00;font-weight:700>=</span><span style=color:#4e9a06>&#34;/hello&#34;</span><span style=color:#000;font-weight:700>);</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#000;font-weight:700>}</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><h3 id=命令>命令</h3><div class=highlight><pre style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>hz new --mod<span style=color:#ce5c00;font-weight:700>=</span>github.com/hertz/hello --idl<span style=color:#ce5c00;font-weight:700>=</span>./hertzDemo/hello.thrift --customize_layout<span style=color:#ce5c00;font-weight:700>=</span>template/layout.yaml:template/data.json
+</code></pre></div><h3 id=默认-layout-模板的含义>默认 layout 模板的含义</h3><blockquote><p>注：以下的 body 均为 go template</p></blockquote><div class=highlight><pre style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>layouts</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#8f5902;font-style:italic># 生成的 handler 的目录，只有目录下有文件才会生成</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>path</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>biz/handler/</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>delims</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span>- <span style=color:#4e9a06>&#34;&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span>- <span style=color:#4e9a06>&#34;&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>body</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#8f5902;font-style:italic># 生成的 model 的目录，只有目录下有文件才会生成</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>path</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>biz/model/</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>delims</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span>- <span style=color:#4e9a06>&#34;&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span>- <span style=color:#4e9a06>&#34;&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>body</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#8f5902;font-style:italic># 项目 main 文件，</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>path</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>main.go</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>delims</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span>- <span style=color:#4e9a06>&#34;&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span>- <span style=color:#4e9a06>&#34;&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>body</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000;font-weight:700>|-</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      // Code generated by hertz generator.
+</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      package main
+</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      import (
+</span><span style=color:#8f5902;font-style:italic>      	&#34;github.com/cloudwego/hertz/pkg/app/server&#34;
+</span><span style=color:#8f5902;font-style:italic>      )
+</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      func main() {
+</span><span style=color:#8f5902;font-style:italic>      	h := server.Default()
+</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      	register(h)
+</span><span style=color:#8f5902;font-style:italic>      	h.Spin()
+</span><span style=color:#8f5902;font-style:italic>      }</span><span style=color:#f8f8f8;text-decoration:underline>      
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#8f5902;font-style:italic># go.mod 文件，需要模板渲染数据{{.GoModule}}才能生成</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>path</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>go.mod</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>delims</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span>- <span style=color:#4e9a06>&#39;{{&#39;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span>- <span style=color:#4e9a06>&#39;}}&#39;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>body</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000;font-weight:700>|-</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      module {{.GoModule}}
+</span><span style=color:#8f5902;font-style:italic>      {{- if .UseApacheThrift}}
+</span><span style=color:#8f5902;font-style:italic>      replace github.com/apache/thrift =&gt; github.com/apache/thrift v0.13.0
+</span><span style=color:#8f5902;font-style:italic>      {{- end}}</span><span style=color:#f8f8f8;text-decoration:underline>      
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#8f5902;font-style:italic># .gitignore 文件</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>path</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>.gitignore</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>delims</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span>- <span style=color:#4e9a06>&#34;&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span>- <span style=color:#4e9a06>&#34;&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>body</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;*.o\n*.a\n*.so\n_obj\n_test\n*.[568vq]\n[568vq].out\n*.cgo1.go\n*.cgo2.c\n_cgo_defun.c\n_cgo_gotypes.go\n_cgo_export.*\n_testmain.go\n*.exe\n*.exe~\n*.test\n*.prof\n*.rar\n*.zip\n*.gz\n*.psd\n*.bmd\n*.cfg\n*.pptx\n*.log\n*nohup.out\n*settings.pyc\n*.sublime-project\n*.sublime-workspace\n!.gitkeep\n.DS_Store\n/.idea\n/.vscode\n/output\n*.local.yml\ndumped_hertz_remote_config.json\n\t\t
+</span><span style=color:#4e9a06>    \ &#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#8f5902;font-style:italic># .hz 文件，包含 hz 版本，是 hz 创建的项目的标志，不需要传渲染数据</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>path</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>.hz</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>delims</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span>- <span style=color:#4e9a06>&#39;{{&#39;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span>- <span style=color:#4e9a06>&#39;}}&#39;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>body</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000;font-weight:700>|-</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      // Code generated by hz. DO NOT EDIT.
+</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      hz version: {{.hzVersion}}</span><span style=color:#f8f8f8;text-decoration:underline>      
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#8f5902;font-style:italic># ping 自带 ping 的 handler</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>path</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>biz/handler/ping.go</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>delims</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span>- <span style=color:#4e9a06>&#34;&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span>- <span style=color:#4e9a06>&#34;&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>body</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000;font-weight:700>|-</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      // Code generated by hertz generator.
+</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      package handler
+</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      import (
+</span><span style=color:#8f5902;font-style:italic>      	&#34;context&#34;
+</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      	&#34;github.com/cloudwego/hertz/pkg/app&#34;
+</span><span style=color:#8f5902;font-style:italic>      	&#34;github.com/cloudwego/hertz/pkg/common/utils&#34;
+</span><span style=color:#8f5902;font-style:italic>      )
+</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      // Ping .
+</span><span style=color:#8f5902;font-style:italic>      func Ping(ctx context.Context, c *app.RequestContext) {
+</span><span style=color:#8f5902;font-style:italic>      	c.JSON(200, utils.H{
+</span><span style=color:#8f5902;font-style:italic>      		&#34;message&#34;: &#34;pong&#34;,
+</span><span style=color:#8f5902;font-style:italic>      	})
+</span><span style=color:#8f5902;font-style:italic>      }</span><span style=color:#f8f8f8;text-decoration:underline>      
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#8f5902;font-style:italic># 定义路由注册的文件，需要模板渲染数据{{.RouterPkgPath}}才能生成</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>path</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>router_gen.go</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>delims</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span>- <span style=color:#4e9a06>&#34;&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span>- <span style=color:#4e9a06>&#34;&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>body</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000;font-weight:700>|-</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      // Code generated by hertz generator. DO NOT EDIT.
+</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      package main
+</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      import (
+</span><span style=color:#8f5902;font-style:italic>      	&#34;github.com/cloudwego/hertz/pkg/app/server&#34;
+</span><span style=color:#8f5902;font-style:italic>      	router &#34;{{.RouterPkgPath}}&#34;
+</span><span style=color:#8f5902;font-style:italic>      )
+</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      // register registers all routers.
+</span><span style=color:#8f5902;font-style:italic>      func register(r *server.Hertz) {
+</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      	router.GeneratedRegister(r)
+</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      	customizedRegister(r)
+</span><span style=color:#8f5902;font-style:italic>      }</span><span style=color:#f8f8f8;text-decoration:underline>      
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#8f5902;font-style:italic># 自定义路由注册的文件</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>path</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>router.go</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>delims</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span>- <span style=color:#4e9a06>&#34;&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span>- <span style=color:#4e9a06>&#34;&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>body</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000;font-weight:700>|-</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      // Code generated by hertz generator.
+</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      package main
+</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      import (
+</span><span style=color:#8f5902;font-style:italic>      	&#34;github.com/cloudwego/hertz/pkg/app/server&#34;
+</span><span style=color:#8f5902;font-style:italic>      	handler &#34;{{.HandlerPkgPath}}&#34;
+</span><span style=color:#8f5902;font-style:italic>      )
+</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      // customizeRegister registers customize routers.
+</span><span style=color:#8f5902;font-style:italic>      func customizedRegister(r *server.Hertz){
+</span><span style=color:#8f5902;font-style:italic>      	r.GET(&#34;/ping&#34;, handler.Ping)
+</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      	// your code ...
+</span><span style=color:#8f5902;font-style:italic>      }</span><span style=color:#f8f8f8;text-decoration:underline>      
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#8f5902;font-style:italic># 默认路由注册文件，不要修改</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>path</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>biz/router/register.go</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>delims</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span>- <span style=color:#4e9a06>&#34;&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span>- <span style=color:#4e9a06>&#34;&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>body</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000;font-weight:700>|-</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      // Code generated by hertz generator. DO NOT EDIT.
+</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      package router
+</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      import (
+</span><span style=color:#8f5902;font-style:italic>      	&#34;github.com/cloudwego/hertz/pkg/app/server&#34;
+</span><span style=color:#8f5902;font-style:italic>      )
+</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      // GeneratedRegister registers routers generated by IDL.
+</span><span style=color:#8f5902;font-style:italic>      func GeneratedRegister(r *server.Hertz){
+</span><span style=color:#8f5902;font-style:italic>      	//INSERT_POINT: DO NOT DELETE THIS LINE!
+</span><span style=color:#8f5902;font-style:italic>      }</span><span style=color:#f8f8f8;text-decoration:underline>      
+</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><h3 id=模板渲染参数文件的含义>模板渲染参数文件的含义</h3><p>当指定了自定义模板以及渲染数据后，此时命令行指定的选项将不会被作为渲染数据，因此，模板中的渲染数据需要用户自己定义。</p><p>hz 使用了"json"来指定渲染数据，下面进行介绍</p><pre><code class=language-json5 data-lang=json5>{
   // 全局的渲染参数
   &quot;*&quot;: {
     &quot;GoModule&quot;: &quot;github.com/hz/test&quot;, // 要和命令行指定的一致，否则后续生成model、handler等代码将使用命令行指定的mod，导致出现不一致。
@@ -141,234 +294,458 @@ service HelloService {
     &quot;RouterPkgPath&quot;: &quot;github.com/hz/test/biz/router&quot;
   }
 }
-</code></pre><h2 id=自定义一个-layout-模板>自定义一个 layout 模板</h2><blockquote><p>目前，hz 生成的项目 layout 已经是一个 hertz 项目最最最基础的骨架了，所以不建议删除现有的模板里的文件。</p><p>不过如果用户想要一个别的 layout ，当然也可以根据自身需求来删除相应的文件(除"biz/register.go"外，其余都可以动)</p><p>我们十分欢迎用户来贡献自己的模板</p></blockquote><p>下面假设用户只想要 &ldquo;main.go&rdquo; 以及 &ldquo;go.mod&rdquo; 文件，那么我们对默认模板进行修改，如下：</p><h3 id=template>template:</h3><pre><code>// layout.yaml
-layouts:
-  # 项目 main 文件，
-  - path: main.go
-    delims:
-      - &quot;&quot;
-      - &quot;&quot;
-    body: &quot;// This is my customized hertz layout.\n\n
-    package main
-    \n\n
-    import (\n
-    \t\&quot;github.com/cloudwego/hertz/pkg/app/server\&quot;\n
-    \t\&quot;{{.GoModule}}/biz/router\&quot;\n
-    )\n\n
-    func main() {\n
-      \th := server.Default()\n\n
-      \trouter.GeneratedRegister(h)\n\n
-      \t// do what you wanted\n
-      \t// add some render data: {{.MainData}}\n
-      \th.Spin()\n
-    }\n&quot;
-  # go.mod 文件，需要模板渲染数据{{.GoModule}}才能生成
-  - path: go.mod
-    delims:
-      - '{{'
-      - '}}'
-    body: &quot;module {{.GoModule}}\n{{- if .UseApacheThrift}}\nreplace github.com/apache/thrift
-    =&gt; github.com/apache/thrift v0.13.0\n{{- end}}\n&quot;
-  # 默认路由注册文件，没必要修改
-  - path: biz/router/register.go
-    delims:
-      - &quot;&quot;
-      - &quot;&quot;
-    body: &quot;// Code generated by hertz generator. DO NOT EDIT.\n\npackage router\n\nimport (\n\t\&quot;github.com/cloudwego/hertz/pkg/app/server\&quot;\n)
-    \n\n// GeneratedRegister registers routers generated by IDL.\n
-    func GeneratedRegister(r *server.Hertz) {\n\t//INSERT_POINT: DO NOT DELETE THIS LINE!\n}\n&quot;
-</code></pre><h3 id=render-data>render data:</h3><pre><code>{
-  &quot;*&quot;: {
-    &quot;GoModule&quot;: &quot;github.com/hertz/hello&quot;,
-    &quot;ServiceName&quot;: &quot;hello&quot;,
-    &quot;UseApacheThrift&quot;: true
-  },
-  &quot;main.go&quot;: {
-    &quot;MainData&quot;: &quot;this is customized render data&quot;
-  }
-}
-</code></pre><p>命令：</p><pre><code>hz new --mod=github.com/hertz/hello --idl=./hertzDemo/hello.thrift --customize_layout=template/layout.yaml:template/data.json
-</code></pre><h1 id=自定义-package-模板>自定义 package 模板</h1><blockquote><p>hz 模板的模板地址：</p><p>用户可根据默认模板来修改或重写，从而符合自身需求</p></blockquote><ul><li>所谓的 package 模板是指与 idl 定义相关的服务代码，这部分代码涉及到定义 idl 时指定的service、go_package/namespace等，主要包括以下几部分：</li><li>handler.go : 处理函数逻辑</li><li>router.go：具体的 idl 定义的服务的路由注册逻辑</li><li>register.go：调用router.go中内容的逻辑</li><li><del>model代码：生成的 go struct；不过由于目前使用插件来生成model代码工具没权限来修改model的模板，所以这部分功能先不开放</del></li></ul><h2 id=命令-1>命令</h2><pre><code># 之后会提供 package 模板渲染数据，所以输入命令的时候先保留了&quot;k-v&quot;的形式，customize_package 后需要加&quot;:&quot;
-hz new --mod=github.com/hertz/hello --handler_dir=handler_test --idl=hertzDemo/hello.thrift --customize_package=template/package.yaml:
-</code></pre><h2 id=默认-package-模板>默认 package 模板</h2><p>注意：自定义 package 模板没有提供渲染数据的功能，这里主要是因为这些渲染数据是 hz 工具解析生成的，所以暂时不提供自己写渲染数据的功能。可以修改下模板里面与渲染数据无关的部分，以满足自身需求。</p><pre><code># 以下数据都是 yaml marshal 得到的，所以可能看起来比较乱
-layouts:
-  # path只表示handler.go的模板，具体的handler路径由默认路径和handler_dir决定
-  - path: handler.go
-    delims:
-      - '{{'
-      - '}}'
-    body: &quot;// Code generated by hertz generator.\n\npackage {{.PackageName}}\n\nimport (\n\t\&quot;context\&quot;\n\n\t\&quot;github.com/cloudwego/hertz/pkg/app\&quot;\n\n
-    {{- range $k, $v := .Imports}}\n\t{{$k}} \&quot;{{$v.Package}}\&quot;\n{{- end}}\n)\n\n{{range $_, $MethodInfo := .Methods}}\n{{$MethodInfo.Comment}}\n
-    func {{$MethodInfo.Name}}(ctx context.Context, c *app.RequestContext) { \n\tvar err error\n\t{{if ne $MethodInfo.RequestTypeName \&quot;\&quot; -}}\n\t
-    var req {{$MethodInfo.RequestTypeName}}\n\terr = c.BindAndValidate(&amp;req)\n\tif err != nil {\n\t\tc.String(400, err.Error())\n\t\treturn\n\t}\n\t{{end}}\n
-    \tresp := new({{$MethodInfo.ReturnTypeName}})\n\n\tc.{{.Serializer}}(200, resp)\n}\n{{end}}\n\t\t\t&quot;
-  # path只表示router.go的模板，其路径固定在：biz/router/namespace/
-  - path: router.go
-    delims:
-      - '{{'
-      - '}}'
-    body: &quot;// Code generated by hertz generator. DO NOT EDIT.\n\npackage {{$.PackageName}}\n\nimport
-  (\n\t\&quot;github.com/cloudwego/hertz/pkg/app/server\&quot;\n\n\t{{range $k, $v := .HandlerPackages}}{{$k}}
-  \&quot;{{$v}}\&quot;{{end}}\n)\n\n/*\n This file will register all the routes of the services
-  in the master idl.\n And it will update automatically when you use the \&quot;update\&quot;
-  command for the idl.\n So don't modify the contents of the file, or your code will
-  be deleted when it is updated.\n */\n\n{{define \&quot;g\&quot;}}\n{{- if eq .Path \&quot;/\&quot;}}r\n{{-
-  else}}{{.GroupName}}{{end}}\n{{- end}}\n\n{{define \&quot;G\&quot;}}\n{{- if ne .Handler \&quot;\&quot;}}\n\t{{-
-  .GroupName}}.{{.HttpMethod}}(\&quot;{{.Path}}\&quot;, append({{.MiddleWare}}Mw(), {{.Handler}})...)\n{{-
-  end}}\n{{- if ne (len .Children) 0}}\n{{.MiddleWare}} := {{template \&quot;g\&quot; .}}.Group(\&quot;{{.Path}}\&quot;,
-  {{.MiddleWare}}Mw()...)\n{{- end}}\n{{- range $_, $router := .Children}}\n{{- if
-  ne .Handler \&quot;\&quot;}}\n\t{{template \&quot;G\&quot; $router}}\n{{- else}}\n\t{\t{{template \&quot;G\&quot;
-  $router}}\n\t}\n{{- end}}\n{{- end}}\n{{- end}}\n\n// Register register routes based
-  on the IDL 'api.${HTTP Method}' annotation.\nfunc Register(r *server.Hertz) {\n{{template
-  \&quot;G\&quot; .Router}}\n}&quot;
-  # path只表示register.go的模板，register的路径固定为biz/router/register.go
-  - path: register.go
-    delims:
-      - &quot;&quot;
-      - &quot;&quot;
-    body: &quot;// Code generated by hertz generator. DO NOT EDIT.\n\npackage router\n\nimport (\n\t\&quot;github.com/cloudwego/hertz/pkg/app/server\&quot;\n\t{{$.PkgAlias}}
-  \&quot;{{$.Pkg}}\&quot;\n)\n\n// GeneratedRegister registers routers generated by IDL.\nfunc
-  GeneratedRegister(r *server.Hertz){\n\t//INSERT_POINT: DO NOT DELETE THIS LINE!\n\t{{$.PkgAlias}}.Register(r)\n}\n&quot;
-  - path: model.go
-    delims:
-      - &quot;&quot;
-      - &quot;&quot;
-    body: &quot;&quot;
-  # path只表示middleware.go的模板，middleware的路径和router.go一样为：biz/router/namespace/
-  - path: middleware.go
-    delims:
-      - '{{'
-      - '}}'
-    body: &quot;// Code generated by hertz generator.\n\npackage {{$.PackageName}}\n\nimport (\n\t\&quot;github.com/cloudwego/hertz/pkg/app\&quot;\n)\n\n{{define
-  \&quot;M\&quot;}}\nfunc {{.MiddleWare}}Mw() []app.HandlerFunc {\n\t// your code...\n\treturn
-  nil\n}\n{{range $_, $router := $.Children}}{{template \&quot;M\&quot; $router}}{{end}}\n{{-
-  end}}\n\n{{template \&quot;M\&quot; .Router}}\n\t\t&quot;
-  # path只表示client.go的模板，client代码的生成路径由用户指定&quot;${client_dir}&quot;
-- path: client.go
-  delims:
-    - '{{'
-    - '}}'
-  body: &quot;// Code generated by hertasdasdsadaz generator.\n\npackage {{$.PackageName}}\n\nimport (\n
-\   \&quot;github.com/cloudwego/hertz/pkg/app/client\&quot;\n\t\&quot;github.com/cloudwego/hertz/pkg/common/config\&quot;\n)\n\ntype
-{{.ServiceName}}Client struct {\n\tclient * client.Client\n}\n\nfunc New{{.ServiceName}}Client(opt
-...config.ClientOption) (*{{.ServiceName}}Client, error) {\n\tc, err := client.NewClient(opt...)\n\tif
-err != nil {\n\t\treturn nil, err\n\t}\n\n\treturn &amp;{{.ServiceName}}Client{\n\t\tclient:
-c,\n\t}, nil\n}\n\t\t&quot;
-</code></pre><h2 id=自定义一个-package-模板>自定义一个 package 模板</h2><blockquote><p>与 layout 模板一样，用户同样可以自定义 package 模板。</p><p>就 package 提供的模板来说，一般用户可能只有自定义 handler.go 的模板的需求，因为router.go/middleware.go/register.go 一般与 idl 定义相关而用户无需关心，因此 hz 目前也将这些模板生成的位置固定了，一般也无需修改。</p><p>因此，用户可根据自身的需求来自定义生成的 handler 模板，加速开发速度；但是由于默认的 handler 模板集成了一些 model 的信息以及 package 信息，所以需要 hz 工具来提供渲染数据。这部分用户可根据自身情况酌情来修改，一般建议留下 model 信息。</p></blockquote><p>下面给出一个简单的自定义 handler 模板的示例，在 handler 里加入一些注释：</p><h3 id=template-1>template:</h3><pre><code># 以下数据都是yaml marshal得到的，所以可能看起来比较乱
-layouts:
-  # path只表示handler.go的模板，具体的handler路径由默认路径和handler_dir决定
-  - path: handler.go
-    delims:
-      - '{{'
-      - '}}'
-    body: &quot;// this is my custom handler.\n\npackage {{.PackageName}}\n\nimport (\n\t\&quot;context\&quot;\n\n\t\&quot;github.com/cloudwego/hertz/pkg/app\&quot;\n\n
-    {{- range $k, $v := .Imports}}\n\t{{$k}} \&quot;{{$v.Package}}\&quot;\n{{- end}}\n)\n\n{{range $_, $MethodInfo := .Methods}}\n{{$MethodInfo.Comment}}\n
-    func {{$MethodInfo.Name}}(ctx context.Context, c *app.RequestContext) { \n
-    \t//  you can code something \n\tvar err error\n\t{{if ne $MethodInfo.RequestTypeName \&quot;\&quot; -}}\n\t
-    var req {{$MethodInfo.RequestTypeName}}\n\terr = c.BindAndValidate(&amp;req)\n\tif err != nil {\n\t\tc.String(400, err.Error())\n\t\treturn\n\t}\n\t{{end}}\n
-    \tresp := new({{$MethodInfo.ReturnTypeName}})\n\n\tc.{{.Serializer}}(200, resp)\n}\n{{end}}\n\t\t\t&quot;
-  # path只表示router.go的模板，其路径固定在：biz/router/namespace/
-  - path: router.go
-    delims:
-      - '{{'
-      - '}}'
-    body: &quot;// Code generated by hertz generator. DO NOT EDIT.\n\npackage {{$.PackageName}}\n\nimport
-  (\n\t\&quot;github.com/cloudwego/hertz/pkg/app/server\&quot;\n\n\t{{range $k, $v := .HandlerPackages}}{{$k}}
-  \&quot;{{$v}}\&quot;{{end}}\n)\n\n/*\n This file will register all the routes of the services
-  in the master idl.\n And it will update automatically when you use the \&quot;update\&quot;
-  command for the idl.\n So don't modify the contents of the file, or your code will
-  be deleted when it is updated.\n */\n\n{{define \&quot;g\&quot;}}\n{{- if eq .Path \&quot;/\&quot;}}r\n{{-
-  else}}{{.GroupName}}{{end}}\n{{- end}}\n\n{{define \&quot;G\&quot;}}\n{{- if ne .Handler \&quot;\&quot;}}\n\t{{-
-  .GroupName}}.{{.HttpMethod}}(\&quot;{{.Path}}\&quot;, append({{.MiddleWare}}Mw(), {{.Handler}})...)\n{{-
-  end}}\n{{- if ne (len .Children) 0}}\n{{.MiddleWare}} := {{template \&quot;g\&quot; .}}.Group(\&quot;{{.Path}}\&quot;,
-  {{.MiddleWare}}Mw()...)\n{{- end}}\n{{- range $_, $router := .Children}}\n{{- if
-  ne .Handler \&quot;\&quot;}}\n\t{{template \&quot;G\&quot; $router}}\n{{- else}}\n\t{\t{{template \&quot;G\&quot;
-  $router}}\n\t}\n{{- end}}\n{{- end}}\n{{- end}}\n\n// Register register routes based
-  on the IDL 'api.${HTTP Method}' annotation.\nfunc Register(r *server.Hertz) {\n{{template
-  \&quot;G\&quot; .Router}}\n}&quot;
-  # path只表示register.go的模板，register的路径固定为biz/router/register.go
-  - path: register.go
-    delims:
-      - &quot;&quot;
-      - &quot;&quot;
-    body: &quot;// Code generated by hertz generator. DO NOT EDIT.\n\npackage router\n\nimport (\n\t\&quot;github.com/cloudwego/hertz/pkg/app/server\&quot;\n\t{{$.PkgAlias}}
-  \&quot;{{$.Pkg}}\&quot;\n)\n\n// GeneratedRegister registers routers generated by IDL.\nfunc
-  GeneratedRegister(r *server.Hertz){\n\t//INSERT_POINT: DO NOT DELETE THIS LINE!\n\t{{$.PkgAlias}}.Register(r)\n}\n&quot;
-  - path: model.go
-    delims:
-      - &quot;&quot;
-      - &quot;&quot;
-    body: &quot;&quot;
-  # path只表示middleware.go的模板，middleware的路径和router.go一样为：biz/router/namespace/
-  - path: middleware.go
-    delims:
-      - '{{'
-      - '}}'
-    body: &quot;// Code generated by hertz generator.\n\npackage {{$.PackageName}}\n\nimport (\n\t\&quot;github.com/cloudwego/hertz/pkg/app\&quot;\n)\n\n{{define
-  \&quot;M\&quot;}}\nfunc {{.MiddleWare}}Mw() []app.HandlerFunc {\n\t// your code...\n\treturn
-  nil\n}\n{{range $_, $router := $.Children}}{{template \&quot;M\&quot; $router}}{{end}}\n{{-
-  end}}\n\n{{template \&quot;M\&quot; .Router}}\n\t\t&quot;
-  # path只表示client.go的模板，client代码的生成路径由用户指定&quot;${client_dir}&quot;
-- path: client.go
-  delims:
-    - '{{'
-    - '}}'
-  body: &quot;// Code generated by hertz generator.\n\npackage {{$.PackageName}}\n\nimport (\n
-\   \&quot;github.com/cloudwego/hertz/pkg/app/client\&quot;\n\t\&quot;github.com/cloudwego/hertz/pkg/common/config\&quot;\n)\n\ntype
-{{.ServiceName}}Client struct {\n\tclient * client.Client\n}\n\nfunc New{{.ServiceName}}Client(opt
-...config.ClientOption) (*{{.ServiceName}}Client, error) {\n\tc, err := client.NewClient(opt...)\n\tif
-err != nil {\n\t\treturn nil, err\n\t}\n\n\treturn &amp;{{.ServiceName}}Client{\n\t\tclient:
-c,\n\t}, nil\n}\n\t\t&quot;
-</code></pre><p>命令：</p><pre><code># 之后会提供 package 模板渲染数据，所以输入命令的时候先保留了&quot;k-v&quot;的形式，customize_package 后需要加&quot;:&quot;
-hz new --mod=github.com/hertz/hello --handler_dir=handler_test --idl=hertzDemo/hello.thrift --customize_package=template/package.yaml:
-</code></pre><p>生成handler如下：</p><pre><code>// this is my custom handler.
+</code></pre><h3 id=自定义一个-layout-模板>自定义一个 layout 模板</h3><blockquote><p>目前，hz 生成的项目 layout 已经是一个 hertz 项目最最最基础的骨架了，所以不建议删除现有的模板里的文件。</p><p>不过如果用户想要一个别的 layout ，当然也可以根据自身需求来删除相应的文件(除"biz/register.go"外，其余都可以动)</p><p>我们十分欢迎用户来贡献自己的模板</p></blockquote><p>下面假设用户只想要 &ldquo;main.go&rdquo; 以及 &ldquo;go.mod&rdquo; 文件，那么我们对默认模板进行修改，如下：</p><h4 id=template>template</h4><div class=highlight><pre style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#000>// layout.yaml</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>layouts</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#8f5902;font-style:italic># 项目 main 文件，</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>path</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>main.go</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>delims</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span>- <span style=color:#4e9a06>&#34;&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span>- <span style=color:#4e9a06>&#34;&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>body</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000;font-weight:700>|-</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      // Code generated by hertz generator.
+</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      package main
+</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      import (
+</span><span style=color:#8f5902;font-style:italic>      	&#34;github.com/cloudwego/hertz/pkg/app/server&#34;
+</span><span style=color:#8f5902;font-style:italic>        &#34;{{.GoModule}}/biz/router&#34;
+</span><span style=color:#8f5902;font-style:italic>      )
+</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      func main() {
+</span><span style=color:#8f5902;font-style:italic>      	h := server.Default()
+</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>        router.GeneratedRegister(h)
+</span><span style=color:#8f5902;font-style:italic>        // do what you wanted
+</span><span style=color:#8f5902;font-style:italic>        // add some render data: {{.MainData}}
+</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      	h.Spin()
+</span><span style=color:#8f5902;font-style:italic>      }</span><span style=color:#f8f8f8;text-decoration:underline>      
+</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#8f5902;font-style:italic># go.mod 文件，需要模板渲染数据{{.GoModule}}才能生成</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>path</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>go.mod</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>delims</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span>- <span style=color:#4e9a06>&#39;{{&#39;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span>- <span style=color:#4e9a06>&#39;}}&#39;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>body</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000;font-weight:700>|-</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      module {{.GoModule}}
+</span><span style=color:#8f5902;font-style:italic>      {{- if .UseApacheThrift}}
+</span><span style=color:#8f5902;font-style:italic>      replace github.com/apache/thrift =&gt; github.com/apache/thrift v0.13.0
+</span><span style=color:#8f5902;font-style:italic>      {{- end}}</span><span style=color:#f8f8f8;text-decoration:underline>      
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#8f5902;font-style:italic># 默认路由注册文件，没必要修改</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>path</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>biz/router/register.go</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>delims</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span>- <span style=color:#4e9a06>&#34;&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span>- <span style=color:#4e9a06>&#34;&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>body</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000;font-weight:700>|-</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      // Code generated by hertz generator. DO NOT EDIT.
+</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      package router
+</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      import (
+</span><span style=color:#8f5902;font-style:italic>      	&#34;github.com/cloudwego/hertz/pkg/app/server&#34;
+</span><span style=color:#8f5902;font-style:italic>      )
+</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      // GeneratedRegister registers routers generated by IDL.
+</span><span style=color:#8f5902;font-style:italic>      func GeneratedRegister(r *server.Hertz){
+</span><span style=color:#8f5902;font-style:italic>      	//INSERT_POINT: DO NOT DELETE THIS LINE!
+</span><span style=color:#8f5902;font-style:italic>      }</span><span style=color:#f8f8f8;text-decoration:underline>      
+</span></code></pre></div><h4 id=render-data>render data</h4><div class=highlight><pre style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json><span style=color:#000;font-weight:700>{</span>
+  <span style=color:#204a87;font-weight:700>&#34;*&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+    <span style=color:#204a87;font-weight:700>&#34;GoModule&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;github.com/hertz/hello&#34;</span><span style=color:#000;font-weight:700>,</span>
+    <span style=color:#204a87;font-weight:700>&#34;ServiceName&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;hello&#34;</span><span style=color:#000;font-weight:700>,</span>
+    <span style=color:#204a87;font-weight:700>&#34;UseApacheThrift&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#204a87;font-weight:700>true</span>
+  <span style=color:#000;font-weight:700>},</span>
+  <span style=color:#204a87;font-weight:700>&#34;main.go&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#000;font-weight:700>{</span>
+    <span style=color:#204a87;font-weight:700>&#34;MainData&#34;</span><span style=color:#000;font-weight:700>:</span> <span style=color:#4e9a06>&#34;this is customized render data&#34;</span>
+  <span style=color:#000;font-weight:700>}</span>
+<span style=color:#000;font-weight:700>}</span>
+</code></pre></div><p>命令：</p><div class=highlight><pre style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>hz new --mod<span style=color:#ce5c00;font-weight:700>=</span>github.com/hertz/hello --idl<span style=color:#ce5c00;font-weight:700>=</span>./hertzDemo/hello.thrift --customize_layout<span style=color:#ce5c00;font-weight:700>=</span>template/layout.yaml:template/data.json
+</code></pre></div><h2 id=自定义-package-模板>自定义 package 模板</h2><blockquote><p>hz 模板的模板地址：</p><p>用户可根据默认模板来修改或重写，从而符合自身需求</p></blockquote><ul><li>所谓的 package 模板是指与 idl 定义相关的服务代码，这部分代码涉及到定义 idl 时指定的service、go_package/namespace等，主要包括以下几部分：</li><li>handler.go： 处理函数逻辑</li><li>router.go：具体的 idl 定义的服务的路由注册逻辑</li><li>register.go：调用router.go中内容的逻辑</li><li><del>model代码：生成的 go struct；不过由于目前使用插件来生成model代码工具没权限来修改model的模板，所以这部分功能先不开放</del></li></ul><h3 id=命令-1>命令</h3><div class=highlight><pre style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=color:#8f5902;font-style:italic># 之后会提供 package 模板渲染数据，所以输入命令的时候先保留了&#34;k-v&#34;的形式，customize_package 后需要加&#34;:&#34;</span>
+hz new --mod<span style=color:#ce5c00;font-weight:700>=</span>github.com/hertz/hello --handler_dir<span style=color:#ce5c00;font-weight:700>=</span>handler_test --idl<span style=color:#ce5c00;font-weight:700>=</span>hertzDemo/hello.thrift --customize_package<span style=color:#ce5c00;font-weight:700>=</span>template/package.yaml:
+</code></pre></div><h3 id=默认-package-模板>默认 package 模板</h3><p>注意：自定义 package 模板没有提供渲染数据的功能，这里主要是因为这些渲染数据是 hz 工具解析生成的，所以暂时不提供自己写渲染数据的功能。可以修改下模板里面与渲染数据无关的部分，以满足自身需求。</p><div class=highlight><pre style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#8f5902;font-style:italic># 以下数据都是 yaml marshal 得到的，所以可能看起来比较乱</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline></span><span style=color:#204a87;font-weight:700>layouts</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#8f5902;font-style:italic># path只表示handler.go的模板，具体的handler路径由默认路径和handler_dir决定</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>path</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>handler.go</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>delims</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span>- <span style=color:#4e9a06>&#39;{{&#39;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span>- <span style=color:#4e9a06>&#39;}}&#39;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>body</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000;font-weight:700>|-</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      // Code generated by hertz generator.
+</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      package {{.PackageName}}
+</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      import (
+</span><span style=color:#8f5902;font-style:italic>      	&#34;context&#34;
+</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      	&#34;github.com/cloudwego/hertz/pkg/app&#34;
+</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      {{- range $k, $v := .Imports}}
+</span><span style=color:#8f5902;font-style:italic>      	{{$k}} &#34;{{$v.Package}}&#34;
+</span><span style=color:#8f5902;font-style:italic>      {{- end}}
+</span><span style=color:#8f5902;font-style:italic>      )
+</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      {{range $_, $MethodInfo := .Methods}}
+</span><span style=color:#8f5902;font-style:italic>      {{$MethodInfo.Comment}}
+</span><span style=color:#8f5902;font-style:italic>      func {{$MethodInfo.Name}}(ctx context.Context, c *app.RequestContext) {
+</span><span style=color:#8f5902;font-style:italic>      	var err error
+</span><span style=color:#8f5902;font-style:italic>      	{{if ne $MethodInfo.RequestTypeName &#34;&#34; -}}
+</span><span style=color:#8f5902;font-style:italic>      	var req {{$MethodInfo.RequestTypeName}}
+</span><span style=color:#8f5902;font-style:italic>      	err = c.BindAndValidate(&amp;req)
+</span><span style=color:#8f5902;font-style:italic>      	if err != nil {
+</span><span style=color:#8f5902;font-style:italic>      		c.String(400, err.Error())
+</span><span style=color:#8f5902;font-style:italic>      		return
+</span><span style=color:#8f5902;font-style:italic>      	}
+</span><span style=color:#8f5902;font-style:italic>      	{{end}}
+</span><span style=color:#8f5902;font-style:italic>      	resp := new({{$MethodInfo.ReturnTypeName}})
+</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      	c.{{.Serializer}}(200, resp)
+</span><span style=color:#8f5902;font-style:italic>      }
+</span><span style=color:#8f5902;font-style:italic>      {{end}}</span><span style=color:#f8f8f8;text-decoration:underline>      
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#8f5902;font-style:italic># path只表示router.go的模板，其路径固定在:biz/router/namespace/</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>path</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>router.go</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>delims</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span>- <span style=color:#4e9a06>&#39;{{&#39;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span>- <span style=color:#4e9a06>&#39;}}&#39;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>body</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000;font-weight:700>|-</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      // Code generated by hertz generator. DO NOT EDIT.
+</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      package {{$.PackageName}}
+</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      import (
+</span><span style=color:#8f5902;font-style:italic>      	&#34;github.com/cloudwego/hertz/pkg/app/server&#34;
+</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      	{{range $k, $v := .HandlerPackages}}{{$k}} &#34;{{$v}}&#34;{{end}}
+</span><span style=color:#8f5902;font-style:italic>      )
+</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      /*
+</span><span style=color:#8f5902;font-style:italic>       This file will register all the routes of the services in the master idl.
+</span><span style=color:#8f5902;font-style:italic>       And it will update automatically when you use the &#34;update&#34; command for the idl.
+</span><span style=color:#8f5902;font-style:italic>       So don&#39;t modify the contents of the file, or your code will be deleted when it is updated.
+</span><span style=color:#8f5902;font-style:italic>       */
+</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      {{define &#34;g&#34;}}
+</span><span style=color:#8f5902;font-style:italic>      {{- if eq .Path &#34;/&#34;}}r
+</span><span style=color:#8f5902;font-style:italic>      {{- else}}{{.GroupName}}{{end}}
+</span><span style=color:#8f5902;font-style:italic>      {{- end}}
+</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      {{define &#34;G&#34;}}
+</span><span style=color:#8f5902;font-style:italic>      {{- if ne .Handler &#34;&#34;}}
+</span><span style=color:#8f5902;font-style:italic>      	{{- .GroupName}}.{{.HttpMethod}}(&#34;{{.Path}}&#34;, append({{.MiddleWare}}Mw(), {{.Handler}})...)
+</span><span style=color:#8f5902;font-style:italic>      {{- end}}
+</span><span style=color:#8f5902;font-style:italic>      {{- if ne (len .Children) 0}}
+</span><span style=color:#8f5902;font-style:italic>      {{.MiddleWare}} := {{template &#34;g&#34; .}}.Group(&#34;{{.Path}}&#34;, {{.MiddleWare}}Mw()...)
+</span><span style=color:#8f5902;font-style:italic>      {{- end}}
+</span><span style=color:#8f5902;font-style:italic>      {{- range $_, $router := .Children}}
+</span><span style=color:#8f5902;font-style:italic>      {{- if ne .Handler &#34;&#34;}}
+</span><span style=color:#8f5902;font-style:italic>      	{{template &#34;G&#34; $router}}
+</span><span style=color:#8f5902;font-style:italic>      {{- else}}
+</span><span style=color:#8f5902;font-style:italic>      	{	{{template &#34;G&#34; $router}}
+</span><span style=color:#8f5902;font-style:italic>      	}
+</span><span style=color:#8f5902;font-style:italic>      {{- end}}
+</span><span style=color:#8f5902;font-style:italic>      {{- end}}
+</span><span style=color:#8f5902;font-style:italic>      {{- end}}
+</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      // Register register routes based on the IDL &#39;api.${HTTP Method}&#39; annotation.
+</span><span style=color:#8f5902;font-style:italic>      func Register(r *server.Hertz) {
+</span><span style=color:#8f5902;font-style:italic>      {{template &#34;G&#34; .Router}}
+</span><span style=color:#8f5902;font-style:italic>      }</span><span style=color:#f8f8f8;text-decoration:underline>      
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#8f5902;font-style:italic># path只表示register.go的模板，register的路径固定为biz/router/register.go</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>path</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>register.go</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>delims</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span>- <span style=color:#4e9a06>&#34;&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span>- <span style=color:#4e9a06>&#34;&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>body</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000;font-weight:700>|-</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      // Code generated by hertz generator. DO NOT EDIT.
+</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      package router
+</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      import (
+</span><span style=color:#8f5902;font-style:italic>      	&#34;github.com/cloudwego/hertz/pkg/app/server&#34;
+</span><span style=color:#8f5902;font-style:italic>      	{{$.PkgAlias}} &#34;{{$.Pkg}}&#34;
+</span><span style=color:#8f5902;font-style:italic>      )
+</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      // GeneratedRegister registers routers generated by IDL.
+</span><span style=color:#8f5902;font-style:italic>      func GeneratedRegister(r *server.Hertz){
+</span><span style=color:#8f5902;font-style:italic>      	//INSERT_POINT: DO NOT DELETE THIS LINE!
+</span><span style=color:#8f5902;font-style:italic>      	{{$.PkgAlias}}.Register(r)
+</span><span style=color:#8f5902;font-style:italic>      }</span><span style=color:#f8f8f8;text-decoration:underline>      
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>path</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>model.go</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>delims</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span>- <span style=color:#4e9a06>&#34;&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span>- <span style=color:#4e9a06>&#34;&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>body</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#8f5902;font-style:italic># path只表示middleware.go的模板，middleware的路径和router.go一样为：biz/router/namespace/</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>path</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>middleware.go</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>delims</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span>- <span style=color:#4e9a06>&#39;{{&#39;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span>- <span style=color:#4e9a06>&#39;}}&#39;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>body</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000;font-weight:700>|-</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      // Code generated by hertz generator.
+</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      package {{$.PackageName}}
+</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      import (
+</span><span style=color:#8f5902;font-style:italic>      	&#34;github.com/cloudwego/hertz/pkg/app&#34;
+</span><span style=color:#8f5902;font-style:italic>      )
+</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      {{define &#34;M&#34;}}
+</span><span style=color:#8f5902;font-style:italic>      func {{.MiddleWare}}Mw() []app.HandlerFunc {
+</span><span style=color:#8f5902;font-style:italic>      	// your code...
+</span><span style=color:#8f5902;font-style:italic>      	return nil
+</span><span style=color:#8f5902;font-style:italic>      }
+</span><span style=color:#8f5902;font-style:italic>      {{range $_, $router := $.Children}}{{template &#34;M&#34; $router}}{{end}}
+</span><span style=color:#8f5902;font-style:italic>      {{- end}}
+</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      {{template &#34;M&#34; .Router}}</span><span style=color:#f8f8f8;text-decoration:underline>      
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#8f5902;font-style:italic># path只表示client.go的模板，client代码的生成路径由用户指定&#34;${client_dir}&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>path</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>client.go</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>delims</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span>- <span style=color:#4e9a06>&#39;{{&#39;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span>- <span style=color:#4e9a06>&#39;}}&#39;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>body</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000;font-weight:700>|-</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      // Code generated by hertz generator.
+</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      package {{$.PackageName}}
+</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      import (
+</span><span style=color:#8f5902;font-style:italic>          &#34;github.com/cloudwego/hertz/pkg/app/client&#34;
+</span><span style=color:#8f5902;font-style:italic>      	&#34;github.com/cloudwego/hertz/pkg/common/config&#34;
+</span><span style=color:#8f5902;font-style:italic>      )
+</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      type {{.ServiceName}}Client struct {
+</span><span style=color:#8f5902;font-style:italic>      	client * client.Client
+</span><span style=color:#8f5902;font-style:italic>      }
+</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      func New{{.ServiceName}}Client(opt ...config.ClientOption) (*{{.ServiceName}}Client, error) {
+</span><span style=color:#8f5902;font-style:italic>      	c, err := client.NewClient(opt...)
+</span><span style=color:#8f5902;font-style:italic>      	if err != nil {
+</span><span style=color:#8f5902;font-style:italic>      		return nil, err
+</span><span style=color:#8f5902;font-style:italic>      	}
+</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      	return &amp;{{.ServiceName}}Client{
+</span><span style=color:#8f5902;font-style:italic>      		client: c,
+</span><span style=color:#8f5902;font-style:italic>      	}, nil
+</span><span style=color:#8f5902;font-style:italic>      }</span><span style=color:#f8f8f8;text-decoration:underline>      
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#8f5902;font-style:italic># handler_single表示单独的handler模板，用于update的时候更新每一个新增的handler</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>path</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>handler_single.go</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>delims</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span>- <span style=color:#4e9a06>&#39;{{&#39;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span>- <span style=color:#4e9a06>&#39;}}&#39;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>body</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000;font-weight:700>|+</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      {{.Comment}}
+</span><span style=color:#8f5902;font-style:italic>      func {{.Name}}(ctx context.Context, c *app.RequestContext) {
+</span><span style=color:#8f5902;font-style:italic>      // this my demo
+</span><span style=color:#8f5902;font-style:italic>      	var err error
+</span><span style=color:#8f5902;font-style:italic>      	{{if ne .RequestTypeName &#34;&#34; -}}
+</span><span style=color:#8f5902;font-style:italic>      	var req {{.RequestTypeName}}
+</span><span style=color:#8f5902;font-style:italic>      	err = c.BindAndValidate(&amp;req)
+</span><span style=color:#8f5902;font-style:italic>      	if err != nil {
+</span><span style=color:#8f5902;font-style:italic>      		c.String(400, err.Error())
+</span><span style=color:#8f5902;font-style:italic>      		return
+</span><span style=color:#8f5902;font-style:italic>      	}
+</span><span style=color:#8f5902;font-style:italic>      	{{end}}
+</span><span style=color:#8f5902;font-style:italic>      	resp := new({{.ReturnTypeName}})
+</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      	c.{{.Serializer}}(200, resp)
+</span><span style=color:#8f5902;font-style:italic>      }</span><span style=color:#f8f8f8;text-decoration:underline>      
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span><span style=color:#8f5902;font-style:italic># middleware_single表示单独的middleware模板，用于update的时候更新每一个新增的middleware_single</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>  </span>- <span style=color:#204a87;font-weight:700>path</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>middleware_single.go</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>delims</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span>- <span style=color:#4e9a06>&#39;{{&#39;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span>- <span style=color:#4e9a06>&#39;}}&#39;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>body</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000;font-weight:700>|+</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>      func {{.MiddleWare}}Mw() []app.HandlerFunc {
+</span><span style=color:#8f5902;font-style:italic>      	// your code...
+</span><span style=color:#8f5902;font-style:italic>      	return nil
+</span><span style=color:#8f5902;font-style:italic>      }</span><span style=color:#f8f8f8;text-decoration:underline>      
+</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><h3 id=自定义一个-package-模板>自定义一个 package 模板</h3><blockquote><p>与 layout 模板一样，用户同样可以自定义 package 模板。</p><p>就 package 提供的模板来说，一般用户可能只有自定义 handler.go 的模板的需求，因为router.go/middleware.go/register.go 一般与 idl 定义相关而用户无需关心，因此 hz 目前也将这些模板生成的位置固定了，一般也无需修改。</p><p>因此，用户可根据自身的需求来自定义生成的 handler 模板，加速开发速度；但是由于默认的 handler 模板集成了一些 model 的信息以及 package 信息，所以需要 hz 工具来提供渲染数据。这部分用户可根据自身情况酌情来修改，一般建议留下 model 信息。</p></blockquote><h4 id=覆盖默认模板>覆盖默认模板</h4><p>目前，hz 本身自带了如下的模板：</p><ul><li>handler.go</li><li>router.go</li><li>register.go</li><li>middleware.go</li><li>client.go</li><li>handler_single.go</li><li>middleware_single.go</li><li>idl_client.go</li><li>hertz_client.go</li></ul><p>以上这些模板是工具运行最基础的模板，在自定义模板的时候：</p><ul><li>如果指定了同名模板会覆盖掉默认的内容</li><li>如果没指定同名模板会使用默认的模板</li></ul><p>因此，大家在自定义模板的时候需要根据自己的实际情况来考虑是否需要覆盖掉这些模板</p><h4 id=添加一个新的模板>添加一个新的模板</h4><p>考虑到大家有时可能需要针对 IDL 的某些信息新增自己的一些实现，例如为每个生成的handler加一下单测等需求。因此，hz 的模板里允许用户自定义新的模板，并提供模板的渲染参数数据源。</p><p>模板形式：</p><div class=highlight><pre style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#f8f8f8;text-decoration:underline> </span>- <span style=color:#204a87;font-weight:700>path</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>biz/Fgy/{{$HandlerName}}.go // 路径+文件名，支持渲染数据</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>loop_method</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>bool // 是否按照 idl 中定义的 method 生成多个文件，配合 path 渲染使用</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>loop_service</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>bool // 是否按照 idl 中定义的 service 生成多个文件，配合 path 渲染使用</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>update_behavior</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>// 在使用 hz update 的时候对于该文件的更新行为</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>type</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>string // 更新行为:skip/cover/append</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>append_key</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;method&#34;</span><span style=color:#000>/&#34;service&#34; // 在 append 行为的时候，指定追加的渲染数据源，method/service</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>insert_key</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>string // 在 append 行为的时候追加逻辑的 “key”，根据这个key判断是否需要进行追加</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>append_content_tpl</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>string // 在 append 行为的时候，指定追加内容的模板</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>import_tpl</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000;font-weight:700>[]</span><span style=color:#000>string // 要新增的import的模板</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span><span style=color:#204a87;font-weight:700>body</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>string // 生成文件的模板内容</span><span style=color:#f8f8f8;text-decoration:underline>
+</span></code></pre></div><h4 id=模板数据源>模板数据源</h4><ul><li>文件路径渲染：在指定文件路径的时候可使用如下渲染数据</li></ul><div class=highlight><pre style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#204a87;font-weight:700>type</span> <span style=color:#000>FilePathRenderInfo</span> <span style=color:#204a87;font-weight:700>struct</span> <span style=color:#000;font-weight:700>{</span>
+	<span style=color:#000>MasterIDLName</span>  <span style=color:#204a87;font-weight:700>string</span> <span style=color:#8f5902;font-style:italic>// master IDL name 
+</span><span style=color:#8f5902;font-style:italic></span>	<span style=color:#000>GenPackage</span>     <span style=color:#204a87;font-weight:700>string</span> <span style=color:#8f5902;font-style:italic>// master IDL generate code package 
+</span><span style=color:#8f5902;font-style:italic></span>	<span style=color:#000>HandlerDir</span>     <span style=color:#204a87;font-weight:700>string</span> <span style=color:#8f5902;font-style:italic>// handler generate dir 
+</span><span style=color:#8f5902;font-style:italic></span>	<span style=color:#000>ModelDir</span>       <span style=color:#204a87;font-weight:700>string</span> <span style=color:#8f5902;font-style:italic>// model generate dir 
+</span><span style=color:#8f5902;font-style:italic></span>	<span style=color:#000>RouterDir</span>      <span style=color:#204a87;font-weight:700>string</span> <span style=color:#8f5902;font-style:italic>// router generate dir 
+</span><span style=color:#8f5902;font-style:italic></span>	<span style=color:#000>ProjectDir</span>     <span style=color:#204a87;font-weight:700>string</span> <span style=color:#8f5902;font-style:italic>// projectDir 
+</span><span style=color:#8f5902;font-style:italic></span>	<span style=color:#000>GoModule</span>       <span style=color:#204a87;font-weight:700>string</span> <span style=color:#8f5902;font-style:italic>// go module 
+</span><span style=color:#8f5902;font-style:italic></span>	<span style=color:#000>ServiceName</span>    <span style=color:#204a87;font-weight:700>string</span> <span style=color:#8f5902;font-style:italic>// service name, changed as services are traversed 
+</span><span style=color:#8f5902;font-style:italic></span>	<span style=color:#000>MethodName</span>     <span style=color:#204a87;font-weight:700>string</span> <span style=color:#8f5902;font-style:italic>// method name, changed as methods are traversed 
+</span><span style=color:#8f5902;font-style:italic></span>	<span style=color:#000>HandlerGenPath</span> <span style=color:#204a87;font-weight:700>string</span> <span style=color:#8f5902;font-style:italic>// &#34;api.gen_path&#34; value
+</span><span style=color:#8f5902;font-style:italic></span><span style=color:#000;font-weight:700>}</span>
+</code></pre></div><ul><li>单个文件的渲染数据：在单独定义一个文件时使用的渲染数据，可根据 &ldquo;IDLPackageRenderInfo&rdquo; 的定义解出所有 IDL 的信息</li></ul><div class=highlight><pre style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#204a87;font-weight:700>type</span> <span style=color:#000>CustomizedFileForIDL</span> <span style=color:#204a87;font-weight:700>struct</span> <span style=color:#000;font-weight:700>{</span>
+	<span style=color:#ce5c00;font-weight:700>*</span><span style=color:#000>IDLPackageRenderInfo</span>
+	<span style=color:#000>FilePath</span>    <span style=color:#204a87;font-weight:700>string</span>
+	<span style=color:#000>FilePackage</span> <span style=color:#204a87;font-weight:700>string</span>
+<span style=color:#000;font-weight:700>}</span>
+</code></pre></div><ul><li>Method 级别的渲染数据：当指定"loop_method"时，会使用到的渲染数据，会以每个 method 为单位生成一个文件</li></ul><div class=highlight><pre style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#204a87;font-weight:700>type</span> <span style=color:#000>CustomizedFileForMethod</span> <span style=color:#204a87;font-weight:700>struct</span> <span style=color:#000;font-weight:700>{</span>
+	<span style=color:#ce5c00;font-weight:700>*</span><span style=color:#000>HttpMethod</span> <span style=color:#8f5902;font-style:italic>// 每个 method 定义的解析出来的具体信息 
+</span><span style=color:#8f5902;font-style:italic></span>	<span style=color:#000>FilePath</span>    <span style=color:#204a87;font-weight:700>string</span> <span style=color:#8f5902;font-style:italic>// 当循环生成 method 文件时，该文件路径 
+</span><span style=color:#8f5902;font-style:italic></span>	<span style=color:#000>FilePackage</span> <span style=color:#204a87;font-weight:700>string</span> <span style=color:#8f5902;font-style:italic>// 当循环生成 method 文件时，该文件的 go package 名 
+</span><span style=color:#8f5902;font-style:italic></span>	<span style=color:#000>ServiceInfo</span> <span style=color:#ce5c00;font-weight:700>*</span><span style=color:#000>Service</span> <span style=color:#8f5902;font-style:italic>// 该 method 所属的 service 定义的信息
+</span><span style=color:#8f5902;font-style:italic></span><span style=color:#000;font-weight:700>}</span>
+   
+<span style=color:#204a87;font-weight:700>type</span> <span style=color:#000>HttpMethod</span> <span style=color:#204a87;font-weight:700>struct</span> <span style=color:#000;font-weight:700>{</span>
+	<span style=color:#000>Name</span>            <span style=color:#204a87;font-weight:700>string</span>
+	<span style=color:#000>HTTPMethod</span>      <span style=color:#204a87;font-weight:700>string</span>
+	<span style=color:#000>Comment</span>         <span style=color:#204a87;font-weight:700>string</span>
+	<span style=color:#000>RequestTypeName</span> <span style=color:#204a87;font-weight:700>string</span>
+	<span style=color:#000>ReturnTypeName</span>  <span style=color:#204a87;font-weight:700>string</span>
+	<span style=color:#000>Path</span>            <span style=color:#204a87;font-weight:700>string</span> <span style=color:#8f5902;font-style:italic>// 请求路由 
+</span><span style=color:#8f5902;font-style:italic></span>	<span style=color:#000>Serializer</span>      <span style=color:#204a87;font-weight:700>string</span>
+	<span style=color:#000>OutputDir</span>       <span style=color:#204a87;font-weight:700>string</span>
+	<span style=color:#000>Models</span> <span style=color:#204a87;font-weight:700>map</span><span style=color:#000;font-weight:700>[</span><span style=color:#204a87;font-weight:700>string</span><span style=color:#000;font-weight:700>]</span><span style=color:#ce5c00;font-weight:700>*</span><span style=color:#000>model</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>Model</span>
+<span style=color:#000;font-weight:700>}</span>
+</code></pre></div><ul><li>Service 级别的渲染数据：当指定"loop_service"时，会使用到的渲染数据，会以每个 service 为单位生成一个文件</li></ul><div class=highlight><pre style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-go data-lang=go><span style=color:#204a87;font-weight:700>type</span> <span style=color:#000>CustomizedFileForService</span> <span style=color:#204a87;font-weight:700>struct</span> <span style=color:#000;font-weight:700>{</span>
+	<span style=color:#ce5c00;font-weight:700>*</span><span style=color:#000>Service</span> <span style=color:#8f5902;font-style:italic>// 该 service 的具体信息，包括 service 名字，servide 内定义的 method 的信息等 
+</span><span style=color:#8f5902;font-style:italic></span>	<span style=color:#000>FilePath</span>       <span style=color:#204a87;font-weight:700>string</span> <span style=color:#8f5902;font-style:italic>// 当循环生成 service 文件时，该文件路径 
+</span><span style=color:#8f5902;font-style:italic></span>	<span style=color:#000>FilePackage</span>    <span style=color:#204a87;font-weight:700>string</span> <span style=color:#8f5902;font-style:italic>// 当循环生成 service 文件时，该文件的 go package 名 
+</span><span style=color:#8f5902;font-style:italic></span>	<span style=color:#000>IDLPackageInfo</span> <span style=color:#ce5c00;font-weight:700>*</span><span style=color:#000>IDLPackageRenderInfo</span> <span style=color:#8f5902;font-style:italic>// 该 service 所属的 IDL 定义的信息
+</span><span style=color:#8f5902;font-style:italic></span><span style=color:#000;font-weight:700>}</span>
 
-package example
-
-import (
-	&quot;context&quot;
-
-	&quot;github.com/cloudwego/hertz/pkg/app&quot;
-	example &quot;test/test2/biz/model/hello/example&quot;
-)
-
-// HelloMethod .
-// @router /hello [GET]
-func HelloMethod(ctx context.Context, c *app.RequestContext) {
-	//  you can code something
-	var err error
-	var req example.HelloReq
-	err = c.BindAndValidate(&amp;req)
-	if err != nil {
-		c.String(400, err.Error())
-		return
-	}
-
-	resp := new(example.HelloResp)
-
-	c.JSON(200, resp)
-}
-
-// OtherMethod .
-// @router /other [POST]
-func OtherMethod(ctx context.Context, c *app.RequestContext) {
-	//  you can code something
-	var err error
-	var req example.OtherReq
-	err = c.BindAndValidate(&amp;req)
-	if err != nil {
-		c.String(400, err.Error())
-		return
-	}
-
-	resp := new(example.OtherResp)
-
-	c.JSON(200, resp)
-}
-
-</code></pre><h1 id=注意事项>注意事项</h1><h2 id=使用-layout-模板的注意事项>使用 layout 模板的注意事项</h2><p>当用户使用了 layout 自定义模板后，那么生成的 layout 和渲染数据都由用户接管，所以用户需要提供其定义的 layout 的渲染数据。</p><h2 id=使用-package-模板的注意事项>使用 package 模板的注意事项</h2><p>一般来说，用户使用 package 模板的时候大多数是为了修改默认的 handler 模板；不过，目前 hz 没有提供单个 handler 的模板，所以当 update 已经存在的 handler 文件时，会使用默认 handler 模板在 handler 文件尾追加新的 handler function。当对应的 handler 文件不存在的时候，才会使用自定义模板来生成 handler 文件。</p><style>.feedback--answer{display:inline-block}.feedback--answer-no{margin-left:1em}.feedback--response{display:none;margin-top:1em}.feedback--response__visible{display:block}</style><div class=d-print-none><h2 class=feedback--title>反馈</h2><p class=feedback--question>当前页面对你有帮助吗？</p><button class="btn btn-primary mb-4 feedback--answer feedback--answer-yes">是</button>
+<span style=color:#204a87;font-weight:700>type</span> <span style=color:#000>Service</span> <span style=color:#204a87;font-weight:700>struct</span> <span style=color:#000;font-weight:700>{</span>
+	<span style=color:#000>Name</span>          <span style=color:#204a87;font-weight:700>string</span>
+	<span style=color:#000>Methods</span>       <span style=color:#000;font-weight:700>[]</span><span style=color:#ce5c00;font-weight:700>*</span><span style=color:#000>HttpMethod</span>
+	<span style=color:#000>ClientMethods</span> <span style=color:#000;font-weight:700>[]</span><span style=color:#ce5c00;font-weight:700>*</span><span style=color:#000>ClientMethod</span>
+	<span style=color:#000>Models</span>        <span style=color:#000;font-weight:700>[]</span><span style=color:#ce5c00;font-weight:700>*</span><span style=color:#000>model</span><span style=color:#000;font-weight:700>.</span><span style=color:#000>Model</span> <span style=color:#8f5902;font-style:italic>// all dependency models 
+</span><span style=color:#8f5902;font-style:italic></span>	<span style=color:#000>BaseDomain</span>    <span style=color:#204a87;font-weight:700>string</span>         <span style=color:#8f5902;font-style:italic>// base domain for client code
+</span><span style=color:#8f5902;font-style:italic></span><span style=color:#000;font-weight:700>}</span>
+</code></pre></div><p>下面给出一个简单的自定义 handler 模板的示例：</p><h4 id=example>example</h4><blockquote><p>example： <a href=https://github.com/cloudwego/hertz-examples/tree/main/hz/template>https://github.com/cloudwego/hertz-examples/tree/main/hz/template</a></p></blockquote><ul><li><p>修改默认 handler 的内容</p></li><li><p>为 handler 新增一个单测文件</p></li></ul><div class=highlight><pre style=background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-yaml data-lang=yaml><span style=color:#204a87;font-weight:700>layouts</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span>- <span style=color:#204a87;font-weight:700>path</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>handler.go</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>body</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000;font-weight:700>|-</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>          {{$OutDirs := GetUniqueHandlerOutDir .Methods}}
+</span><span style=color:#8f5902;font-style:italic>          package {{.PackageName}}
+</span><span style=color:#8f5902;font-style:italic>          import (
+</span><span style=color:#8f5902;font-style:italic>           &#34;context&#34;
+</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>           &#34;github.com/cloudwego/hertz/pkg/app&#34;
+</span><span style=color:#8f5902;font-style:italic>            &#34;github.com/cloudwego/hertz/pkg/protocol/consts&#34;
+</span><span style=color:#8f5902;font-style:italic>          {{- range $k, $v := .Imports}}
+</span><span style=color:#8f5902;font-style:italic>           {{$k}} &#34;{{$v.Package}}&#34;
+</span><span style=color:#8f5902;font-style:italic>          {{- end}}
+</span><span style=color:#8f5902;font-style:italic>          {{- range $_, $OutDir := $OutDirs}}
+</span><span style=color:#8f5902;font-style:italic>            {{if eq $OutDir &#34;&#34; -}}
+</span><span style=color:#8f5902;font-style:italic>              &#34;{{$.ProjPackage}}/biz/service&#34;
+</span><span style=color:#8f5902;font-style:italic>            {{- else -}}
+</span><span style=color:#8f5902;font-style:italic>              &#34;{{$.ProjPackage}}/biz/service/{{$OutDir}}&#34;
+</span><span style=color:#8f5902;font-style:italic>            {{- end -}}
+</span><span style=color:#8f5902;font-style:italic>          {{- end}}
+</span><span style=color:#8f5902;font-style:italic>          &#34;{{$.ProjPackage}}/biz/utils&#34;
+</span><span style=color:#8f5902;font-style:italic>          )
+</span><span style=color:#8f5902;font-style:italic>          {{range $_, $MethodInfo := .Methods}}
+</span><span style=color:#8f5902;font-style:italic>          {{$MethodInfo.Comment}}
+</span><span style=color:#8f5902;font-style:italic>          func {{$MethodInfo.Name}}(ctx context.Context, c *app.RequestContext) {
+</span><span style=color:#8f5902;font-style:italic>           var err error
+</span><span style=color:#8f5902;font-style:italic>           {{if ne $MethodInfo.RequestTypeName &#34;&#34; -}}
+</span><span style=color:#8f5902;font-style:italic>           var req {{$MethodInfo.RequestTypeName}}
+</span><span style=color:#8f5902;font-style:italic>           err = c.BindAndValidate(&amp;req)
+</span><span style=color:#8f5902;font-style:italic>           if err != nil {
+</span><span style=color:#8f5902;font-style:italic>              utils.SendErrResponse(ctx, c, consts.StatusOK, err)
+</span><span style=color:#8f5902;font-style:italic>              return
+</span><span style=color:#8f5902;font-style:italic>           }
+</span><span style=color:#8f5902;font-style:italic>           {{end}}
+</span><span style=color:#8f5902;font-style:italic>            {{if eq $MethodInfo.OutputDir &#34;&#34; -}}
+</span><span style=color:#8f5902;font-style:italic>              resp,err := service.New{{$MethodInfo.Name}}Service(ctx, c).Run(&amp;req)
+</span><span style=color:#8f5902;font-style:italic>              if err != nil {
+</span><span style=color:#8f5902;font-style:italic>                   utils.SendErrResponse(ctx, c, consts.StatusOK, err)
+</span><span style=color:#8f5902;font-style:italic>                   return
+</span><span style=color:#8f5902;font-style:italic>              }
+</span><span style=color:#8f5902;font-style:italic>            {{else}}
+</span><span style=color:#8f5902;font-style:italic>              resp,err := {{$MethodInfo.OutputDir}}.New{{$MethodInfo.Name}}Service(ctx, c).Run(&amp;req)
+</span><span style=color:#8f5902;font-style:italic>              if err != nil {
+</span><span style=color:#8f5902;font-style:italic>                      utils.SendErrResponse(ctx, c, consts.StatusOK, err)
+</span><span style=color:#8f5902;font-style:italic>                      return
+</span><span style=color:#8f5902;font-style:italic>              }
+</span><span style=color:#8f5902;font-style:italic>            {{end}}
+</span><span style=color:#8f5902;font-style:italic>           utils.SendSuccessResponse(ctx, c, consts.StatusOK, resp)
+</span><span style=color:#8f5902;font-style:italic>          }
+</span><span style=color:#8f5902;font-style:italic>          {{end}}</span><span style=color:#f8f8f8;text-decoration:underline>          
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>update_behavior</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>          </span><span style=color:#204a87;font-weight:700>import_tpl</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>              </span>- <span style=color:#000;font-weight:700>|-</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>                  {{$OutDirs := GetUniqueHandlerOutDir .Methods}}
+</span><span style=color:#8f5902;font-style:italic>                  {{- range $_, $OutDir := $OutDirs}}
+</span><span style=color:#8f5902;font-style:italic>                    {{if eq $OutDir &#34;&#34; -}}
+</span><span style=color:#8f5902;font-style:italic>                      &#34;{{$.ProjPackage}}/biz/service&#34;
+</span><span style=color:#8f5902;font-style:italic>                    {{- else -}}
+</span><span style=color:#8f5902;font-style:italic>                      &#34;{{$.ProjPackage}}/biz/service/{{$OutDir}}&#34;
+</span><span style=color:#8f5902;font-style:italic>                    {{end}}
+</span><span style=color:#8f5902;font-style:italic>                  {{- end}}</span><span style=color:#f8f8f8;text-decoration:underline>                  
+</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span>- <span style=color:#204a87;font-weight:700>path</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000>handler_single.go</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>body</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000;font-weight:700>|+</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>          {{.Comment}}
+</span><span style=color:#8f5902;font-style:italic>          func {{.Name}}(ctx context.Context, c *app.RequestContext) {
+</span><span style=color:#8f5902;font-style:italic>           var err error
+</span><span style=color:#8f5902;font-style:italic>           {{if ne .RequestTypeName &#34;&#34; -}}
+</span><span style=color:#8f5902;font-style:italic>           var req {{.RequestTypeName}}
+</span><span style=color:#8f5902;font-style:italic>           err = c.BindAndValidate(&amp;req)
+</span><span style=color:#8f5902;font-style:italic>           if err != nil {
+</span><span style=color:#8f5902;font-style:italic>              utils.SendErrResponse(ctx, c, consts.StatusOK, err)
+</span><span style=color:#8f5902;font-style:italic>              return
+</span><span style=color:#8f5902;font-style:italic>           }
+</span><span style=color:#8f5902;font-style:italic>           {{end}}
+</span><span style=color:#8f5902;font-style:italic>           {{if eq .OutputDir &#34;&#34; -}}
+</span><span style=color:#8f5902;font-style:italic>              resp,err := service.New{{.Name}}Service(ctx, c).Run(&amp;req)
+</span><span style=color:#8f5902;font-style:italic>            {{else}}
+</span><span style=color:#8f5902;font-style:italic>              resp,err := {{.OutputDir}}.New{{.Name}}Service(ctx, c).Run(&amp;req)
+</span><span style=color:#8f5902;font-style:italic>            {{end}}
+</span><span style=color:#8f5902;font-style:italic>            if err != nil {
+</span><span style=color:#8f5902;font-style:italic>                  utils.SendErrResponse(ctx, c, consts.StatusOK, err)
+</span><span style=color:#8f5902;font-style:italic>                  return
+</span><span style=color:#8f5902;font-style:italic>            }
+</span><span style=color:#8f5902;font-style:italic>           utils.SendSuccessResponse(ctx, c, consts.StatusOK, resp)
+</span><span style=color:#8f5902;font-style:italic>          }=</span><span style=color:#f8f8f8;text-decoration:underline>          
+</span><span style=color:#f8f8f8;text-decoration:underline>    </span>- <span style=color:#204a87;font-weight:700>path</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;{{.HandlerDir}}/{{.GenPackage}}/{{ToSnakeCase .ServiceName}}_test.go&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>loop_service</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#204a87;font-weight:700>true</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>update_behavior</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>          </span><span style=color:#204a87;font-weight:700>type</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;append&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>          </span><span style=color:#204a87;font-weight:700>append_key</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;method&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>          </span><span style=color:#204a87;font-weight:700>insert_key</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#4e9a06>&#34;Test{{$.Name}}&#34;</span><span style=color:#f8f8f8;text-decoration:underline>
+</span><span style=color:#f8f8f8;text-decoration:underline>          </span><span style=color:#204a87;font-weight:700>append_tpl</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000;font-weight:700>|-</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>              func Test{{.Name}}(t *testing.T) {
+</span><span style=color:#8f5902;font-style:italic>                h := server.Default()
+</span><span style=color:#8f5902;font-style:italic>                h.GET(&#34;{{.Path}}&#34;, {{.Name}})
+</span><span style=color:#8f5902;font-style:italic>                w := ut.PerformRequest(h.Engine, &#34;{{.HTTPMethod}}&#34;, &#34;{{.Path}}&#34;, &amp;ut.Body{Body: bytes.NewBufferString(&#34;&#34;), Len: 1},
+</span><span style=color:#8f5902;font-style:italic>                ut.Header{})
+</span><span style=color:#8f5902;font-style:italic>                resp := w.Result()
+</span><span style=color:#8f5902;font-style:italic>                assert.DeepEqual(t, 201, resp.StatusCode())
+</span><span style=color:#8f5902;font-style:italic>                assert.DeepEqual(t, &#34;&#34;, string(resp.Body()))
+</span><span style=color:#8f5902;font-style:italic>                // todo edit your unit test.
+</span><span style=color:#8f5902;font-style:italic>              }</span><span style=color:#f8f8f8;text-decoration:underline>              
+</span><span style=color:#f8f8f8;text-decoration:underline>      </span><span style=color:#204a87;font-weight:700>body</span><span style=color:#000;font-weight:700>:</span><span style=color:#f8f8f8;text-decoration:underline> </span><span style=color:#000;font-weight:700>|-</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>          package {{.FilePackage}}
+</span><span style=color:#8f5902;font-style:italic>          import (
+</span><span style=color:#8f5902;font-style:italic>            &#34;bytes&#34;
+</span><span style=color:#8f5902;font-style:italic>            &#34;testing&#34;
+</span><span style=color:#8f5902;font-style:italic>
+</span><span style=color:#8f5902;font-style:italic>            &#34;github.com/cloudwego/hertz/pkg/app/server&#34;
+</span><span style=color:#8f5902;font-style:italic>            &#34;github.com/cloudwego/hertz/pkg/common/test/assert&#34;
+</span><span style=color:#8f5902;font-style:italic>            &#34;github.com/cloudwego/hertz/pkg/common/ut&#34;
+</span><span style=color:#8f5902;font-style:italic>          )
+</span><span style=color:#8f5902;font-style:italic>          {{range $_, $MethodInfo := $.Methods}}
+</span><span style=color:#8f5902;font-style:italic>            func Test{{$MethodInfo.Name}}(t *testing.T) {
+</span><span style=color:#8f5902;font-style:italic>            h := server.Default()
+</span><span style=color:#8f5902;font-style:italic>            h.GET(&#34;{{$MethodInfo.Path}}&#34;, {{$MethodInfo.Name}})
+</span><span style=color:#8f5902;font-style:italic>            w := ut.PerformRequest(h.Engine, &#34;{{$MethodInfo.HTTPMethod}}&#34;, &#34;{{$MethodInfo.Path}}&#34;, &amp;ut.Body{Body: bytes.NewBufferString(&#34;&#34;), Len: 1},
+</span><span style=color:#8f5902;font-style:italic>            ut.Header{})
+</span><span style=color:#8f5902;font-style:italic>            resp := w.Result()
+</span><span style=color:#8f5902;font-style:italic>            assert.DeepEqual(t, 201, resp.StatusCode())
+</span><span style=color:#8f5902;font-style:italic>            assert.DeepEqual(t, &#34;&#34;, string(resp.Body()))
+</span><span style=color:#8f5902;font-style:italic>            // todo edit your unit test.
+</span><span style=color:#8f5902;font-style:italic>            }
+</span><span style=color:#8f5902;font-style:italic>          {{end}}</span><span style=color:#f8f8f8;text-decoration:underline>          
+</span></code></pre></div><h2 id=mvc-模板实践>MVC 模板实践</h2><p>Hertz 提供了 一个 MVC 自定义模版的最佳实践，代码详见 <a href=https://github.com/cloudwego/hertz-examples/tree/main/hz/template>code</a> 。</p><h2 id=注意事项>注意事项</h2><h3 id=使用-layout-模板的注意事项>使用 layout 模板的注意事项</h3><p>当用户使用了 layout 自定义模板后，那么生成的 layout 和渲染数据都由用户接管，所以用户需要提供其定义的 layout 的渲染数据。</p><h3 id=使用-package-模板的注意事项>使用 package 模板的注意事项</h3><p>一般来说，用户使用 package 模板的时候大多数是为了修改默认的 handler 模板；不过，目前 hz 没有提供单个 handler 的模板，所以当 update 已经存在的 handler 文件时，会使用默认 handler 模板在 handler 文件尾追加新的 handler function。当对应的 handler 文件不存在的时候，才会使用自定义模板来生成 handler 文件。</p><style>.feedback--answer{display:inline-block}.feedback--answer-no{margin-left:1em}.feedback--response{display:none;margin-top:1em}.feedback--response__visible{display:block}</style><div class=d-print-none><h2 class=feedback--title>反馈</h2><p class=feedback--question>当前页面对你有帮助吗？</p><button class="btn btn-primary mb-4 feedback--answer feedback--answer-yes">是</button>
 <button class="btn btn-primary mb-4 feedback--answer feedback--answer-no">否</button><p class="feedback--response feedback--response-yes"><a href=https://github.com/cloudwego/cloudwego.github.io/issues/new>请告诉我们如何改进</a>.</p><p class="feedback--response feedback--response-no"><a href=https://github.com/cloudwego/cloudwego.github.io/issues/new>请告诉我们如何改进</a>.</p></div><script>const yesButton=document.querySelector('.feedback--answer-yes'),noButton=document.querySelector('.feedback--answer-no'),yesResponse=document.querySelector('.feedback--response-yes'),noResponse=document.querySelector('.feedback--response-no'),disableButtons=()=>{yesButton.disabled=!0,noButton.disabled=!0},sendFeedback=b=>{if(typeof ga!='function')return;const a={command:'send',hitType:'event',category:'Helpful',action:'click',label:window.location.pathname,value:b};ga(a.command,a.hitType,a.category,a.action,a.label,a.value)};yesButton.addEventListener('click',()=>{yesResponse.classList.add('feedback--response__visible'),disableButtons(),sendFeedback(1)}),noButton.addEventListener('click',()=>{noResponse.classList.add('feedback--response__visible'),disableButtons(),sendFeedback(0)})</script><br><div class="text-muted mt-5 pt-3 border-top">最后修改
-July 15, 2022
-: <a href=https://github.com/cloudwego/cloudwego.github.io/commit/1e23fd39de675db0f85e30abcefcd2b2abbea7f0>feat: update cloudwego defination (#253) (1e23fd3)</a></div></div></main></div></div><footer class="bg-dark py-5 row d-print-none"><div class="container-fluid mx-sm-5"><div class=row><div class="col-6 col-sm-4 text-xs-center order-sm-2"></div><div class="col-6 col-sm-4 text-right text-xs-center order-sm-3"></div><div class="col-12 col-sm-4 text-center py-2 order-sm-2"><small class=text-white>&copy; 2022 The CloudWeGo Authors</small><p class="mt-2 text-white"><a class=cloudwego-link href=/about/ target=_blank rel=noopener>About</a>
+April 11, 2023
+: <a href=https://github.com/cloudwego/cloudwego.github.io/commit/237eda3f3f9aaa78d070c6eb9b823760cd1285c2>chore: fix npm security issue (#600) (237eda3)</a></div></div></main></div></div><footer class="bg-dark py-5 row d-print-none"><div class="container-fluid mx-sm-5"><div class=row><div class="col-6 col-sm-4 text-xs-center order-sm-2"><ul class="list-inline mb-0"><li class="list-inline-item mx-2 h3" data-toggle=tooltip data-placement=top title=Lark aria-label=Lark><a class=text-white target=_blank rel=noopener href="https://applink.feishu.cn/client/chat/chatter/add_by_link?link_token=693v2544-2664-4421-b50f-7f1912p745r6" aria-label=Lark><img src=/webfonts/lark.svg alt style=width:26px;line-height:32.5px;margin-bottom:6px></a></li><li class="list-inline-item mx-2 h3" data-toggle=tooltip data-placement=top title=Twitter aria-label=Twitter><a class=text-white target=_blank rel=noopener href=https://twitter.com/CloudWeGo aria-label=Twitter><i class="fab fa-twitter"></i></a></li></ul></div><div class="col-6 col-sm-4 text-right text-xs-center order-sm-3"><ul class="list-inline mb-0"><li class="list-inline-item mx-2 h3" data-toggle=tooltip data-placement=top title=GitHub aria-label=GitHub><a class=text-white target=_blank rel=noopener href=https://github.com/cloudwego aria-label=GitHub><i class="fab fa-github"></i></a></li><li class="list-inline-item mx-2 h3" data-toggle=tooltip data-placement=top title=Slack aria-label=Slack><a class=text-white target=_blank rel=noopener href=https://join.slack.com/t/cloudwego/shared_invite/zt-tmcbzewn-UjXMF3ZQsPhl7W3tEDZboA aria-label=Slack><i class="fab fa-slack"></i></a></li></ul></div><div class="col-12 col-sm-4 text-center py-2 order-sm-2"><small class=text-white>&copy; 2023 The CloudWeGo Authors</small><p class="mt-2 text-white"><a class=cloudwego-link href=/about/ target=_blank rel=noopener>About</a>
 |
-<a class=cloudwego-link href=https://github.com/cloudwego/cloudwego.github.io/blob/main/LICENSE target=_blank rel=noopener>License</a></p></div></div></div></footer></div><script src=https://cdn.staticfile.org/popper.js/1.16.1/umd/popper.min.js integrity=sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN crossorigin=anonymous></script><script src=https://cdn.staticfile.org/bootstrap/4.6.0/js/bootstrap.min.js integrity=sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF crossorigin=anonymous></script><script src=/js/main.min.5c74b870c6953931a705f390a49c7e4c0a842ec5c83b24354758dd674343ed0d.js integrity="sha256-XHS4cMaVOTGnBfOQpJx+TAqELsXIOyQ1R1jdZ0ND7Q0=" crossorigin=anonymous></script></body></html>
+<a class=cloudwego-link href=https://github.com/cloudwego/cloudwego.github.io/blob/main/LICENSE target=_blank rel=noopener>License</a></p></div></div></div></footer></div><script src=https://cdn.staticfile.org/popper.js/1.16.1/umd/popper.min.js integrity=sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN crossorigin=anonymous></script><script src=https://cdn.staticfile.org/bootstrap/4.6.0/js/bootstrap.min.js integrity=sha384-+YQ4JLhjyBLPDQt//I+STsc9iw4uQqACwlvpslubQzn4u2UU2UFM80nGisd026JF crossorigin=anonymous></script><script src=/js/main.min.cc7c4d018c27afc5b5c4e9ddd9f5b1fca60e2005312b12b5bec0518202c51314.js integrity="sha256-zHxNAYwnr8W1xOnd2fWx/KYOIAUxKxK1vsBRggLFExQ=" crossorigin=anonymous></script><script src=/js/prism.js></script><script src=/js/outbound-link.js></script><script src=/js/navScroll.js></script></body></html>
