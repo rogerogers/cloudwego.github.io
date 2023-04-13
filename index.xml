@@ -1504,7 +1504,7 @@ We also encourage developers to use the testing guide provided in this article, 
 &lt;ul>
 &lt;li>Add default ErrorHandler to wrap remote error when no ErrorHandler is specified.&lt;/li>
 &lt;li>Backward metainfo is supported.&lt;/li>
-&lt;li>JSON generic call is supported. Usage guide: &lt;a href="https://www.cloudwego.io/docs/kitex/tutorials/advanced-feature/generic_call/#4-json-mapping-generic-call">link&lt;/a>.&lt;/li>
+&lt;li>JSON generic call is supported. Usage guide: &lt;a href="https://www.cloudwego.io/docs/kitex/tutorials/advanced-feature/generic-call/#4-json-mapping-generic-call">link&lt;/a>.&lt;/li>
 &lt;/ul>
 &lt;h2 id="improvement">Improvement:&lt;/h2>
 &lt;ul>
@@ -1528,7 +1528,7 @@ We also encourage developers to use the testing guide provided in this article, 
 &lt;h2 id="docs">Docs:&lt;/h2>
 &lt;ul>
 &lt;li>English is available for README and all other documents.&lt;/li>
-&lt;li>Guide for generic call. &lt;a href="https://www.cloudwego.io/docs/kitex/tutorials/advanced-feature/generic_call">English&lt;/a> | &lt;a href="https://www.cloudwego.io/zh/docs/kitex/tutorials/advanced-feature/generic_call/">中文&lt;/a>&lt;/li>
+&lt;li>Guide for generic call. &lt;a href="https://www.cloudwego.io/docs/kitex/tutorials/advanced-feature/generic-call">English&lt;/a> | &lt;a href="https://www.cloudwego.io/zh/docs/kitex/tutorials/advanced-feature/generic-call/">中文&lt;/a>&lt;/li>
 &lt;li>Landscape and Roadmap in README.&lt;/li>
 &lt;/ul>
 &lt;h2 id="dependency-change">Dependency Change:&lt;/h2>

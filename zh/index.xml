@@ -1849,7 +1849,7 @@ Server 和 Client 中间件使用方式相同，使用 Use 方法注册中间件
 &lt;p>希望以上的分享能够让大家对 &lt;a href="https://github.com/cloudwego/hertz">Hertz&lt;/a> 有一个整体上的认识。同时，我们也在不断地迭代 &lt;a href="https://github.com/cloudwego/hertz">Hertz&lt;/a>、完善CloudWeGo 整体生态。欢迎各位感兴趣的同学们加入我们，共同建设 CloudWeGo。&lt;/p>
 &lt;h2 id="08-参考资料">08 参考资料&lt;/h2>
 &lt;p>&lt;strong>Hertz Doc&lt;/strong>：https://www.cloudwego.io/zh/docs/hertz/&lt;/p>
-&lt;p>官网文章：&lt;a href="https://www.cloudwego.io/zh/blog/2021/10/09/%E5%AD%97%E8%8A%82%E8%B7%B3%E5%8A%A8%E5%9C%A8-go-%E7%BD%91%E7%BB%9C%E5%BA%93%E4%B8%8A%E7%9A%84%E5%AE%9E%E8%B7%B5/">&lt;strong>字节跳动在 Go 网络库上的实践&lt;/strong> &lt;/a>&lt;/p></description></item><item><title>Blog: 超大规模的企业级微服务 HTTP 框架 — Hertz 正式开源！</title><link>https://www.cloudwego.io/zh/blog/2022/06/21/%E8%B6%85%E5%A4%A7%E8%A7%84%E6%A8%A1%E7%9A%84%E4%BC%81%E4%B8%9A%E7%BA%A7%E5%BE%AE%E6%9C%8D%E5%8A%A1-http-%E6%A1%86%E6%9E%B6-hertz-%E6%AD%A3%E5%BC%8F%E5%BC%80%E6%BA%90/</link><pubDate>Tue, 21 Jun 2022 00:00:00 +0000</pubDate><guid>https://www.cloudwego.io/zh/blog/2022/06/21/%E8%B6%85%E5%A4%A7%E8%A7%84%E6%A8%A1%E7%9A%84%E4%BC%81%E4%B8%9A%E7%BA%A7%E5%BE%AE%E6%9C%8D%E5%8A%A1-http-%E6%A1%86%E6%9E%B6-hertz-%E6%AD%A3%E5%BC%8F%E5%BC%80%E6%BA%90/</guid><description>
+&lt;p>官网文章：&lt;a href="https://www.cloudwego.io/zh/blog/2020/05/24/%E5%AD%97%E8%8A%82%E8%B7%B3%E5%8A%A8%E5%9C%A8-go-%E7%BD%91%E7%BB%9C%E5%BA%93%E4%B8%8A%E7%9A%84%E5%AE%9E%E8%B7%B5/">&lt;strong>字节跳动在 Go 网络库上的实践&lt;/strong> &lt;/a>&lt;/p></description></item><item><title>Blog: 超大规模的企业级微服务 HTTP 框架 — Hertz 正式开源！</title><link>https://www.cloudwego.io/zh/blog/2022/06/21/%E8%B6%85%E5%A4%A7%E8%A7%84%E6%A8%A1%E7%9A%84%E4%BC%81%E4%B8%9A%E7%BA%A7%E5%BE%AE%E6%9C%8D%E5%8A%A1-http-%E6%A1%86%E6%9E%B6-hertz-%E6%AD%A3%E5%BC%8F%E5%BC%80%E6%BA%90/</link><pubDate>Tue, 21 Jun 2022 00:00:00 +0000</pubDate><guid>https://www.cloudwego.io/zh/blog/2022/06/21/%E8%B6%85%E5%A4%A7%E8%A7%84%E6%A8%A1%E7%9A%84%E4%BC%81%E4%B8%9A%E7%BA%A7%E5%BE%AE%E6%9C%8D%E5%8A%A1-http-%E6%A1%86%E6%9E%B6-hertz-%E6%AD%A3%E5%BC%8F%E5%BC%80%E6%BA%90/</guid><description>
 &lt;p>今天，经过了字节跳动内部一年多的使用和迭代，高性能企业级 HTTP 框架—— &lt;a href="https://github.com/cloudwego/hertz">Hertz&lt;/a>，已在 CloudWeGo 正式开源啦！&lt;a href="https://github.com/cloudwego/hertz">Hertz&lt;/a> 已经成为了字节跳动内部最大的 HTTP 框架，线上接入的服务数量超过 &lt;strong>1 万&lt;/strong>，
 峰值 QPS 超过 &lt;strong>4 千万&lt;/strong>，具有 &lt;strong>高易用性&lt;/strong> 、 &lt;strong>易扩展&lt;/strong> 、&lt;strong>低时延&lt;/strong>的特点。对于字节跳动服务框架团队和 CloudWeGo 而言，&lt;a href="https://github.com/cloudwego/hertz">Hertz&lt;/a> 将不仅仅是一个开源项目，它也是一个真实的超大规模企业级实践。&lt;/p>
 &lt;p>&lt;strong>项目地址：https://github.com/cloudwego/hertz&lt;/strong>&lt;/p>
@@ -2463,7 +2463,7 @@ Kitex/gRPC 性能对比（2022 年 1 月数据）
 &lt;li>技术是开源的，且开源项目的 star 数、项目活跃度（Issue&amp;amp;PR）、文档更新频率、发版周期稳定可靠&lt;/li>
 &lt;/ul>
 &lt;p>CloudWeGo 的优势在于，已经在字节跳动经过大规模生产流量验证，有可以参考的稳定性和可靠性实际案例。“CloudWeGo 的特点之一是高性能，但实际上在开发之初它经常遇到性能瓶颈，
-于是内部专门进行了网络库、Thrift 序列化的专项优化，优化的过程会比较漫长，一个瓶颈点要花很长时间反复测试调整实现，我们也发过两篇文章&lt;a href="http://www.cloudwego.io/zh/blog/2021/09/23/%E5%AD%97%E8%8A%82%E8%B7%B3%E5%8A%A8-go-rpc-%E6%A1%86%E6%9E%B6-kitex-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E8%B7%B5/">《字节跳动 Go RPC 框架 Kitex 性能优化实践》&lt;/a>和&lt;a href="http://www.cloudwego.io/zh/blog/2021/10/09/%E5%AD%97%E8%8A%82%E8%B7%B3%E5%8A%A8%E5%9C%A8-go-%E7%BD%91%E7%BB%9C%E5%BA%93%E4%B8%8A%E7%9A%84%E5%AE%9E%E8%B7%B5/">《字节跳动在 Go 网络库上的实践》&lt;/a>分享了优化实践。”字节跳动 CloudWeGo 技术专家表示。&lt;/p>
+于是内部专门进行了网络库、Thrift 序列化的专项优化，优化的过程会比较漫长，一个瓶颈点要花很长时间反复测试调整实现，我们也发过两篇文章&lt;a href="http://www.cloudwego.io/zh/blog/2021/09/23/%E5%AD%97%E8%8A%82%E8%B7%B3%E5%8A%A8-go-rpc-%E6%A1%86%E6%9E%B6-kitex-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%AE%9E%E8%B7%B5/">《字节跳动 Go RPC 框架 Kitex 性能优化实践》&lt;/a>和&lt;a href="https://www.cloudwego.io/zh/blog/2020/05/24/%E5%AD%97%E8%8A%82%E8%B7%B3%E5%8A%A8%E5%9C%A8-go-%E7%BD%91%E7%BB%9C%E5%BA%93%E4%B8%8A%E7%9A%84%E5%AE%9E%E8%B7%B5/">《字节跳动在 Go 网络库上的实践》&lt;/a>分享了优化实践。”字节跳动 CloudWeGo 技术专家表示。&lt;/p>
 &lt;p>据悉，与同类型项目相比，CloudWeGo 开发团队不仅考虑了高性能、强扩展性，还考虑到了易用性。“以 &lt;a href="https://github.com/cloudwego/kitex">Kitex&lt;/a> 为例，目前从治理功能的多样性上不及一些开源框架，
 从性能、扩展性、使用体验多维度综合来看，&lt;a href="https://github.com/cloudwego/kitex">Kitex&lt;/a> 具有一定的优势。&lt;a href="https://github.com/cloudwego/kitex">Kitex&lt;/a> 支持多协议，由于内部以 Thrift 为主，&lt;a href="https://github.com/cloudwego/kitex">Kitex&lt;/a> 对 Thrift 支持也做了性能优化，
 如果使用 Thrift，&lt;a href="https://github.com/cloudwego/kitex">Kitex&lt;/a> 将是最佳的选择。”字节跳动 CloudWeGo 技术专家告诉 InfoQ。&lt;/p>
@@ -2826,7 +2826,7 @@ Kitex/gRPC 性能对比（2022 年 1 月数据）
 &lt;ul>
 &lt;li>增加默认的 ErrorHandler 封装 Error（用户指定会被覆盖）。&lt;/li>
 &lt;li>metainfo 支持反向传递。&lt;/li>
-&lt;li>支持了 JSON 泛化调用，使用指南可参考：&lt;a href="https://www.cloudwego.io/zh/docs/kitex/tutorials/advanced-feature/generic_call/">Kitex 泛化调用使用指南&lt;/a>。&lt;/li>
+&lt;li>支持了 JSON 泛化调用，使用指南可参考：&lt;a href="https://www.cloudwego.io/zh/docs/kitex/tutorials/advanced-feature/generic-call/">Kitex 泛化调用使用指南&lt;/a>。&lt;/li>
 &lt;/ul>
 &lt;h2 id="优化">优化:&lt;/h2>
 &lt;ul>
@@ -2850,7 +2850,7 @@ Kitex/gRPC 性能对比（2022 年 1 月数据）
 &lt;h2 id="文档">文档:&lt;/h2>
 &lt;ul>
 &lt;li>提供了英文版的README和其他文档。&lt;/li>
-&lt;li>补充了泛化调用手册： &lt;a href="https://www.cloudwego.io/docs/kitex/tutorials/advanced-feature/generic_call/">English&lt;/a> | &lt;a href="https://www.cloudwego.io/zh/docs/kitex/tutorials/advanced-feature/generic_call/">中文&lt;/a>。&lt;/li>
+&lt;li>补充了泛化调用手册： &lt;a href="https://www.cloudwego.io/docs/kitex/tutorials/advanced-feature/generic-call/">English&lt;/a> | &lt;a href="https://www.cloudwego.io/zh/docs/kitex/tutorials/advanced-feature/generic-call/">中文&lt;/a>。&lt;/li>
 &lt;li>README 中增加了 landsapce 和 roadmap。&lt;/li>
 &lt;/ul>
 &lt;h2 id="依赖变化">依赖变化:&lt;/h2>
