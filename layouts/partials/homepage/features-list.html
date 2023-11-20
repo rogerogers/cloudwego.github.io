@@ -1,0 +1,29 @@
+<div class="wrapper has-background-white feature-list">
+  <div class="container columns">
+		<div class="column is-10 is-offset-1">
+      <div class="row">
+        {{ range .items }}
+        <div class="col-4">
+          <a href="{{ .url }}" class="card-link">
+            <div class="card">
+              <header class="card-header">
+                <p class="card-header-title has-text-navy-black">
+                  {{.title}}
+                </p>
+              </header>
+              <div class="card-body">
+                    <figure class="image is-64x64">
+                      <img {{ partial "src.html" (dict "img" .image) | safeHTMLAttr }} alt="{{ .title | safeHTMLAttr }}" />
+                    </figure>
+                  <div class="column">
+                    {{.description | markdownify}}
+                  </div>
+              </div>
+            </div>
+          </a>
+        </div>
+        {{ end }}
+      </div>
+    </div>
+  </div>
+</div>

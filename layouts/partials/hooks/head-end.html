@@ -2,3 +2,21 @@
 <!-- stylesheet for algolia docsearch -->
 <link rel="stylesheet" href="/css/docsearch.css" />
 {{ end }}
+
+{{ if eq .Kind "home"  }}
+<style>
+.container-fluid {
+  padding: 0 !important;
+}
+footer {
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+img {
+  max-width: 100%;
+}
+</style>
+
+{{ end }}
