@@ -381,3 +381,133 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+.companies {
+  background-image: linear-gradient(white, #e9fdf5, #e9fdf5, white);
+}
+
+.companies .created-by {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.companies .created-by img {
+  display: block;
+  margin: 0 auto;
+  width: 160px;
+  height: auto;
+}
+
+@media screen and (min-width: 768px) {
+  .companies .created-by {
+    justify-content: flex-start;
+    text-align: left;
+    margin-bottom: 0;
+    padding-right: 8px;
+  }
+
+  .companies .created-by img {
+    margin: 0;
+  }
+}
+
+@keyframes logos-1-keyframes {
+  from {
+    left: 0%;
+  }
+
+  to {
+    left: -1000px;
+  }
+}
+
+@keyframes logos-2-keyframes {
+  from {
+    left: 1000px;
+  }
+
+  to {
+    left: 0%;
+  }
+}
+
+.logos-mask {
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.logos-mask .adopters {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.logos-mask .logos {
+  width: 3600px;
+  position: relative;
+  height: 80px;
+}
+
+.logos-mask .logos-1,
+.logos-mask .logos-2 {
+  width: 100%;
+  position: absolute;
+  display: flex;
+}
+
+.logos-mask .logos-1 {
+  animation: logos-1-keyframes 60s linear infinite;
+}
+
+.logos-mask .logos-2 {
+  animation: logos-2-keyframes 60s linear infinite;
+}
+
+.logos-mask figure {
+  padding: 0;
+  margin: 0;
+}
+
+.logos-mask img {
+  width: 150px;
+  height: auto;
+  margin-left: 50px;
+}
+
+@media screen and (min-width: 769px) {
+  .logos-mask .adopters {
+    text-align: left;
+  }
+
+  .logos-mask::before,
+  .logos-mask::after {
+    content: "";
+    position: absolute;
+    top: 35px;
+    width: 100px;
+    height: 75px;
+    z-index: 1;
+  }
+
+  .logos-mask::before {
+    background-image: linear-gradient(90deg, #e9fdf5, rgba(233, 253, 245, 0));
+    left: 0;
+    z-index: 1;
+  }
+
+  .logos-mask::after {
+    content: "";
+    background-image: linear-gradient(-90deg, #e9fdf5, rgba(233, 253, 245, 0));
+    right: 0;
+  }
+}
+
+@media screen and (min-width: 1088px) {
+  .logos-mask::before,
+  .logos-mask::after {
+    width: 200px;
+  }
+}
