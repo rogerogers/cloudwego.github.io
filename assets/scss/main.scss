@@ -28,12 +28,12 @@
 @import "pageinfo";
 @import "taxonomy";
 
+@import "column";
 @import "home";
 @import "about";
 @import "community";
 @import "markdown";
 @import "safety";
-@import "column";
 
 @if $td-enable-google-fonts {
   @import url($web-font-path);
