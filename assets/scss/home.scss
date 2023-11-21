@@ -477,6 +477,17 @@
   margin-left: 50px;
 }
 
+.case-studies,
+.companies,
+.about-linkerd,
+.feature-list,
+.featured-articles,
+.foundation-member,
+.tweets {
+  padding-top: 48px;
+  padding-bottom: 48px;
+}
+
 @media screen and (min-width: 769px) {
   .logos-mask .adopters {
     text-align: left;
@@ -486,7 +497,7 @@
   .logos-mask::after {
     content: "";
     position: absolute;
-    top: 55px;
+    top: 35px;
     width: 100px;
     height: 75px;
     z-index: 1;
