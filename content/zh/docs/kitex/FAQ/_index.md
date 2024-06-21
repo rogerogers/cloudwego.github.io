@@ -7,7 +7,7 @@ keywords: ["Kitex", "HTTP", "Windows", "Thrift", "Q&A"]
 description: "Kitex 常见问题解答。"
 ---
 
->  **如果无法满足你的需求，请在 [Kitex Github 项目仓库](https://github.com/cloudwego/kitex)提交 Issue，社区维护者会及时跟进处理。**
+> **如果无法满足你的需求，请在 [Kitex Github 项目仓库](https://github.com/cloudwego/kitex)提交 Issue，社区维护者会及时跟进处理。**
 
 ## Kitex 框架
 
@@ -133,13 +133,13 @@ func (e *XError) NewXError(outMsg *XError) *XError {
 - 仅在 Server 端报错，说明 Server 收到的请求不符合预期
   - 例如 HTTP Client 发出的请求，报文以 "GET " 或 "POST "开头
 
-| 报文                                                | 说明                                                         |
-| --------------------------------------------------- | ------------------------------------------------------------ |
-| **first4Bytes=0x48545450, second4Bytes=0x2f312e31** | 这 8 个字节对应 ASCII "HTTP/1.1"，这是典型的 HTTP Server 响应报文。说明 Kitex Client 请求了 HTTP Server。 |
-| **first4Bytes=0x47455420**                          | 这 4 个字节对应 ASCII "GET "，这是典型的 HTTP GET 请求报文。说明 Kitex Server 收到了 HTTP 请求；请勿使用 HTTP Client 直接请求 Kitex Server。 |
+| 报文                                                | 说明                                                                                                                                          |
+| --------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| **first4Bytes=0x48545450, second4Bytes=0x2f312e31** | 这 8 个字节对应 ASCII "HTTP/1.1"，这是典型的 HTTP Server 响应报文。说明 Kitex Client 请求了 HTTP Server。                                     |
+| **first4Bytes=0x47455420**                          | 这 4 个字节对应 ASCII "GET "，这是典型的 HTTP GET 请求报文。说明 Kitex Server 收到了 HTTP 请求；请勿使用 HTTP Client 直接请求 Kitex Server。  |
 | **first4Bytes=0x504f5354**                          | 这 4 个字节对应 ASCII "POST"，这是典型的 HTTP POST 请求报文。说明 Kitex Server 收到了 HTTP 请求；请勿使用 HTTP Client 直接请求 Kitex Server。 |
-| **first4Bytes=0x16030100**                          | 这是 TLS 协议的报文，Kitex 默认并不支持 TLS 协议。           |
-| **first4Bytes=0x50524920, second4Bytes=0x2a204854** | 这是 HTTP2 的 [PRI](https://httpwg.org/specs/rfc7540.html#ConnectionHeader) 请求，即服务收到了 HTTP2 请求，请检查对应的 Client。 |
+| **first4Bytes=0x16030100**                          | 这是 TLS 协议的报文，Kitex 默认并不支持 TLS 协议。                                                                                            |
+| **first4Bytes=0x50524920, second4Bytes=0x2a204854** | 这是 HTTP2 的 [PRI](https://httpwg.org/specs/rfc7540.html#ConnectionHeader) 请求，即服务收到了 HTTP2 请求，请检查对应的 Client。              |
 
 **Q1：如何定位请求源？**
 
@@ -148,4 +148,3 @@ func (e *XError) NewXError(outMsg *XError) *XError {
 **Q2：为什么报错信息里没有请求的方法名称？**
 
 - 因为请求不包含有效的 RPC 报文，Kitex 无法解析，因此不知道请求了哪个方法（报文的协议都不对，大概率并不是在请求某个 RPC 方法）。
-

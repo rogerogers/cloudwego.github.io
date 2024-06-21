@@ -4,7 +4,6 @@ linkTitle: "Panic 自查手册"
 weight: 1
 date: 2024-02-18
 description: "发生 Panic 时如何快速排查"
-
 ---
 
 ## 错误栈怎么看
@@ -14,9 +13,9 @@ description: "发生 Panic 时如何快速排查"
 1. panic 的原因
 2. 栈从哪开始看
 3. 报错的方法是什么
-4. 报错具体代码位置在哪 
+4. 报错具体代码位置在哪
 
-下图是一个典型的 panic 错误栈，我们在图中描述了四项主要信息的位置。 
+下图是一个典型的 panic 错误栈，我们在图中描述了四项主要信息的位置。
 
 ![image](/img/blog/Kitex_self_check/panic_stack.png)
 
@@ -38,7 +37,7 @@ fatal error: xxx...
 
 1. **panic: runtime error: invalid memory address or nil pointer dereference**
 
-   错误原因：代码空指针异常 
+   错误原因：代码空指针异常
 
 2. **panic: runtime error: index out of range [1] with length 1**
 
@@ -46,7 +45,7 @@ fatal error: xxx...
 
 3. **panic: runtime error: slice bounds out of range [2:1]**
 
-​	错误原因：获取数组切片越界，一般是切片参数有问题，比如这里意思是p=p[2:1] 取切片非法
+​ 错误原因：获取数组切片越界，一般是切片参数有问题，比如这里意思是p=p[2:1] 取切片非法
 
 4. **fatal error: concurrent map writes**
 
@@ -146,8 +145,8 @@ main.(*EchoServerImpl).Echo(0x11b54b0, 0xcb2000, 0xc0000987e0, 0xc000283d40, 0x1
 
 1. `0x...` 顺序描述了：方法本身、输入参数、返回值 三部分内容。
 
-```go 
-func (s *EchoServerImpl) Echo(ctx context.Context, req  *echo.Request) (*echo.Result_, error)  
+```go
+func (s *EchoServerImpl) Echo(ctx context.Context, req  *echo.Request) (*echo.Result_, error)
 ```
 
 举例说明：上述 Echo 方法报错，顺序描述了：
@@ -157,16 +156,16 @@ func (s *EchoServerImpl) Echo(ctx context.Context, req  *echo.Request) (*echo.Re
 2. `0x...` 和系统字长有关，64位系统下，每个 `0x...` 都占 64bit，同时**栈最多打印** **10** **字长**
 3. 每个参数和 `0x...` 输出关系如下表所示
 
-| 类型                                  | 描述                                                         |
-| ------------------------------------- | ------------------------------------------------------------ |
-| 全局方法 func                         | 占 0 字长，即不会打印                                        |
-| `(*struct) func`                      | 占 1 字长，即独占一个  `0x...  `                             |
-| 指针类型                              | 占 1 字长，即独占一个  `0x... `                              |
-| `int`                                 | 占 1 字长，表示为 int 的值，例如 `var a  int = 1`，会被表示为 `0x1` |
-| 接口`(interface`)类型                 | 占 2 字长，即  `0x.., 0x..`，分别表示 1. 实际类型指针，2. 数据指针 |
-| `string`                              | 占 2 字长，即  0x.., 0x..，分别表示 1. 底层数组指针，2. string 长度  例如 string("hello")，会被表示为 0x.., 0x5 |
-| `slice []`                            | 占 3 字长，即  `0x., 0x., 0x.`，分别表示 1. 底层数组指针，2. 长度(len)，3. 容量(cap)  例如 `var p=make([]byte, 2, 4)`，会被表示为 `0x., 0x2, 0x4` |
-| `bool`,  `byte`, `int16`, `int32` ... | 占和自身等长的字长，并且值为自身的值。这些参数如果连续出现，会被合并到一个字长中。  例如 `func(a, b int32); a,b=1,2` 在 64 位系统中会被表示为 `0xc000020001` |
+| 类型                                 | 描述                                                                                                                                                        |
+| ------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 全局方法 func                        | 占 0 字长，即不会打印                                                                                                                                       |
+| `(*struct) func`                     | 占 1 字长，即独占一个 `0x...  `                                                                                                                             |
+| 指针类型                             | 占 1 字长，即独占一个 `0x... `                                                                                                                              |
+| `int`                                | 占 1 字长，表示为 int 的值，例如 `var a  int = 1`，会被表示为 `0x1`                                                                                         |
+| 接口`(interface`)类型                | 占 2 字长，即 `0x.., 0x..`，分别表示 1. 实际类型指针，2. 数据指针                                                                                           |
+| `string`                             | 占 2 字长，即 0x.., 0x..，分别表示 1. 底层数组指针，2. string 长度 例如 string("hello")，会被表示为 0x.., 0x5                                               |
+| `slice []`                           | 占 3 字长，即 `0x., 0x., 0x.`，分别表示 1. 底层数组指针，2. 长度(len)，3. 容量(cap) 例如 `var p=make([]byte, 2, 4)`，会被表示为 `0x., 0x2, 0x4`             |
+| `bool`, `byte`, `int16`, `int32` ... | 占和自身等长的字长，并且值为自身的值。这些参数如果连续出现，会被合并到一个字长中。 例如 `func(a, b int32); a,b=1,2` 在 64 位系统中会被表示为 `0xc000020001` |
 
 通过上述知识，我们可以通过**排查指针类型的参数是否为 0x0** 来快速判断某个指针是否为 nil。
 
@@ -283,7 +282,7 @@ Map 并发操作属于不可挽回的错误，因此系统会直接 crash，无�
 
 ### 怎么判断是否是业务逻辑造成框架 Panic
 
-**如果错误栈里出现调用业务代码，请先排查是否是业务返回值造成的 panic** 
+**如果错误栈里出现调用业务代码，请先排查是否是业务返回值造成的 panic**
 
 常见情况有：
 
@@ -296,9 +295,11 @@ Map 并发操作属于不可挽回的错误，因此系统会直接 crash，无�
 ### RPC 调用时并发/异步复用 request/response 导致并发读写进而导致 panic
 
 - **典型的 panic 报错如：`runtime error: slice bounds out of range [12:28]`，这是因为数据被并发修改后本身不一致导致框架读写的时候越界了**
+
   - **例如原本有个 `slice` 长度为 5 传给了框架，因为业务逻辑并发复用赋值为一个长度为 8 的 `slice`，但是由于赋值非原子操作，框架刚好在只有长度被拷贝的时候进行了读写，就会出这种问题。**
 
-- 框架在调用时可能会修改 `request` 里的数据，在调用完成前在其他 `goroutie` 使用同一个 `request`（包括其中的字段）会有并发读写的风险 
+- 框架在调用时可能会修改 `request` 里的数据，在调用完成前在其他 `goroutie` 使用同一个 `request`（包括其中的字段）会有并发读写的风险
+
   - 框架的 RPC 超时设计采用经典的 `select-wait` 模式，当前 `goroutine` 会在特定超时时间内等待创建的另一个 `goroutine` 去执行序列化和网络传输的工作；如果后者没有在规定时间内返回，前者就会直接返回给调用者一个超时错误，而此时后者可能仍然在读写 `request`。
 
 - 另外就是池化 `request`、`response` 或者直接创建多个 `goroutine` 对同一个对象的访问，都会有问题。
@@ -314,7 +315,7 @@ Map 并发操作属于不可挽回的错误，因此系统会直接 crash，无�
         resp, err := cli.InvokeAMethod(ctx, req)
         req.ID++ // 如果 err != nil，此处是有并发读写的风险
     }
-    
+
     // example 2：池化 request 或者 response 导致的并发读写
     var pool sync.Pool = ...
     for {
@@ -322,19 +323,20 @@ Map 并发操作属于不可挽回的错误，因此系统会直接 crash，无�
         cli.InvokeAMethod(ctx, req)
         pool.Put(req) // 此处放入的 request 可能仍然被框架引用着
     }
-    
+
     // example 3：直接的并发读写
     var req := ...
     go func() {
         cli.InvokeAMethod(ctx, req)
     }()
-    
+
     go func() {
         cli.InvokeAMethod(ctx, req) // 与前一个 goroutine 有数据竞争
     }()
     ```
 
 - 常见的 panic 位置（包括但不限于）：
+
   - `Request` 类型的 `FastWrite` 或 `FastWriteNocopy` 方法
   - `Response` 类型的 `FastRead` 方法
 
@@ -347,7 +349,7 @@ Map 并发操作属于不可挽回的错误，因此系统会直接 crash，无�
 
 ## 已知升级框架版本可解决的 Panic
 
-- （< `v0.4.1` 可能触发）**Server 启动异常时，shutdown 时出现 Panic** 
+- （< `v0.4.1` 可能触发）**Server 启动异常时，shutdown 时出现 Panic**
 
   **根因并不是框架 panic 导致的**，而是因为由于端口被占用等情况导致服务启动失败，被 shutdown 的时候引起了 kitex 的 panic ，进而有可能导致根因的日志被 panic 替代，所以看不出原因。修复 PR：[#488](https://xxx/pull/488)。
 

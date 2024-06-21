@@ -15,7 +15,6 @@ description: "Kitex Frequently Asked Questions and corresponding Answers."
 
 - Yes. Kitex has already supported to compile and run in Windows since v0.4.0 version. And code generation tool support the Windows environment since v0.5.2.
 
-
 **Q2: Does Kitex support HTTP？**
 
 - Kitex does not specifically provide HTTP request support. For API gateway scenario, Kitex provides a [HTTP mapping generic call](/docs/kitex/tutorials/advanced-feature/generic-call/#2-http-mapping-generic-call) regarding Thrift and sends the Thrift encoding of the HTTP request to the server.
@@ -134,13 +133,13 @@ To quickly determine whether the issue lies with the client or server, you can c
 - If the error occurs only on the server side, it suggests that the server received a request that does not meet the expected format.
   - For example, if the server received a request starting with "GET " or "POST" from an HTTP client.
 
-| Message                                             | Description                                                  |
-| :-------------------------------------------------- | :----------------------------------------------------------- |
-| **first4Bytes=0x48545450, second4Bytes=0x2f312e31** | These 8 bytes correspond to the ASCII characters "HTTP/1.1," indicating a typical HTTP server response. This indicates that the Kitex client requested an HTTP server. |
-| **first4Bytes=0x47455420**                          | These 4 bytes correspond to the ASCII characters "GET," indicating a typical HTTP GET request. This indicates that the Kitex server received an HTTP request. Please avoid directly using an HTTP client to request Kitex server. |
+| Message                                             | Description                                                                                                                                                                                                                         |
+| :-------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **first4Bytes=0x48545450, second4Bytes=0x2f312e31** | These 8 bytes correspond to the ASCII characters "HTTP/1.1," indicating a typical HTTP server response. This indicates that the Kitex client requested an HTTP server.                                                              |
+| **first4Bytes=0x47455420**                          | These 4 bytes correspond to the ASCII characters "GET," indicating a typical HTTP GET request. This indicates that the Kitex server received an HTTP request. Please avoid directly using an HTTP client to request Kitex server.   |
 | **first4Bytes=0x504f5354**                          | These 4 bytes correspond to the ASCII characters "POST," indicating a typical HTTP POST request. This indicates that the Kitex server received an HTTP request. Please avoid directly using an HTTP client to request Kitex server. |
-| **first4Bytes=0x16030100**                          | This is a TLS protocol message, and Kitex does not natively support the TLS protocol. |
-| **first4Bytes=0x50524920, second4Bytes=0x2a204854** | This is an HTTP2 [PRI](https://httpwg.org/specs/rfc7540.html#ConnectionHeader) request, indicating that the service received an HTTP2 request. Please check the corresponding client. |
+| **first4Bytes=0x16030100**                          | This is a TLS protocol message, and Kitex does not natively support the TLS protocol.                                                                                                                                               |
+| **first4Bytes=0x50524920, second4Bytes=0x2a204854** | This is an HTTP2 [PRI](https://httpwg.org/specs/rfc7540.html#ConnectionHeader) request, indicating that the service received an HTTP2 request. Please check the corresponding client.                                               |
 
 **Q1: How to identify the source of the request?**
 

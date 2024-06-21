@@ -4,7 +4,6 @@ linkTitle: "内存泄漏自查手册"
 weight: 2
 date: 2024-02-18
 description: "发生内存泄漏时如何快速排查"
-
 ---
 
 框架会帮助用户创建 `Request/Response` 对象，而如果用户持续持有这些对象不释放，就会导致出现内存持续上涨的现象。但 `go pprof heap` 只会展示这些泄漏的对象是由谁创建的，并不会统计这些对象由谁在持有。用户可能认为框架在内存泄漏，但实际上不是由于框架导致的。
@@ -18,7 +17,7 @@ description: "发生内存泄漏时如何快速排查"
 - 查看哪个函数创建了最多内存 - `alloc_space`
 
   ![image](/img/blog/Kitex_self_check/alloc_space.png)
-  
+
 - 查看哪个函数创建了最多对象 - `alloc_objects`
 
   ![image](/img/blog/Kitex_self_check/alloc_objects.png)
@@ -136,10 +135,9 @@ cache.Store(resp.Id, resp.Msg[:1])
 
 问题原因：
 
-1. Sonic 出于性能考虑，对 unmarshal 后的 `string` 对象会重用传入 `string` 的底层内存。如果服务是用来解析大 JSON，并且 缓存该解析对象 或 较多`goroutine` 持有该解析对象 ，可能会导致原始传入的 `string` 对象内存长期无法释放，详见 [Sonic](https://github.com/bytedance/sonic) 
+1. Sonic 出于性能考虑，对 unmarshal 后的 `string` 对象会重用传入 `string` 的底层内存。如果服务是用来解析大 JSON，并且 缓存该解析对象 或 较多`goroutine` 持有该解析对象 ，可能会导致原始传入的 `string` 对象内存长期无法释放，详见 [Sonic](https://github.com/bytedance/sonic)
 2. `Request` 中的内存分配都是在 netpoll 的函数栈中进行的，所以看上去都是 netpoll 创建的对象在内存泄漏。实际上和 netpoll 无关。
 
 当然**真正的根因**还是在业务代码中有一处地方长期持有了 sonic unmarshal 后的对象。这里只是放大了泄漏的影响，该解决方法也只是减少泄漏的影响。
 
 如果这么操作后还有内存泄漏，那得真正阅读业务代码哪里在长期持有对象了。
-

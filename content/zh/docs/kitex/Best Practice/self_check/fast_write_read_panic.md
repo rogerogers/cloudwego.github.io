@@ -105,6 +105,7 @@ func (*Handler) GetByKey(ctx context.Context, req *xxx.Request) (*xxx.Response, 
 1. `PutUint32(b []byte, v uint32)` 将 v 写入 b 前会先检查 b[3] 是否可读，panic 发生在这里，表示越界了；
 2. `FastWrite` 事先已遍历 resp 得出所需长度，说明在「(1) 计算所需内存」和「(3) 序列化」之间，`resp` 中某个字段被修改了，需要更多的内存空间；
 3. 假设 server 同时收到两个请求（Key 都是 "X"）
+
    1. `A.Request: {Key="X", UserID = "123" }`
    2. `B.Request: {Key="X", UserID = "123456"} `
 
@@ -154,11 +155,12 @@ struct Base {
 参考方案如下：
 
 1. 第一次采样：在请求发出前，先用对 Request 整体做一次 json 序列化
+
    1. 注意：**性能有损**；可考虑按比例采样，降低对生产环境影响，但可能需要更长时间才能抓到case
 
 2. 第二次采样（有两种思路，供参考）
 
-   1. panic 采样：判断发生了 panic，再对 Request 做 json 序列化 
+   1. panic 采样：判断发生了 panic，再对 Request 做 json 序列化
 
       判断方法：
 
@@ -177,7 +179,7 @@ struct Base {
 
 **Server** **端**
 
-  由于  Server 端在 encode 时已退出了所有 middleware，因此无法捕捉到 panic、不能用中间件做采样对比  
+由于 Server 端在 encode 时已退出了所有 middleware，因此无法捕捉到 panic、不能用中间件做采样对比
 
 参考方案如下：
 
@@ -202,7 +204,7 @@ func (c *codecForPanic) Marshal(ctx context.Context, message remote.Message, out
           }
        }
     }()
-    before, err = json.Marshal(message.Data()) // note the performance loss 
+    before, err = json.Marshal(message.Data()) // note the performance loss
     if err != nil {
         klog.Errorf("json encode before Marshal failed: err = %v", err)
     }
@@ -230,7 +232,7 @@ svr := test.NewServer(new(TestServiceImpl),
 )
 ```
 
-3. 对比两次采样的结果，找到不同的字段，再查看代码里可能有并发读写该字段的地方 
+3. 对比两次采样的结果，找到不同的字段，再查看代码里可能有并发读写该字段的地方
 
 如果 panic 发生频率较低，也可以考虑新启动一个 goroutine，sleep 一段时间，再对比，这样更容易找到被修改的地方。
 

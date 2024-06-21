@@ -4,7 +4,6 @@ linkTitle: "Panic Self-check Guide"
 weight: 1
 date: 2024-02-18
 description: "How to quickly troubleshoot when a panic occurs"
-
 ---
 
 ## How to read an error stack
@@ -151,15 +150,15 @@ For example, if the `Echo` method encounters an error, the order of the `0x...` 
 1. The length of the `0x...` values depends on the system's word length. On a 64-bit system, each `0x...` value occupies 64 bits, and a maximum of 10 word lengths can be printed in the stack.
 2. The relationship between each parameter and its corresponding `0x...` value is described in the following table:
 
-| Type                                   | Description                                                  |
-| :------------------------------------- | :----------------------------------------------------------- |
-| Global method (func)                   | Occupies 0 word length, meaning it will not be printed       |
-| `(*struct) func`                       | Occupies 1 word length, meaning it occupies a single `0x...` |
-| Pointer type                           | Occupies 1 word length, meaning it occupies a single `0x...` |
-| `int`                                  | Occupies 1 word length and represents the value of the `int`. For example, if `var a int = 1`, it would be represented as `0x1` |
-| Interface `(interface{})` type         | Occupies 2 word lengths, meaning `0x.., 0x..` respectively represent 1. the pointer to the actual type and 2. the data pointer |
-| `string`                               | Occupies 2 word lengths, meaning `0x.., 0x..` respectively represent 1. the pointer to the underlying array and 2. the length of the string. For example, if `string("hello")`, it would be represented as `0x.., 0x5` |
-| `slice []`                             | Occupies 3 word lengths, meaning `0x., 0x., 0x.` respectively represent 1. the pointer to the underlying array, 2. the length (`len`), and 3. the capacity (`cap`). For example, if `var p = make([]byte, 2, 4)`, it would be represented as `0x., 0x2, 0x4` |
+| Type                                   | Description                                                                                                                                                                                                                                                                        |
+| :------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Global method (func)                   | Occupies 0 word length, meaning it will not be printed                                                                                                                                                                                                                             |
+| `(*struct) func`                       | Occupies 1 word length, meaning it occupies a single `0x...`                                                                                                                                                                                                                       |
+| Pointer type                           | Occupies 1 word length, meaning it occupies a single `0x...`                                                                                                                                                                                                                       |
+| `int`                                  | Occupies 1 word length and represents the value of the `int`. For example, if `var a int = 1`, it would be represented as `0x1`                                                                                                                                                    |
+| Interface `(interface{})` type         | Occupies 2 word lengths, meaning `0x.., 0x..` respectively represent 1. the pointer to the actual type and 2. the data pointer                                                                                                                                                     |
+| `string`                               | Occupies 2 word lengths, meaning `0x.., 0x..` respectively represent 1. the pointer to the underlying array and 2. the length of the string. For example, if `string("hello")`, it would be represented as `0x.., 0x5`                                                             |
+| `slice []`                             | Occupies 3 word lengths, meaning `0x., 0x., 0x.` respectively represent 1. the pointer to the underlying array, 2. the length (`len`), and 3. the capacity (`cap`). For example, if `var p = make([]byte, 2, 4)`, it would be represented as `0x., 0x2, 0x4`                       |
 | `bool`, `byte`, `int16`, `int32`, etc. | Occupies the same word length as themselves and has a value equal to themselves. If these parameters appear consecutively, they will be combined into a single word length. For example, `func(a, b int32); a, b = 1, 2` would be represented as `0xc000020001` on a 64-bit system |
 
 Using the above knowledge, we can quickly determine if a specific pointer is `nil` by checking if the corresponding pointer parameter in the stack is `0x0`.
@@ -310,7 +309,7 @@ Common scenarios include:
         resp, err := cli.InvokeAMethod(ctx, req)
         req.ID++ // There is a risk of concurrent read and write if err != nil
     }
-    
+
     // example 2: Concurrent read and write due to pooling of request or response
     var pool sync.Pool = ...
     for {
@@ -318,13 +317,13 @@ Common scenarios include:
         cli.InvokeAMethod(ctx, req)
         pool.Put(req) // The request put into the pool may still be referenced by the framework
     }
-    
+
     // example 3: Direct concurrent read and write
     var req := ...
     go func() {
         cli.InvokeAMethod(ctx, req)
     }()
-    
+
     go func() {
         cli.InvokeAMethod(ctx, req) // Data race with the previous goroutine
     }()

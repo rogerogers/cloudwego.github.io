@@ -55,77 +55,77 @@ Trims 36% of generated code, nearly 40%, with significant results.
    ```shell
    kitex -thrift no_default_serdes path/to/your/idl
    ```
-    
+
    This feature requires thriftgo version >= 0.3.7, the latest version is recommended.
 
-2.  Configure SkipDecoder to be enabled 
+2. Configure SkipDecoder to be enabled
 
-    Please specify what the code generated in step 1 is used for:
+   Please specify what the code generated in step 1 is used for:
 
-    - Used to construct a Client to call downstream services
+   - Used to construct a Client to call downstream services
 
-    - With FastCodec
-  
-    ```go
-    import (
-        "github.com/cloudwego/kitex/pkg/remote/codec/thrift"
-        "demo/kitex_gen/kitex/samples/echo/echoservice"
-    )
-    
-    func main() {
-        cli := echoservice.MustNewClient("kitex.samples.echo", 
-            client.WithPayloadCodec(thrift.NewThriftCodecWithConfig(thrift.FastRead|thrift.FastWrite|thrift.EnableSkipDecoder)),
-        )
-    }
-    ```
-    
-    - With Frugal
-  
-    ```go
-    import (
-        "github.com/cloudwego/kitex/pkg/remote/codec/thrift"
-        "demo/kitex_gen/kitex/samples/echo/echoservice"
-    )
-    
-    func main() {
-        cli := echoservice.MustNewClient("kitex.samples.echo", 
-            client.WithPayloadCodec(thrift.NewThriftCodecWithConfig(thrift.FrugalRead|thrift.FrugalWrite|thrift.EnableSkipDecoder)),
-        )
-    }
-    ```
-    
-  - Used to construct a Server for upstream calls
+   - With FastCodec
 
-    - With FastCodec
-  
-    ```go
-    import (
-        "github.com/cloudwego/kitex/pkg/remote/codec/thrift"
-        "demo/kitex_gen/kitex/samples/echo/echoservice"
-    )
-    
-    func main() {
-        srv := echoservice.NewServer(handler,
-            server.WithPayloadCodec(thrift.NewThriftCodecWithConfig(thrift.FastWrite|thrift.FastRead|thrift.EnableSkipDecoder)),
-        )
-    }
-    ```
-    
-    - With Frugal
-  
-    ```go
-    import (
-        "github.com/cloudwego/kitex/pkg/remote/codec/thrift"
-        "demo/kitex_gen/kitex/samples/echo/echoservice"
-    )
-    
-    func main() {
-        srv := echoservice.NewServer(handler,
-            server.WithPayloadCodec(thrift.NewThriftCodecWithConfig(thrift.FrugalWrite|thrift.FrugalRead|thrift.EnableSkipDecoder)),
-        )
-    }
-    ```
-    
+   ```go
+   import (
+       "github.com/cloudwego/kitex/pkg/remote/codec/thrift"
+       "demo/kitex_gen/kitex/samples/echo/echoservice"
+   )
+
+   func main() {
+       cli := echoservice.MustNewClient("kitex.samples.echo",
+           client.WithPayloadCodec(thrift.NewThriftCodecWithConfig(thrift.FastRead|thrift.FastWrite|thrift.EnableSkipDecoder)),
+       )
+   }
+   ```
+
+   - With Frugal
+
+   ```go
+   import (
+       "github.com/cloudwego/kitex/pkg/remote/codec/thrift"
+       "demo/kitex_gen/kitex/samples/echo/echoservice"
+   )
+
+   func main() {
+       cli := echoservice.MustNewClient("kitex.samples.echo",
+           client.WithPayloadCodec(thrift.NewThriftCodecWithConfig(thrift.FrugalRead|thrift.FrugalWrite|thrift.EnableSkipDecoder)),
+       )
+   }
+   ```
+
+- Used to construct a Server for upstream calls
+
+  - With FastCodec
+
+  ```go
+  import (
+      "github.com/cloudwego/kitex/pkg/remote/codec/thrift"
+      "demo/kitex_gen/kitex/samples/echo/echoservice"
+  )
+
+  func main() {
+      srv := echoservice.NewServer(handler,
+          server.WithPayloadCodec(thrift.NewThriftCodecWithConfig(thrift.FastWrite|thrift.FastRead|thrift.EnableSkipDecoder)),
+      )
+  }
+  ```
+
+  - With Frugal
+
+  ```go
+  import (
+      "github.com/cloudwego/kitex/pkg/remote/codec/thrift"
+      "demo/kitex_gen/kitex/samples/echo/echoservice"
+  )
+
+  func main() {
+      srv := echoservice.NewServer(handler,
+          server.WithPayloadCodec(thrift.NewThriftCodecWithConfig(thrift.FrugalWrite|thrift.FrugalRead|thrift.EnableSkipDecoder)),
+      )
+  }
+  ```
+
 ## Attention
 
 1.  `-thrift no_default_serdes` must be used with SkipDecoder.
@@ -134,20 +134,20 @@ Trims 36% of generated code, nearly 40%, with significant results.
 
 - If `-thrift no_default_serdes` is used downstream, then SkipDecoder needs to be enabled downstream.
 
-    Reducing Apache Thrift Codec code generation without turning on SkipDecoder can prevent deserialization.
+  Reducing Apache Thrift Codec code generation without turning on SkipDecoder can prevent deserialization.
 
 2.  In order to identify problems that may occur when the SkipDecoder is turned on, the error messages are handled specially.
 
 - SkipDecoder parses the complete Payload period.
 
-    If there is an error in this process, it will contain the following error message:
+  If there is an error in this process, it will contain the following error message:
 
-    ```
-    caught in SkipDecoder NextStruct phase
-    ```
+  ```
+  caught in SkipDecoder NextStruct phase
+  ```
 
 - SkipDecoder parses the Payload and passes it to FastCodec/Frugal for decoding.
-    If there is an error in this process, it will contain the following error message:
+  If there is an error in this process, it will contain the following error message:
 
   - Using FastCodec
 

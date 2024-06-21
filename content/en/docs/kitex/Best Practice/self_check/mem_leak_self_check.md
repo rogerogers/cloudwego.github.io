@@ -4,7 +4,6 @@ linkTitle: "Memory Leak Self-Check Guide"
 weight: 2
 date: 2024-02-18
 description: "Memory Leak Self-Check Guide"
-
 ---
 
 The framework helps users create `Request/Response` objects, and if users hold onto these objects without releasing them, it can lead to a continuous increase in memory usage. However, when using `go pprof heap`, it only shows which functions created the leaked objects and doesn't track who is holding onto those objects. Users might mistakenly think that the framework is causing the memory leak, but in reality, it is not caused by the framework.

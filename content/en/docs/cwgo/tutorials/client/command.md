@@ -40,6 +40,7 @@ OPTIONS:
 ```
 
 ## Attention
+
 - service is not recommended and will be removed from v0.2.0
 
 ## Specification

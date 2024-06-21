@@ -65,67 +65,67 @@ Thrift Buffered 协议在 Header 中并没有表明 Payload 的长度，因此�
 - 用于构造 Client 调用下游服务
 
   - 配合 FastCodec
-  
+
     ```go
     import (
         "github.com/cloudwego/kitex/pkg/remote/codec/thrift"
         "demo/kitex_gen/kitex/samples/echo/echoservice"
     )
-    
+
     func main() {
-        cli := echoservice.MustNewClient("kitex.samples.echo", 
+        cli := echoservice.MustNewClient("kitex.samples.echo",
             client.WithPayloadCodec(thrift.NewThriftCodecWithConfig(thrift.FastRead|thrift.FastWrite|thrift.EnableSkipDecoder)),
         )
     }
     ```
-    
+
   - 配合 Frugal
-  
+
     ```go
     import (
         "github.com/cloudwego/kitex/pkg/remote/codec/thrift"
         "demo/kitex_gen/kitex/samples/echo/echoservice"
     )
-    
+
     func main() {
-        cli := echoservice.MustNewClient("kitex.samples.echo", 
+        cli := echoservice.MustNewClient("kitex.samples.echo",
             client.WithPayloadCodec(thrift.NewThriftCodecWithConfig(thrift.FrugalRead|thrift.FrugalWrite|thrift.EnableSkipDecoder)),
         )
     }
     ```
-    
+
 - 用于构造 Server 供上游调用
 
   - 配合 FastCodec
-  
+
     ```go
     import (
         "github.com/cloudwego/kitex/pkg/remote/codec/thrift"
         "demo/kitex_gen/kitex/samples/echo/echoservice"
     )
-    
+
     func main() {
         srv := echoservice.NewServer(handler,
             server.WithPayloadCodec(thrift.NewThriftCodecWithConfig(thrift.FastWrite|thrift.FastRead|thrift.EnableSkipDecoder)),
         )
     }
     ```
-    
+
   - 配合 Frugal
-  
+
     ```go
     import (
         "github.com/cloudwego/kitex/pkg/remote/codec/thrift"
         "demo/kitex_gen/kitex/samples/echo/echoservice"
     )
-    
+
     func main() {
         srv := echoservice.NewServer(handler,
             server.WithPayloadCodec(thrift.NewThriftCodecWithConfig(thrift.FrugalWrite|thrift.FrugalRead|thrift.EnableSkipDecoder)),
         )
     }
     ```
-    
+
 ## 注意
 
 1.  `-thrift no_default_serdes` 请务必配合 SkipDecoder 使用
@@ -134,33 +134,33 @@ Thrift Buffered 协议在 Header 中并没有表明 Payload 的长度，因此�
 
 - 下游使用了 `-thrift no_default_serdes`，则下游需开启 SkipDecoder
 
-    若减少了 Apache Thrift Codec 代码生成，但却没有开启 SkipDecoder，会造成无法反序列化
+  若减少了 Apache Thrift Codec 代码生成，但却没有开启 SkipDecoder，会造成无法反序列化
 
 2.  为了方便识别在开启 SkipDecoder 后可能出现的问题，对错误信息做了特殊处理
 
 - SkipDecoder 解析完整 Payload 期间
 
-    若这个流程出现错误，会包含以下错误信息：
+  若这个流程出现错误，会包含以下错误信息：
 
-    ```
-    caught in SkipDecoder NextStruct phase
-    ```
+  ```
+  caught in SkipDecoder NextStruct phase
+  ```
 
 - SkipDecoder 解析完 Payload 后，交给 FastCodec/Frugal 解码
 
-    若这个流程出现错误，会包含以下错误信息：
+  若这个流程出现错误，会包含以下错误信息：
 
 - 使用 FastCodec
 
-    ```
-    caught in FastCodec using SkipDecoder Buffer
-    ```
+  ```
+  caught in FastCodec using SkipDecoder Buffer
+  ```
 
 - 使用 Frugal
 
-    ```
-    caught in Frugal using SkipDecoder Buffer
-    ```
+  ```
+  caught in Frugal using SkipDecoder Buffer
+  ```
 
 ## 性能
 

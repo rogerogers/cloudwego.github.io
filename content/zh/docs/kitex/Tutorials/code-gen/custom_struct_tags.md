@@ -46,7 +46,7 @@ JSON Tag 属于默认 tag ，一旦通过 go.tag 自定义 tag 后，原来的 J
   ```bash
   # upgrade thriftgo
   go install github.com/cloudwego/thriftgo@latest
-  
+
   # regenerate with the argument
   kitex -thrift always_gen_json_tag -module $mod -service $svc xxx.thrift
   ```
@@ -59,5 +59,3 @@ JSON Tag 属于默认 tag ，一旦通过 go.tag 自定义 tag 后，原来的 J
     1: required string Bar (go.tag = "json=\"Bar,omitempty\" some_tag:\"xxx\"")
   }
   ```
-
-  

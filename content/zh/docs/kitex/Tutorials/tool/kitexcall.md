@@ -86,7 +86,9 @@ func main() {
 ```bash
 kitexcall -idl-path echo.thrift -m echo -d '{"message": "hello"}' -e 127.0.0.1:9999
 ```
+
 输出：
+
 ```
 [Status]: Success
 {
@@ -99,7 +101,9 @@ kitexcall -idl-path echo.thrift -m echo -d '{"message": "hello"}' -e 127.0.0.1:9
 ```bash
 kitexcall -idl-path echo.thrift -m echo -d '{"message": "hello"}' -e 127.0.0.1:9999 -f input.json
 ```
+
 输出：
+
 ```
 [Status]: Success
 {

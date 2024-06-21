@@ -5,7 +5,7 @@ weight: 1
 description: >
 ---
 
-**kitexcall**(https://github.com/kitex-contrib/kitexcall)  is a command-line tool (CLI) for sending JSON generic requests using Kitex. It supports IDL in both Thrift and Protobuf formats, offers various client options, and is compatible with multiple transport protocols. Future versions will also support GRPC.
+**kitexcall**(https://github.com/kitex-contrib/kitexcall) is a command-line tool (CLI) for sending JSON generic requests using Kitex. It supports IDL in both Thrift and Protobuf formats, offers various client options, and is compatible with multiple transport protocols. Future versions will also support GRPC.
 
 ## Features
 
@@ -53,7 +53,7 @@ service Echo {
 
 ```json
 {
-    "message": "hello"
+  "message": "hello"
 }
 ```
 
@@ -86,7 +86,9 @@ func main() {
 ```bash
 kitexcall -idl-path echo.thrift -m echo -d '{"message": "hello"}' -e 127.0.0.1:9999
 ```
+
 Output:
+
 ```
 [Status]: Success
 {
@@ -99,7 +101,9 @@ Output:
 ```bash
 kitexcall -idl-path echo.thrift -m echo -e 127.0.0.1:9999 -f input.json
 ```
+
 Output:
+
 ```
 [Status]: Success
 {
@@ -182,7 +186,7 @@ kitexcall -m ExampleMethod -e 127.0.0.1:9919 -e 127.0.0.1:9920
 - Persistent keys (WithPersistentValue): Use the `-meta-persistent` flag to specify. Multiple can be specified, in the format key=value.
 - Backward metadata (Backward): Enable the `-meta-backward` option to support receiving backward metadata (Backward) returned by the server.
 
-Assuming we want to pass Transient  metadata `temp=temp-value` and persistent metadata `logid=12345` to the server and receive backward metadata, we can specify it like this:
+Assuming we want to pass Transient metadata `temp=temp-value` and persistent metadata `logid=12345` to the server and receive backward metadata, we can specify it like this:
 
 ```bash
 kitexcall -m ExampleMethod -meta temp=temp-value -meta-persistent logid=12345 -meta-backward

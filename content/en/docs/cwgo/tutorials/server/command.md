@@ -39,11 +39,13 @@ OPTIONS:
    --hex                                                                        Add HTTP listen for Kitex. (default: false)
    --help, -h                                                                   show help (default: false)
 ```
+
 ## Attention
+
 - service is not recommended and will be removed from v0.2.0
 
-
 ## Specification
+
 - service: Specify the service name for functions such as service registration and discovery(Not recommended)
 - server_name: Specify the service name for functions such as service registration and discovery
 - type: Specify the generation type, support parameters RPC and HTTP, default to RPC

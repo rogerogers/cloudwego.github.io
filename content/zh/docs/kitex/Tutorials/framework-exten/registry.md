@@ -78,14 +78,16 @@ type Info struct {
   ```go
   svr := xxxservice.NewServer(handler, server.WithRegistry(yourRegistry), server.WithRegistryInfo(yourRegistryInfo))
   ```
+
 - 自定义的 Registry 获取 Client 可访问的实际地址（Kitex v0.10.0 版本开始可用）
 
   当 Client 端无法访问 Server 端的 Listen Address，而需要使用公共的 IP 地址访问 Server 端时，可以通过指定 RegistryInfo 中的 `Addr` 和 `SkipListenAddr` 进行设置
-   ```go
+
+  ```go
   info := &registry.Info{
-       Addr: YourServerAddress,
-       SkipListenAddr: true,
-       ...
+      Addr: YourServerAddress,
+      SkipListenAddr: true,
+      ...
   }
   svr := xxxservice.NewServer(handler, server.WithRegistry(yourRegistry), server.WithRegistryInfo(info))
   ```
