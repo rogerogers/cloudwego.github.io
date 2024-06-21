@@ -7,7 +7,7 @@
     "dev": "hugo server -D",
     "postinstall": "simple-git-hooks",
     "format": "node scripts/format/index.mjs",
-    "prettier": "prettier -w content"
+    "fix:format": "prettier -w content"
   },
   "simple-git-hooks": {
     "pre-commit": "npm run format"
