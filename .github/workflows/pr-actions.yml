@@ -28,7 +28,7 @@ jobs:
         run: |
           PR_ACTION=$(echo $COMMENT | grep -oP '/fix:\K\w+')
           echo "Action is $PR_ACTION"
-          ACTION_NAMES="all|filenames|format"
+          ACTION_NAMES="all|refcache|filenames|format"
           if [[ ! "$PR_ACTION" =~ ^($ACTION_NAMES)$ ]]; then
             echo "Invalid action name: $PR_ACTION"
             echo "Action name should be one of: $ACTION_NAMES"
