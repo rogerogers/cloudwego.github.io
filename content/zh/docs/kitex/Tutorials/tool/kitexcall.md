@@ -207,12 +207,3 @@ kitexcall -m ExampleMethod -biz-error
 #### 启用详细模式
 
 使用 `-verbose` 或 `-v` 标志启用详细模式，以提供更详细的输出信息。
-
-
-
-
-
-
-
-
-
