@@ -1,7 +1,6 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>CloudWeGo – CloudWeGo</title><link>https://www.cloudwego.io/zh/projects/cloudwego/</link><description>Recent content on CloudWeGo</description><generator>Hugo -- gohugo.io</generator><language>zh</language><lastBuildDate>Thu, 21 Dec 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://www.cloudwego.io/zh/projects/cloudwego/index.xml" rel="self" type="application/rss+xml"/><item><title>Blog: CloudWeGo 易用性建设：提升 Go 语言云原生工程效率之路</title><link>https://www.cloudwego.io/zh/blog/2023/12/21/cloudwego-%E6%98%93%E7%94%A8%E6%80%A7%E5%BB%BA%E8%AE%BE%E6%8F%90%E5%8D%87-go-%E8%AF%AD%E8%A8%80%E4%BA%91%E5%8E%9F%E7%94%9F%E5%B7%A5%E7%A8%8B%E6%95%88%E7%8E%87%E4%B9%8B%E8%B7%AF/</link><pubDate>Thu, 21 Dec 2023 00:00:00 +0000</pubDate><guid>https://www.cloudwego.io/zh/blog/2023/12/21/cloudwego-%E6%98%93%E7%94%A8%E6%80%A7%E5%BB%BA%E8%AE%BE%E6%8F%90%E5%8D%87-go-%E8%AF%AD%E8%A8%80%E4%BA%91%E5%8E%9F%E7%94%9F%E5%B7%A5%E7%A8%8B%E6%95%88%E7%8E%87%E4%B9%8B%E8%B7%AF/</guid><description>
 &lt;blockquote&gt;
-&lt;p&gt;本篇文章是 CloudWeGo 两周年庆典系列的第二篇。&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;本篇文章是 CloudWeGo 两周年庆典系列的第二篇。&lt;/p&gt;&lt;/blockquote&gt;
 &lt;p&gt;这次分享会首先给大家同步下 CloudWeGo 易用性建设的一个简单背景，然后会介绍我们针对易用性建设做了哪些工作，最后会对未来的工作进行展望。&lt;/p&gt;
 &lt;h2 id="背景"&gt;背景&lt;/h2&gt;
 &lt;p&gt;CloudWeGo 是一套由字节跳动基础架构服务框架团队开源的、可快速构建企业级云原生微服务架构的中间件集合。
@@ -104,8 +103,7 @@ CloudWeGo 下的项目主要有三个特点：&lt;strong&gt;高性能&lt;/strong
 &lt;li&gt;2022 年 6 月，开源高性能 HTTP 框架 &lt;a href="https://github.com/cloudwego/hertz"&gt;Hertz&lt;/a&gt;。&lt;a href="https://github.com/cloudwego/hertz"&gt;Hertz&lt;/a&gt; 不仅仅是一个 高性能的 HTTP 的开源框架，同时也是一个超大规模的企业落地实践。在我们内部的网关场景下，替换 &lt;a href="https://github.com/cloudwego/hertz"&gt;Hertz&lt;/a&gt; 框架之后的 CPU 使用节省了超过 40%。&lt;/li&gt;
 &lt;li&gt;2022 年 7 月，我们响应社区呼声最高的关于 Protobuf 的性能优化，带来了高性能的 Protobuf 序列化反序列化库 FastPB，再次对相关的性能进行提升。&lt;/li&gt;
 &lt;li&gt;开源一周年之际，我们又进行了更深度的高性能框架能力探索，开源了国内首个 Rust RPC 框架 &lt;a href="https://github.com/cloudwego/volo"&gt;Volo&lt;/a&gt;。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;
+&lt;/ul&gt;&lt;/blockquote&gt;
 &lt;p&gt;CloudWeGo 开源一周年的时间线，隐藏着 CloudWeGo 社区运营的第一个长期主义关键词：&lt;strong&gt;高性能技术解决方案的持续探索&lt;/strong&gt; 。&lt;/p&gt;
 &lt;h4 id="活跃--高可靠性的长期承诺"&gt;活跃 &amp;amp; 高可靠性的长期承诺&lt;/h4&gt;
 &lt;p&gt;CloudWeGo 开源一年来，收获了超过 1w 的 star 数，整个社区的活跃度也有了飞速提升。&lt;/p&gt;
@@ -259,8 +257,7 @@ CloudWeGo 下的项目主要有三个特点：&lt;strong&gt;高性能&lt;/strong
 我们会在公众号上发布一些新闻动态以及各个相关场景的案例报道，同时我们也会在公众号上提供相关的技术支持。感谢大家的关注！&lt;/p&gt;</description></item><item><title>Blog: 从 CloudWeGo 谈云原生时代的微服务与开源</title><link>https://www.cloudwego.io/zh/blog/2022/05/26/%E4%BB%8E-cloudwego-%E8%B0%88%E4%BA%91%E5%8E%9F%E7%94%9F%E6%97%B6%E4%BB%A3%E7%9A%84%E5%BE%AE%E6%9C%8D%E5%8A%A1%E4%B8%8E%E5%BC%80%E6%BA%90/</link><pubDate>Thu, 26 May 2022 00:00:00 +0000</pubDate><guid>https://www.cloudwego.io/zh/blog/2022/05/26/%E4%BB%8E-cloudwego-%E8%B0%88%E4%BA%91%E5%8E%9F%E7%94%9F%E6%97%B6%E4%BB%A3%E7%9A%84%E5%BE%AE%E6%9C%8D%E5%8A%A1%E4%B8%8E%E5%BC%80%E6%BA%90/</guid><description>
 &lt;h1 id="从-cloudwego-谈云原生时代的微服务与开源"&gt;从 CloudWeGo 谈云原生时代的微服务与开源&lt;/h1&gt;
 &lt;blockquote&gt;
-&lt;p&gt;本文整理自罗广明在 DIVE 全球基础软件创新大会 2022 的演讲分享，主题为《从 CloudWeGo 谈云原生时代的微服务与开源》。&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;本文整理自罗广明在 DIVE 全球基础软件创新大会 2022 的演讲分享，主题为《从 CloudWeGo 谈云原生时代的微服务与开源》。&lt;/p&gt;&lt;/blockquote&gt;
 &lt;h2 id="01-项目创造的思考与哲学"&gt;&lt;strong&gt;01 项目创造的思考与哲学&lt;/strong&gt;&lt;/h2&gt;
 &lt;p&gt;我们团队经常会被人问到，你们为什么创造一个新的项目？我认为这是一个哲学问题。&lt;/p&gt;
 &lt;p&gt;纵观整个开源社区，每个时间段都会有各种各样的项目被重复地创造出来，这其中的大部分项目很快便销声匿迹了，只有一部分项目能够存活下来。
@@ -414,8 +411,7 @@ CloudWeGo 下的项目主要有三个特点：&lt;strong&gt;高性能&lt;/strong
 &lt;blockquote&gt;
 &lt;p&gt;导语：2022 年 3 月，NextArch 基金会正式成立微服务技术小组，致力于推动微服务技术和开源生态的持续发展，根据各个企业在微服务生产实践中遇到的问题，针对不同行业和应用场景输出标准化解决方案，
 并且联合 PolarisMesh、TARS、go-zero、GoFrame、&lt;strong&gt;&lt;a href="https://github.com/cloudwego"&gt;CloudWeGo&lt;/a&gt;&lt;/strong&gt; 和 Spring Cloud Tencent 等开源社区提供开箱即用的实现，降低终端用户的使用门槛。
-来自腾讯、字节跳动、七牛云、快手、BIGO、好未来和蓝色光标等多家企业的技术专家已经加入技术小组，欢迎更多企业和开源社区加入。&lt;/p&gt;
-&lt;/blockquote&gt;
+来自腾讯、字节跳动、七牛云、快手、BIGO、好未来和蓝色光标等多家企业的技术专家已经加入技术小组，欢迎更多企业和开源社区加入。&lt;/p&gt;&lt;/blockquote&gt;
 &lt;p&gt;2021 年 11 月，Linux 基金会正式成立 NextArch 基金会，共计 40 余家企业或单位联合参与了该基金会的筹建工作，并作为首批共建和支持单位加入，目前已增至 53 家企业。NextArch 基金会致力于在异构基础设施、多元化技术栈和混合云场景下的构建下一代技术架构，始终秉承一个开放中立的治理模式，发展适合企业数字化转型的开源生态。&lt;/p&gt;
 &lt;p&gt;微服务是下一代架构的关键部分，越来越多企业采用微服务架构。市场调研表明，随着企业数字化转型持续深入，2023 年微服务云市场的规模达到 18.8 亿美元，从 2018 到 2023 年的复合年增长率达到 22.4%。众所周知，微服务相比于传统架构具有诸多优势，但是，我们在微服务实施的各个环节中都可能面临问题。&lt;/p&gt;
 &lt;p&gt;为了降低微服务架构的落地成本，来自腾讯、快手、字节跳动、好未来、七牛云和蓝色光标等多家企业的技术专家在 NextArch 基金会成立微服务技术小组，共同探讨各自企业在微服务领域中遇到的问题，分享大家在生产过程中的实践经验，并且面向不同的应用场景和终端用户，联合相关开源社区输出标准化的解决方案。&lt;/p&gt;
