@@ -112,6 +112,11 @@ pre.mermaid {
       }
     }
 
+    // Invert content images in dark mode for better visibility
+    .td-content img, .markdown img {
+      filter: invert(1) hue-rotate(180deg);
+    }
+
     // Cloudwego link colors for dark mode
     a.cloudwego-link {
       color: #6db8f0;
