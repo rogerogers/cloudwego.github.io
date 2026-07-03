@@ -121,6 +121,20 @@ resp := &HelloEchoResult{}
 _, err = frugal.DecodeObject(res.([]byte), resp)
 ```
 
+###### Per-Call IDL Service Name
+
+To dynamically specify the IDL service name to access per call, use the following configuration:
+
+```go
+import (
+    "github.com/cloudwego/kitex/client/callopt"
+)
+
+result, err:= genericCli.GenericCall(ctx, methodName, buf,
+    callopt.WithBinaryGenericIDLService(svcName),
+)
+```
+
 ##### Streaming Generic Call
 Kitex streaming interface's binary payload is the value after raw request/response serialization, without Args/Results struct encapsulation, which differs from the unary interface. The streaming interface provides three streaming call modes. For detailed usage, see: [StreamX Basic Stream Programming](../../basic-feature/streamx/).
 
@@ -143,6 +157,20 @@ rbuf, err := stream.Recv(stream.Context())
 
 resp := &Response{}
 _, err = frugal.DecodeObject(rbuf.([]byte), resp)
+```
+
+###### Per-Call IDL Service Name
+
+To dynamically specify the IDL service name to access per call, use the following configuration:
+
+```go
+import (
+    "github.com/cloudwego/kitex/client/callopt/streamcall"
+)
+
+stream, err := genericCli.BidirectionalStreaming(ctx, methodName,
+    streamcall.WithBinaryGenericIDLService(svcName),
+)
 ```
 
 #### Server Usage
