@@ -61,7 +61,7 @@ anchor = "smart"
 [languages.en]
 contentDir = "content/en"
 title = "CloudWeGo"
-languageName = "English"
+label = "English"
 # Weight used for sorting.
 weight = 1
 
@@ -71,7 +71,7 @@ description = "A leading practice for building enterprise cloud native middlewar
 [languages.zh]
 contentDir = "content/zh"
 title = "CloudWeGo"
-languageName = "中文"
+label = "中文"
 # Weight used for sorting.
 weight = 1
 

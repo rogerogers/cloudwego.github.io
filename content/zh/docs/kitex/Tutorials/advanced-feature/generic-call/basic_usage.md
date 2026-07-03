@@ -121,6 +121,20 @@ resp := &HelloEchoResult{}
 _, err = frugal.DecodeObject(res.([]byte), resp)
 ```
 
+###### 动态指定 IDL Service Name
+
+若需要动态指定每次调用所需要访问的 IDL service name，请使用以下配置：
+
+```go
+import (
+    "github.com/cloudwego/kitex/client/callopt"
+)
+
+result, err:= genericCli.GenericCall(ctx, methodName, buf,
+    callopt.WithBinaryGenericIDLService(svcName),
+)
+```
+
 ##### 流式泛化调用
 Kitex 流式接口的二进制 payload 即是原始 request/response 序列化后的值，不包含 Args/Results 结构体，这与 unary 接口存在区别。流式接口提供三种流调用模式，相关详细用法可见：[StreamX 基础流编程](../../basic-feature/streamx/)。
 
@@ -143,6 +157,20 @@ rbuf, err := stream.Recv(stream.Context())
 
 resp := &Response{}
 _, err = frugal.DecodeObject(rbuf.([]byte), resp)
+```
+
+###### 动态指定 IDL Service Name
+
+若需要动态指定每次调用所需要访问的 IDL service name，请使用以下配置：
+
+```go
+import (
+    "github.com/cloudwego/kitex/client/callopt/streamcall"
+)
+
+stream, err := genericCli.BidirectionalStreaming(ctx, methodName,
+    streamcall.WithBinaryGenericIDLService(svcName),
+)
 ```
 
 #### 服务端使用
